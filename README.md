@@ -33,7 +33,7 @@ Modern AI applications often fail at the seams between prompts, tools, MCP serve
 Runwise currently runs from source.
 
 ```bash
-git clone <your-future-repo-url>
+git clone https://github.com/darwinx687-afk/runwise.git
 cd runwise
 pnpm install
 pnpm check
@@ -41,8 +41,6 @@ pnpm test
 pnpm exec runwise doctor
 pnpm exec runwise view
 ```
-
-Replace `<your-future-repo-url>` with the repository URL after the first public push.
 
 ## What Runwise Does
 

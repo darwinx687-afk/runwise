@@ -3,7 +3,7 @@
 Runwise 当前从源码运行。
 
 ```bash
-git clone <your-future-repo-url>
+git clone https://github.com/darwinx687-afk/runwise.git
 cd runwise
 pnpm install
 pnpm check
@@ -11,8 +11,6 @@ pnpm test
 pnpm exec runwise doctor
 pnpm exec runwise view
 ```
-
-首次公开推送后，将 `<your-future-repo-url>` 替换为实际仓库地址。
 
 ## 生成报告
 

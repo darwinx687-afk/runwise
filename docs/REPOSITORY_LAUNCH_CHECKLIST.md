@@ -3,7 +3,7 @@
 - [ ] Create GitHub repository.
 - [ ] Confirm repository name.
 - [ ] Confirm remote repository URL.
-- [ ] Update `<your-future-repo-url>` placeholders where appropriate.
+- [ ] Confirm repository URL placeholders were replaced where appropriate.
 - [ ] Confirm MIT license.
 - [ ] Confirm security policy.
 - [ ] Confirm README links.
