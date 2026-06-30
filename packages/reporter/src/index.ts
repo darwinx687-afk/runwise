@@ -342,7 +342,7 @@ export function renderHtmlReport(
     </header>
 
     <section class="section" aria-labelledby="score-title">
-      <h2 id="score-title">Score Summary / 评分摘要</h2>
+      <h2 id="score-title">Score and Severity Summary / 评分和严重级别摘要</h2>
       <div class="metric-grid">
         ${scoreMetrics}
       </div>

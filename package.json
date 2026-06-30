@@ -13,6 +13,7 @@
   "scripts": {
     "dev:cli": "pnpm --filter @runwise/cli dev",
     "check": "node scripts/check-workspace.mjs",
+    "check:types": "node scripts/check-workspace.mjs --ts-only",
     "test": "node scripts/test-cli.mjs"
   },
   "devDependencies": {

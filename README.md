@@ -4,6 +4,8 @@
 
 Runwise is an open-source readiness, tracing, replay, and eval toolkit for AI agents, MCP servers, and LLM applications.
 
+Runwise is local-first. The current quality gate validates workspace structure, package health, report generation, and TypeScript package checks where available.
+
 ## Quick Start
 
 Run the local Doctor scanner from the project root:
@@ -19,6 +21,14 @@ Runwise writes local reports to:
 .runwise/runwise-report.json
 .runwise/runwise-report.md
 .runwise/runwise-report.html
+```
+
+Validate the local workspace before handoff:
+
+```bash
+pnpm check
+pnpm check:types
+pnpm test
 ```
 
 ## Core Features

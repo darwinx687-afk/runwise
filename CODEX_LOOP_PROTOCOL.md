@@ -8,8 +8,15 @@ Runwise development proceeds in explicit loops.
 2. Keep changes inside the current phase boundary.
 3. Update `RUN_STATE.md` at the end of each loop.
 4. Record structural decisions in `DECISION_LOG.md`.
-5. Run `pnpm check` and `pnpm test` before handoff when dependencies are installed.
+5. Run `pnpm check`, `pnpm check:types`, and `pnpm test` before handoff when dependencies are installed.
+6. Run `pnpm exec runwise doctor` when the loop touches Doctor, reports, scoring, or quality-gate behavior.
 
 ## Current Loop
 
-Loop 3 is Phase 3 - Report System Refinement and HTML Report. It adds a self-contained static HTML report and improves report readability without building the dashboard.
+Loop 3A is Phase 3 Stabilization - Check Pipeline Hardening and HTML Report QA. It clarifies the local quality gate and validates the generated static HTML report before Dashboard work begins.
+
+## Check Strategy
+
+`pnpm check` is the deterministic root workspace gate. It validates required folders, governance files, package entry files, package JSON parsing, TypeScript syntax/transpile health, and that generated `.runwise/` report artifacts are not tracked.
+
+`pnpm check:types` runs the TypeScript syntax/transpile portion directly. Package-level `tsc --noEmit -p tsconfig.json` scripts remain available in package workspaces, but root-wide `tsc --noEmit` is not the required handoff gate until the workspace TypeScript strategy is revisited.

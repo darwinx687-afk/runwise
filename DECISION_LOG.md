@@ -15,3 +15,7 @@ Phase 0 does not include login, cloud services, billing, databases, or complex d
 ## D004: Use static HTML as the bridge report artifact
 
 The static HTML report is the local-first bridge between CLI-generated evidence and the future Dashboard. It must remain self-contained, dependency-free, and openable without a dev server.
+
+## D005: Use deterministic workspace check before root-wide TypeScript compilation
+
+Until the TypeScript workspace strategy is revisited, the root quality gate uses `scripts/check-workspace.mjs` plus explicit package-level check scripts instead of relying on root-wide `tsc --noEmit`. The deterministic gate validates workspace shape, governance files, package entry files, package JSON parsing, TypeScript syntax/transpile health, and untracked `.runwise/` generated reports.

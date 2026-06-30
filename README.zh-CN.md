@@ -4,6 +4,8 @@
 
 Runwise 是一个开源的 AI Agent、MCP Server 和 LLM 应用就绪度检查、追踪、回放与评测工具包。
 
+Runwise 采用本地优先策略。当前质量门禁会检查 workspace 结构、包状态、报告生成，以及可用的 TypeScript 包级检查。
+
 ## 快速开始
 
 在项目根目录运行本地 Doctor 扫描：
@@ -19,6 +21,14 @@ Runwise 会写入本地报告：
 .runwise/runwise-report.json
 .runwise/runwise-report.md
 .runwise/runwise-report.html
+```
+
+交付前验证本地 workspace：
+
+```bash
+pnpm check
+pnpm check:types
+pnpm test
 ```
 
 ## 核心功能
