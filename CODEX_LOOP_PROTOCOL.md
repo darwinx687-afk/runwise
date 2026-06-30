@@ -13,7 +13,7 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 4 is Phase 4 - Lightweight Local Dashboard Viewer. It introduces a local report-file viewer for `.runwise/runwise-report.json` without hosted dashboard behavior.
+Loop 5 is Phase 5 - GitHub Action Readiness Check. It introduces a local-first composite GitHub Action that runs the same Doctor report pipeline in CI without hosted service behavior.
 
 ## Check Strategy
 

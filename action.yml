@@ -1,0 +1,130 @@
+name: Runwise
+description: Local-first readiness check for AI agents, MCP servers, and LLM applications.
+
+inputs:
+  working-directory:
+    description: Project directory to scan
+    required: false
+    default: "."
+  output-directory:
+    description: Directory where Runwise reports are written
+    required: false
+    default: ".runwise"
+  min-score:
+    description: Minimum acceptable readiness score
+    required: false
+    default: "0"
+  fail-on-blocking:
+    description: Fail if blocking findings exist
+    required: false
+    default: "true"
+  fail-on-severity:
+    description: Fail if findings at or above this severity exist. One of none, critical, high, medium, low.
+    required: false
+    default: "critical"
+  node-version:
+    description: Node.js version used by the action
+    required: false
+    default: "20"
+
+outputs:
+  score:
+    description: Overall Runwise readiness score
+    value: ${{ steps.summary.outputs.score }}
+  total-findings:
+    description: Total Runwise findings
+    value: ${{ steps.summary.outputs.total-findings }}
+  critical:
+    description: Critical finding count
+    value: ${{ steps.summary.outputs.critical }}
+  high:
+    description: High finding count
+    value: ${{ steps.summary.outputs.high }}
+  medium:
+    description: Medium finding count
+    value: ${{ steps.summary.outputs.medium }}
+  low:
+    description: Low finding count
+    value: ${{ steps.summary.outputs.low }}
+  info:
+    description: Info finding count
+    value: ${{ steps.summary.outputs.info }}
+  blocking:
+    description: Blocking finding count
+    value: ${{ steps.summary.outputs.blocking }}
+  report-json:
+    description: Generated JSON report path
+    value: ${{ steps.summary.outputs.report-json }}
+  report-markdown:
+    description: Generated Markdown report path
+    value: ${{ steps.summary.outputs.report-markdown }}
+  report-html:
+    description: Generated HTML report path
+    value: ${{ steps.summary.outputs.report-html }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Enable pnpm
+      shell: bash
+      run: |
+        set -euo pipefail
+        corepack enable
+        corepack prepare pnpm@9.15.4 --activate
+
+    - name: Install Runwise action dependencies
+      shell: bash
+      run: |
+        set -euo pipefail
+        pnpm --dir "$GITHUB_ACTION_PATH" install --frozen-lockfile
+
+    - name: Resolve Runwise paths
+      id: paths
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        working_directory="${{ inputs.working-directory }}"
+        output_directory="${{ inputs.output-directory }}"
+
+        if [[ "$working_directory" = /* ]]; then
+          scan_cwd="$working_directory"
+        else
+          scan_cwd="$GITHUB_WORKSPACE/$working_directory"
+        fi
+
+        if [[ "$output_directory" = /* ]]; then
+          report_dir="$output_directory"
+        else
+          report_dir="$scan_cwd/$output_directory"
+        fi
+
+        {
+          echo "scan-cwd=$scan_cwd"
+          echo "output-directory=$output_directory"
+          echo "report-json=$report_dir/runwise-report.json"
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Run Runwise Doctor
+      shell: bash
+      run: |
+        set -euo pipefail
+        pnpm --dir "$GITHUB_ACTION_PATH" exec runwise doctor \
+          --cwd "${{ steps.paths.outputs.scan-cwd }}" \
+          --output "${{ steps.paths.outputs.output-directory }}"
+
+    - name: Write Runwise summary and outputs
+      id: summary
+      shell: bash
+      run: |
+        set -euo pipefail
+        node "$GITHUB_ACTION_PATH/packages/github-action/src/action-summary.mjs" \
+          --report "${{ steps.paths.outputs.report-json }}" \
+          --min-score "${{ inputs.min-score }}" \
+          --fail-on-blocking "${{ inputs.fail-on-blocking }}" \
+          --fail-on-severity "${{ inputs.fail-on-severity }}"

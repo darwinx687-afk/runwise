@@ -2,21 +2,22 @@
 
 ## Current Phase
 
-Phase 4
+Phase 5
 
 ## Current Loop
 
-Loop 4 - Lightweight Local Dashboard Viewer
+Loop 5 - GitHub Action Readiness Check
 
 ## Completed
 
-- Local Dashboard Viewer introduced
-- `runwise view` command added
-- Viewer reads `.runwise/runwise-report.json`
-- Viewer is local-first and does not upload project data
-- Dashboard HTML includes bilingual readiness summary, rule summary, findings, and report paths
-- Tests updated for viewer behavior
+- Root GitHub Action definition added
+- CI-friendly doctor flags added
+- GitHub Action summary helper added
+- Action outputs and threshold handling added
+- Self-check workflow added
+- README and architecture docs updated
+- Tests updated for action helper and CI doctor behavior
 
 ## Next Required Step
 
-Phase 5 - GitHub Action Readiness Check
+Phase 6 - Trace Schema and Validation

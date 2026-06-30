@@ -37,6 +37,21 @@ The current runtime behavior is:
 
 - `runwise doctor`: scans the local project, runs structured readiness rules, computes a readiness score, and writes JSON, Markdown, and static HTML reports under `.runwise/`.
 - `runwise view`: starts a lightweight local HTTP viewer for `.runwise/runwise-report.json`.
+- `action.yml`: runs Runwise Doctor in GitHub Actions, writes a job summary, sets outputs, and evaluates local threshold gates.
+
+## GitHub Action Readiness Check
+
+The first GitHub Action is a root composite action. It uses the same local Doctor report artifacts as the CLI instead of a hosted service, GitHub App, cloud sync layer, database, or external API call.
+
+The action flow is:
+
+- Set up Node.js and pnpm.
+- Install Runwise action dependencies from the action checkout.
+- Run `runwise doctor --cwd <working-directory> --output <output-directory>`.
+- Read `runwise-report.json`.
+- Write `$GITHUB_STEP_SUMMARY` with the readiness score, rule summary, finding summary, report paths, and a short Chinese local-first note.
+- Set action outputs for score, finding counts, blocking count, and report paths.
+- Fail when configured thresholds are violated: `min-score`, `fail-on-blocking`, or `fail-on-severity`.
 
 ## Local Dashboard Viewer
 

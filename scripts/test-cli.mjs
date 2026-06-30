@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cliBin = resolve(rootDir, "node_modules/.bin/runwise");
+const actionSummaryBin = resolve(rootDir, "packages/github-action/src/action-summary.mjs");
 const expectedRuleCount = 15;
 
 const governanceFiles = [
@@ -48,6 +49,23 @@ try {
 
   const base = createFixtureProject();
   const baseRun = runDoctor(base);
+  const customOutputProject = createFixtureProject();
+  const customOutputRun = runCli(
+    ["doctor", "--cwd", customOutputProject, "--output", "custom-runwise"],
+    rootDir
+  );
+  const customOutputDir = join(customOutputProject, "custom-runwise");
+  const customJsonPath = join(customOutputDir, "runwise-report.json");
+  assert.equal(
+    customOutputRun.status,
+    0,
+    `runwise doctor --cwd/--output failed\nstdout:\n${customOutputRun.stdout}\nstderr:\n${customOutputRun.stderr}`
+  );
+  assert.equal(existsSync(customJsonPath), true, "Custom JSON report should be generated");
+  assert.equal(
+    JSON.parse(readFileSync(customJsonPath, "utf8")).scannedPath,
+    customOutputProject
+  );
 
   assert.match(baseRun.stdout, /Runwise Doctor/);
   assert.match(baseRun.stdout, /Rules:/);
@@ -117,6 +135,7 @@ try {
   assert.doesNotMatch(baseRun.html, /TODO|PLACEHOLDER/i);
 
   await assertViewerServer(base);
+  assertActionSummaryHelper(baseRun.report);
 
   const missingConstitution = createFixtureProject({
     omitGovernance: ["PROJECT_CONSTITUTION.md"]
@@ -157,6 +176,113 @@ function runCli(args, cwd = rootDir) {
     encoding: "utf8",
     shell: process.platform === "win32"
   });
+}
+
+function runActionSummary(report, options = {}) {
+  const actionRoot = realpathSync(mkdtempSync(join(tmpdir(), "runwise-action-")));
+  fixtureRoots.push(actionRoot);
+
+  const reportPath = join(actionRoot, "runwise-report.json");
+  const summaryPath = join(actionRoot, "step-summary.md");
+  const outputPath = join(actionRoot, "github-output.txt");
+  writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+
+  const args = [
+    actionSummaryBin,
+    "--report",
+    reportPath,
+    "--min-score",
+    String(options.minScore ?? 0),
+    "--fail-on-blocking",
+    String(options.failOnBlocking ?? true),
+    "--fail-on-severity",
+    options.failOnSeverity ?? "critical"
+  ];
+
+  const result = spawnSync(process.execPath, args, {
+    cwd: rootDir,
+    encoding: "utf8",
+    env: {
+      ...process.env,
+      GITHUB_STEP_SUMMARY: summaryPath,
+      GITHUB_OUTPUT: outputPath
+    }
+  });
+
+  return {
+    result,
+    summary: existsSync(summaryPath) ? readFileSync(summaryPath, "utf8") : "",
+    outputs: existsSync(outputPath) ? readFileSync(outputPath, "utf8") : ""
+  };
+}
+
+function assertActionSummaryHelper(report) {
+  const passing = runActionSummary(report, {
+    minScore: 70,
+    failOnBlocking: true,
+    failOnSeverity: "critical"
+  });
+  assert.equal(
+    passing.result.status,
+    0,
+    `Action summary helper should pass\nstdout:\n${passing.result.stdout}\nstderr:\n${passing.result.stderr}`
+  );
+  assert.match(passing.summary, /# Runwise Readiness Check/);
+  assert.match(passing.summary, /Score: \d+\/100/);
+  assert.match(passing.summary, /Reports:/);
+  assert.match(passing.summary, /本检查由 Runwise 生成/);
+  assert.match(passing.outputs, /score=\d+/);
+  assert.match(passing.outputs, /total-findings=\d+/);
+  assert.match(passing.outputs, /report-json=\.runwise\/runwise-report\.json/);
+
+  const blockingReport = {
+    ...report,
+    rules: {
+      ...report.rules,
+      blocking: 1
+    }
+  };
+  const blocking = runActionSummary(blockingReport, {
+    minScore: 0,
+    failOnBlocking: true,
+    failOnSeverity: "none"
+  });
+  assert.equal(blocking.result.status, 1, "Blocking findings should fail when enabled");
+  assert.match(blocking.result.stderr, /blocking finding/);
+
+  const lowScoreReport = {
+    ...report,
+    summary: {
+      ...report.summary,
+      overallScore: 60
+    }
+  };
+  const lowScore = runActionSummary(lowScoreReport, {
+    minScore: 70,
+    failOnBlocking: false,
+    failOnSeverity: "none"
+  });
+  assert.equal(lowScore.result.status, 1, "Low score should fail below min-score");
+  assert.match(lowScore.result.stderr, /below min-score/);
+
+  const severityReport = {
+    ...report,
+    summary: {
+      ...report.summary,
+      critical: 1,
+      totalFindings: report.summary.totalFindings + 1
+    }
+  };
+  const severityDisabled = runActionSummary(severityReport, {
+    minScore: 0,
+    failOnBlocking: false,
+    failOnSeverity: "none"
+  });
+  assert.equal(
+    severityDisabled.result.status,
+    0,
+    "fail-on-severity=none should not fail on critical findings"
+  );
 }
 
 function createFixtureProject(options = {}) {

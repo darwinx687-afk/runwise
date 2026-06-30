@@ -23,3 +23,7 @@ Until the TypeScript workspace strategy is revisited, the root quality gate uses
 ## D006: Keep the first Dashboard Viewer local and report-file based
 
 The first Dashboard Viewer is a local HTTP viewer for `.runwise/runwise-report.json`, not a hosted app or dashboard backend. It must avoid login, cloud sync, databases, external API calls, and SaaS assumptions while keeping the static HTML report as a separate shareable artifact.
+
+## D007: Start GitHub Action as local-first composite action
+
+Runwise GitHub Action starts as a local-first composite action using the same Doctor report artifacts instead of a hosted service or GitHub App. It runs in the repository workflow, writes a job summary and outputs, and applies configurable thresholds from the generated local report.

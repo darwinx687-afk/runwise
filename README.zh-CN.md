@@ -61,6 +61,29 @@ pnpm exec runwise view
 
 查看器只读取本地 `.runwise/runwise-report.json`，不会上传项目数据。
 
+## GitHub Action
+
+Runwise 可以作为 CI 上线准备度门禁使用。它会在 GitHub Actions 中本地运行，生成 JSON/Markdown/HTML 报告，写入 job summary，并可根据 blocking finding、critical finding 或最低分数阈值决定是否让 workflow 失败。
+
+当前仓库本地自检用法：
+
+```yaml
+- uses: ./
+  with:
+    min-score: "70"
+    fail-on-blocking: "true"
+```
+
+公开发布 tag 之后的未来用法：
+
+```yaml
+- uses: runwise-ai/runwise@v0
+  with:
+    min-score: "70"
+    fail-on-blocking: "true"
+    fail-on-severity: "critical"
+```
+
 ## 架构概览
 
 Runwise 是一个 pnpm monorepo，并采用 TypeScript-first 架构。
@@ -75,7 +98,7 @@ packages/
   schemas/                   共享 TypeScript schema 契约。
   reporter/                  JSON、Markdown 和 HTML 报告生成。
   integrations/              集成适配器边界。
-  github-action/             GitHub Action 包边界。
+  github-action/             GitHub Action summary 和 threshold helper。
 examples/
   mcp-demo/                  未来的 MCP Server 示例。
   rag-demo/                  未来的 RAG 应用示例。
@@ -93,10 +116,12 @@ docs/
 - Phase 2：基于规则的 Doctor 引擎和评分细化。
 - Phase 3：报告系统细化和 HTML 报告。
 - Phase 4：完善 Dashboard 和文档。
+- Phase 5：GitHub Action 上线准备度检查。
+- Phase 6：Trace schema 和验证。
 
 ## 贡献
 
-Runwise 在 Phase 3 会刻意保持小范围。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
+Runwise 在 Phase 5 会刻意保持小范围。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
 
 ## 许可证
 

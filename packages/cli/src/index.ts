@@ -22,7 +22,7 @@ export interface RunwiseCliIO {
 const HELP_TEXT = `Runwise
 
 Usage:
-  runwise doctor
+  runwise doctor [--cwd .] [--output .runwise]
   runwise view [--port 4321]
 
 Commands:
@@ -38,7 +38,7 @@ export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = conso
   }
 
   if (command === "doctor") {
-    return runDoctor(io);
+    return runDoctor(args, io);
   }
 
   if (command === "view") {
@@ -49,9 +49,18 @@ export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = conso
   return 1;
 }
 
-async function runDoctor(io: RunwiseCliIO) {
-  const cwd = process.cwd();
-  const outputDir = path.join(cwd, DEFAULT_REPORT_DIRECTORY);
+async function runDoctor(args: string[], io: RunwiseCliIO) {
+  const parseResult = parseDoctorArgs(args);
+
+  if (!parseResult.ok) {
+    io.error(parseResult.message);
+    return 1;
+  }
+
+  const cwd = path.resolve(parseResult.cwd);
+  const outputDir = path.isAbsolute(parseResult.output)
+    ? parseResult.output
+    : path.join(cwd, parseResult.output);
 
   await fs.mkdir(outputDir, { recursive: true });
 
@@ -72,6 +81,53 @@ async function runDoctor(io: RunwiseCliIO) {
   );
 
   return 0;
+}
+
+type ParseDoctorArgsResult =
+  | { ok: true; cwd: string; output: string }
+  | { ok: false; message: string };
+
+function parseDoctorArgs(args: string[]): ParseDoctorArgsResult {
+  let cwd = process.cwd();
+  let output = DEFAULT_REPORT_DIRECTORY;
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+
+    if (arg === "--cwd") {
+      const value = args[index + 1];
+      if (!value) {
+        return { ok: false, message: "Missing value for --cwd." };
+      }
+      cwd = value;
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith("--cwd=")) {
+      cwd = arg.slice("--cwd=".length);
+      continue;
+    }
+
+    if (arg === "--output") {
+      const value = args[index + 1];
+      if (!value) {
+        return { ok: false, message: "Missing value for --output." };
+      }
+      output = value;
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith("--output=")) {
+      output = arg.slice("--output=".length);
+      continue;
+    }
+
+    return { ok: false, message: `Unknown doctor option: ${arg}` };
+  }
+
+  return { ok: true, cwd, output };
 }
 
 async function runView(args: string[], io: RunwiseCliIO) {

@@ -1,0 +1,54 @@
+name: Runwise
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.15.4 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run workspace check
+        run: pnpm check
+
+      - name: Run TypeScript check
+        run: pnpm check:types
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Generate Runwise reports
+        run: pnpm exec runwise doctor
+
+      - name: Run local Runwise action
+        uses: ./
+        with:
+          min-score: "70"
+          fail-on-blocking: "true"
+          fail-on-severity: "critical"
+
+      - name: Upload Runwise reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runwise-reports
+          path: .runwise/
+          if-no-files-found: warn

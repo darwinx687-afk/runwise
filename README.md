@@ -61,6 +61,29 @@ pnpm exec runwise view
 
 The viewer reads `.runwise/runwise-report.json` locally and does not upload project data.
 
+## GitHub Action
+
+Runwise can be used as a CI readiness gate. It runs locally in GitHub Actions, generates JSON/Markdown/HTML reports, writes a job summary, and can fail the workflow on blocking findings, critical findings, or a minimum score threshold.
+
+Current local self-check usage:
+
+```yaml
+- uses: ./
+  with:
+    min-score: "70"
+    fail-on-blocking: "true"
+```
+
+Intended future tagged usage after a public release:
+
+```yaml
+- uses: runwise-ai/runwise@v0
+  with:
+    min-score: "70"
+    fail-on-blocking: "true"
+    fail-on-severity: "critical"
+```
+
 ## Architecture Overview
 
 Runwise is a pnpm monorepo with TypeScript-first packages.
@@ -75,7 +98,7 @@ packages/
   schemas/                   Shared TypeScript schema contracts.
   reporter/                  JSON, Markdown, and HTML report generation.
   integrations/              Integration adapter boundary.
-  github-action/             GitHub Action package boundary.
+  github-action/             GitHub Action summary and threshold helper.
 examples/
   mcp-demo/                  Future MCP server demo.
   rag-demo/                  Future RAG app demo.
@@ -93,10 +116,12 @@ docs/
 - Phase 2: Rule-based Doctor engine and scoring refinement.
 - Phase 3: Report system refinement and HTML report.
 - Phase 4: Dashboard and docs refinement.
+- Phase 5: GitHub Action readiness check.
+- Phase 6: Trace schema and validation.
 
 ## Contributing
 
-Runwise is intentionally small in Phase 3. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
+Runwise is intentionally small in Phase 5. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
 
 ## License
 

@@ -39,4 +39,12 @@
 
 - Add GitHub Action entrypoint.
 - Run Runwise Doctor in CI.
+- Write GitHub Step Summary and action outputs.
+- Support score, blocking, and severity thresholds.
 - Upload reproducible report artifacts.
+
+## Phase 6: Trace Schema and Validation
+
+- Define trace schema contracts.
+- Add trace fixture validation.
+- Keep trace work local-first and reportable.
