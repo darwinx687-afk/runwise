@@ -1,0 +1,21 @@
+{
+  "name": "@runwise/cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "runwise": "./src/index.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@runwise/core": "workspace:*",
+    "@runwise/reporter": "workspace:*",
+    "@runwise/schemas": "workspace:*"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts doctor",
+    "check": "tsc --noEmit -p tsconfig.json"
+  }
+}

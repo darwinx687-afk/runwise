@@ -1,0 +1,24 @@
+{
+  "name": "runwise",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Open-source readiness, tracing, replay, and eval toolkit for AI agents, MCP servers, and LLM applications.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev:cli": "pnpm --filter @runwise/cli dev",
+    "check": "pnpm -r --if-present check",
+    "test": "node scripts/test-cli.mjs"
+  },
+  "devDependencies": {
+    "@runwise/cli": "workspace:*",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  }
+}
