@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev:cli": "pnpm --filter @runwise/cli dev",
-    "check": "pnpm -r --if-present check",
+    "check": "node scripts/check-workspace.mjs",
     "test": "node scripts/test-cli.mjs"
   },
   "devDependencies": {

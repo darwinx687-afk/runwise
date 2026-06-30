@@ -37,8 +37,10 @@ try {
   assert.match(baseRun.stdout, /Runwise Doctor/);
   assert.match(baseRun.stdout, /Rules:/);
   assert.match(baseRun.stdout, /Reports:/);
+  assert.match(baseRun.stdout, /\.runwise\/runwise-report\.html/);
   assert.equal(existsSync(baseRun.jsonPath), true, "JSON report should be generated");
   assert.equal(existsSync(baseRun.markdownPath), true, "Markdown report should be generated");
+  assert.equal(existsSync(baseRun.htmlPath), true, "HTML report should be generated");
 
   assert.equal(baseRun.report.tool, "runwise");
   assert.equal(baseRun.report.command, "doctor");
@@ -54,6 +56,11 @@ try {
   assert.equal(baseRun.report.summary.overallScore >= 0, true);
   assert.equal(baseRun.report.summary.overallScore <= 100, true);
   assert.ok(baseRun.report.summary.categoryScores, "Category scores should be included");
+  assert.deepEqual(baseRun.report.reportFiles, {
+    json: ".runwise/runwise-report.json",
+    markdown: ".runwise/runwise-report.md",
+    html: ".runwise/runwise-report.html"
+  });
 
   assertFinding(baseRun.report, {
     ruleId: "evals.coverage_present",
@@ -66,13 +73,23 @@ try {
     blocking: false
   });
 
-  assert.match(baseRun.markdown, /## Rule Execution/);
+  assert.match(baseRun.markdown, /## Rule Summary/);
   assert.match(baseRun.markdown, /Blocking findings/);
   assert.match(baseRun.markdown, /## What to Fix First/);
+  assert.match(baseRun.markdown, /## Report Files/);
   assert.match(baseRun.markdown, /No eval coverage detected/);
   assert.match(baseRun.markdown, /未检测到评测覆盖/);
   assert.match(baseRun.markdown, /\.runwise\/runwise-report\.json/);
   assert.match(baseRun.markdown, /\.runwise\/runwise-report\.md/);
+  assert.match(baseRun.markdown, /\.runwise\/runwise-report\.html/);
+
+  assert.match(baseRun.html, /<h1>Runwise<\/h1>/);
+  assert.match(baseRun.html, /Local-first AI readiness, tracing, replay and eval toolkit/);
+  assert.match(baseRun.html, /面向 AI 项目的本地优先上线体检、运行审计、失败回放与评测生成工具/);
+  assert.match(baseRun.html, /Overall score/);
+  assert.match(baseRun.html, /Rule Summary/);
+  assert.match(baseRun.html, /medium/);
+  assert.match(baseRun.html, /No eval coverage detected/);
 
   const missingConstitution = createFixtureProject({
     omitGovernance: ["PROJECT_CONSTITUTION.md"]
@@ -164,15 +181,19 @@ function runDoctor(projectRoot) {
   const reportDir = join(projectRoot, ".runwise");
   const jsonPath = join(reportDir, "runwise-report.json");
   const markdownPath = join(reportDir, "runwise-report.md");
+  const htmlPath = join(reportDir, "runwise-report.html");
   const report = JSON.parse(readFileSync(jsonPath, "utf8"));
   const markdown = readFileSync(markdownPath, "utf8");
+  const html = readFileSync(htmlPath, "utf8");
 
   return {
     stdout: result.stdout,
     jsonPath,
     markdownPath,
+    htmlPath,
     report,
-    markdown
+    markdown,
+    html
   };
 }
 

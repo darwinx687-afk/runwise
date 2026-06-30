@@ -18,12 +18,13 @@ Runwise 会写入本地报告：
 ```text
 .runwise/runwise-report.json
 .runwise/runwise-report.md
+.runwise/runwise-report.html
 ```
 
 ## 核心功能
 
 - 基于规则的本地 Doctor 检查：工作区结构、包管理器状态、TypeScript 配置、治理文件、AI 迹象、MCP 迹象、评测覆盖和追踪覆盖。
-- 生成 JSON 和 Markdown 报告，作为可审阅的就绪度证据。
+- 生成 JSON、Markdown 和静态 HTML 报告，作为可审阅的就绪度证据。
 - 为 Doctor rule、finding、scoring 和 report 提供共享 TypeScript schema。
 - 为未来的追踪、回放、评测、集成、GitHub Action、Dashboard 和文档工作保留包边界。
 
@@ -35,6 +36,10 @@ Runwise Doctor 运行本地就绪度规则，不需要 API key、网络访问、
 - Blocking finding 表示应优先修复的 loop 治理问题。
 - Non-blocking finding 表示就绪度缺口，但不会阻止本地报告生成。
 - 报告包含规则执行计数、评分和简短的优先修复建议。
+
+## 静态 HTML 报告
+
+Runwise 会生成一个可直接在浏览器打开的本地 HTML 报告，可作为项目审计交付物、GitHub Actions artifact，或后续 Dashboard 的设计基础。
 
 ## 架构概览
 
@@ -48,7 +53,7 @@ packages/
   cli/                       Runwise 命令行界面。
   core/                      本地扫描、规则引擎和评分逻辑。
   schemas/                   共享 TypeScript schema 契约。
-  reporter/                  JSON 和 Markdown 报告生成。
+  reporter/                  JSON、Markdown 和 HTML 报告生成。
   integrations/              集成适配器边界。
   github-action/             GitHub Action 包边界。
 examples/
@@ -71,7 +76,7 @@ docs/
 
 ## 贡献
 
-Runwise 在 Phase 2 会刻意保持小范围。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
+Runwise 在 Phase 3 会刻意保持小范围。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
 
 ## 许可证
 

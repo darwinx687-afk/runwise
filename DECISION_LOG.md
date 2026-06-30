@@ -11,3 +11,7 @@ All runtime package entrypoints are TypeScript files in Phase 0. This keeps cont
 ## D003: Keep Phase 0 free of hosted product behavior
 
 Phase 0 does not include login, cloud services, billing, databases, or complex dashboard behavior. These are outside the foundation loop.
+
+## D004: Use static HTML as the bridge report artifact
+
+The static HTML report is the local-first bridge between CLI-generated evidence and the future Dashboard. It must remain self-contained, dependency-free, and openable without a dev server.

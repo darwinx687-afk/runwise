@@ -26,10 +26,10 @@ docs/zh-CN
 - `@runwise/cli`: command-line entrypoint.
 - `@runwise/core`: local project scanner, rule engine, and scoring engine.
 - `@runwise/schemas`: shared schema, rule, finding, scoring, and report contracts.
-- `@runwise/reporter`: JSON and Markdown report formatting boundary.
+- `@runwise/reporter`: JSON, Markdown, and static HTML report formatting boundary.
 - `@runwise/integrations`: integration adapter boundary.
 - `@runwise/github-action`: GitHub Action boundary.
 
 ## Current Runtime
 
-The current runtime behavior is `runwise doctor`. It scans the local project, runs structured readiness rules, computes a readiness score, and writes JSON and Markdown reports under `.runwise/`.
+The current runtime behavior is `runwise doctor`. It scans the local project, runs structured readiness rules, computes a readiness score, and writes JSON, Markdown, and static HTML reports under `.runwise/`.

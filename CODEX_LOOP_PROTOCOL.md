@@ -12,4 +12,4 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 2 is Phase 2 - Risk Rule Engine and Scoring Refinement. It refactors Doctor findings to come from structured local rules, blocking finding metadata, refined scoring, and report rule summaries only.
+Loop 3 is Phase 3 - Report System Refinement and HTML Report. It adds a self-contained static HTML report and improves report readability without building the dashboard.

@@ -94,5 +94,10 @@ export interface RunwiseDoctorReport {
     evalsDetected: boolean;
     tracesDetected: boolean;
   };
+  reportFiles?: {
+    json: string;
+    markdown: string;
+    html: string;
+  };
   findings: RunwiseFinding[];
 }

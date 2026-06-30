@@ -18,12 +18,13 @@ Runwise writes local reports to:
 ```text
 .runwise/runwise-report.json
 .runwise/runwise-report.md
+.runwise/runwise-report.html
 ```
 
 ## Core Features
 
 - Rule-based local Doctor checks for workspace shape, package manager state, TypeScript config, governance files, AI indicators, MCP indicators, eval coverage, and trace coverage.
-- JSON and Markdown reports for reviewable readiness evidence.
+- JSON, Markdown, and static HTML reports for reviewable readiness evidence.
 - Shared TypeScript schemas for Doctor rules, findings, scoring, and reports.
 - Package boundaries for future tracing, replay, eval, integrations, GitHub Action, dashboard, and docs work.
 
@@ -35,6 +36,10 @@ Runwise Doctor runs local readiness rules and does not require API keys, network
 - Blocking findings identify loop-governance issues that should be fixed first.
 - Non-blocking findings show readiness gaps without stopping local report generation.
 - Reports include rule execution counts, scoring, and a short fix-first section.
+
+## Static HTML Report
+
+Runwise generates a self-contained local HTML report that can be opened directly in a browser, shared as an artifact, or used as a baseline for future dashboards.
 
 ## Architecture Overview
 
@@ -48,7 +53,7 @@ packages/
   cli/                       Runwise command-line interface.
   core/                      Local scanner, rule engine, and scoring logic.
   schemas/                   Shared TypeScript schema contracts.
-  reporter/                  JSON and Markdown report generation.
+  reporter/                  JSON, Markdown, and HTML report generation.
   integrations/              Integration adapter boundary.
   github-action/             GitHub Action package boundary.
 examples/
@@ -71,7 +76,7 @@ docs/
 
 ## Contributing
 
-Runwise is intentionally small in Phase 2. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
+Runwise is intentionally small in Phase 3. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
 
 ## License
 

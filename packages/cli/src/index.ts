@@ -49,7 +49,15 @@ async function runDoctor(io: RunwiseCliIO) {
   });
   const writtenReports = await writeDoctorReports(report, { outputDir });
 
-  io.log(formatTerminalSummary(report, cwd, writtenReports.jsonPath, writtenReports.markdownPath));
+  io.log(
+    formatTerminalSummary(
+      report,
+      cwd,
+      writtenReports.jsonPath,
+      writtenReports.markdownPath,
+      writtenReports.htmlPath
+    )
+  );
 
   return 0;
 }
@@ -58,7 +66,8 @@ export function formatTerminalSummary(
   report: RunwiseDoctorReport,
   cwd: string,
   jsonPath: string,
-  markdownPath: string
+  markdownPath: string,
+  htmlPath: string
 ) {
   return [
     "Runwise Doctor",
@@ -70,7 +79,8 @@ export function formatTerminalSummary(
     "",
     "Reports:",
     `- ${formatReportPath(cwd, jsonPath)}`,
-    `- ${formatReportPath(cwd, markdownPath)}`
+    `- ${formatReportPath(cwd, markdownPath)}`,
+    `- ${formatReportPath(cwd, htmlPath)}`
   ].join("\n");
 }
 
