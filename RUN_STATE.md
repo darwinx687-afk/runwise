@@ -2,21 +2,22 @@
 
 ## Current Phase
 
-Phase 6
+Phase 7
 
 ## Current Loop
 
-Loop 6 - Trace Schema and Validation
+Loop 7 - Trace Replay
 
 ## Completed
 
-- Runwise trace schema introduced
-- Local trace validator added
-- `runwise trace validate` command added
-- Example trace files added
-- Trace validation tests added
+- Static trace replay command added
+- Replay summary schema introduced
+- Replay builder added
+- Markdown replay report generation added
+- High-risk and approval flow summary added
+- Replay tests added
 - README and architecture docs updated
 
 ## Next Required Step
 
-Phase 7 - Trace Replay
+Phase 8 - Failure-to-Eval

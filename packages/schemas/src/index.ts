@@ -5,7 +5,8 @@ export type RunwisePhase =
   | "Phase 3"
   | "Phase 4"
   | "Phase 5"
-  | "Phase 6";
+  | "Phase 6"
+  | "Phase 7";
 
 export interface RunwiseManifest {
   name: string;
@@ -184,4 +185,50 @@ export type RunwiseTraceValidationResult = {
   file: string;
   valid: boolean;
   issues: RunwiseTraceValidationIssue[];
+};
+
+export type RunwiseReplayRiskSummary = {
+  none: number;
+  low: number;
+  medium: number;
+  high: number;
+  critical: number;
+};
+
+export type RunwiseReplayStepSummary = {
+  stepId: string;
+  index: number;
+  type: RunwiseTraceStepType;
+  name?: string;
+  risk: RunwiseTraceRiskLevel;
+  durationMs?: number;
+  status: "ok" | "error" | "warning";
+  summary: string;
+  summaryZh: string;
+};
+
+export type RunwiseTraceReplaySummary = {
+  traceFile: string;
+  runId: string;
+  name?: string;
+  status: RunwiseTraceStatus;
+  startedAt: string;
+  endedAt?: string;
+  totalSteps: number;
+  totalDurationMs?: number;
+  riskSummary: RunwiseReplayRiskSummary;
+  approval: {
+    requests: number;
+    responses: number;
+    missingApprovalForHighRisk: boolean;
+  };
+  errors: {
+    count: number;
+    messages: string[];
+  };
+  steps: RunwiseReplayStepSummary[];
+  recommendations: {
+    message: string;
+    messageZh: string;
+  }[];
 };

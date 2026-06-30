@@ -69,6 +69,14 @@ Runwise 定义了一套轻量的本地运行轨迹格式，用于描述 AI Agent
 pnpm exec runwise trace validate examples/traces/valid-agent-run.json
 ```
 
+## Trace Replay / 运行轨迹复盘
+
+验证 trace 后，Runwise 可以生成静态复盘报告。Replay 只读取 trace 并解释运行时间线、风险点、审批流程和错误，不会重新运行 Agent，也不会调用模型。
+
+```bash
+pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json
+```
+
 ## GitHub Action
 
 Runwise 可以作为 CI 上线准备度门禁使用。它会在 GitHub Actions 中本地运行，生成 JSON/Markdown/HTML 报告，写入 job summary，并可根据 blocking finding、critical finding 或最低分数阈值决定是否让 workflow 失败。

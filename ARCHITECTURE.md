@@ -24,9 +24,9 @@ docs/zh-CN
 ## Package Roles
 
 - `@runwise/cli`: command-line entrypoint.
-- `@runwise/core`: local project scanner, rule engine, scoring engine, and trace validator.
-- `@runwise/schemas`: shared schema, rule, finding, scoring, report, and trace contracts.
-- `@runwise/reporter`: JSON, Markdown, and static HTML report formatting boundary.
+- `@runwise/core`: local project scanner, rule engine, scoring engine, trace validator, and static trace replay builder.
+- `@runwise/schemas`: shared schema, rule, finding, scoring, report, trace, and replay contracts.
+- `@runwise/reporter`: JSON, Markdown, static HTML report, and replay Markdown formatting boundary.
 - `@runwise/integrations`: integration adapter boundary.
 - `@runwise/github-action`: GitHub Action boundary.
 - `@runwise/dashboard`: local report-file dashboard viewer.
@@ -37,6 +37,7 @@ The current runtime behavior is:
 
 - `runwise doctor`: scans the local project, runs structured readiness rules, computes a readiness score, and writes JSON, Markdown, and static HTML reports under `.runwise/`.
 - `runwise trace validate <path>`: validates a Runwise trace JSON file or a directory of trace JSON files locally.
+- `runwise trace replay <trace-file>`: validates a trace file, builds a static replay summary, prints a terminal timeline, and writes Markdown under `.runwise/replays/`.
 - `runwise view`: starts a lightweight local HTTP viewer for `.runwise/runwise-report.json`.
 - `action.yml`: runs Runwise Doctor in GitHub Actions, writes a job summary, sets outputs, and evaluates local threshold gates.
 
@@ -49,6 +50,12 @@ The trace schema is for AI Agent, MCP, RAG, and LLM application runs. It records
 The validator checks required root fields, step fields, timeline sanity, error step shape, and high-risk tool calls without approval steps. Errors make a trace invalid; warnings provide guidance without blocking structurally usable traces.
 
 `runwise trace validate` does not call external services, require API keys, write to `.runwise/`, run replay, generate evals, or store traces. Replay and Failure-to-Eval remain later phases.
+
+## Static Trace Replay
+
+Trace Replay is a static local interpretation of a validated `runwise.agent_trace` JSON file. It reads the trace, summarizes the timeline, counts risk levels, reviews approval request/response flow, records error steps, and writes a Markdown replay report.
+
+Replay output is written under `.runwise/replays/` by default and remains a reproducible local artifact. The command does not re-run agents, execute tools, call models, call external APIs, generate eval cases, or store traces in a hosted system.
 
 ## GitHub Action Readiness Check
 

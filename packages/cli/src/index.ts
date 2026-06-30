@@ -2,17 +2,29 @@
 import { promises as fs, realpathSync } from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-import { RUNWISE_DOCTOR_VERSION, scanRunwiseDoctor, validateRunwiseTracePath } from "@runwise/core";
+import {
+  RUNWISE_DOCTOR_VERSION,
+  buildRunwiseTraceReplaySummary,
+  scanRunwiseDoctor,
+  validateRunwiseTraceFile,
+  validateRunwiseTracePath
+} from "@runwise/core";
 import {
   DEFAULT_VIEWER_PORT,
   RUNWISE_REPORT_PATH,
   isRunwiseReportMissingError,
   startRunwiseViewer
 } from "@runwise/dashboard";
-import { writeDoctorReports } from "@runwise/reporter";
-import type { RunwiseDoctorReport, RunwiseTraceValidationResult } from "@runwise/schemas";
+import { renderTraceReplayMarkdown, writeDoctorReports } from "@runwise/reporter";
+import type {
+  RunwiseAgentTrace,
+  RunwiseDoctorReport,
+  RunwiseTraceReplaySummary,
+  RunwiseTraceValidationResult
+} from "@runwise/schemas";
 
 export const DEFAULT_REPORT_DIRECTORY = ".runwise";
+export const DEFAULT_REPLAY_DIRECTORY = ".runwise/replays";
 
 export interface RunwiseCliIO {
   log(message: string): void;
@@ -24,6 +36,7 @@ const HELP_TEXT = `Runwise
 Usage:
   runwise doctor [--cwd .] [--output .runwise]
   runwise trace validate <path>
+  runwise trace replay <trace-file> [--output .runwise/replays]
   runwise view [--port 4321]
 
 Commands:
@@ -35,9 +48,11 @@ const TRACE_HELP_TEXT = `Runwise Trace
 
 Usage:
   runwise trace validate <path>
+  runwise trace replay <trace-file> [--output .runwise/replays]
 
 Commands:
-  validate  Validate a Runwise trace JSON file or a directory of JSON traces`;
+  validate  Validate a Runwise trace JSON file or a directory of JSON traces
+  replay    Build a static replay report from a valid Runwise trace file`;
 
 export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = console) {
   const [command, ...args] = argv;
@@ -100,6 +115,10 @@ async function runDoctor(args: string[], io: RunwiseCliIO) {
 async function runTrace(args: string[], io: RunwiseCliIO) {
   const [subcommand, targetPath, ...rest] = args;
 
+  if (subcommand === "replay") {
+    return runTraceReplay(targetPath, rest, io);
+  }
+
   if (subcommand !== "validate") {
     io.error([subcommand ? `Unknown trace command: ${subcommand}` : "Missing trace command.", "", TRACE_HELP_TEXT].join("\n"));
     return 1;
@@ -127,8 +146,56 @@ async function runTrace(args: string[], io: RunwiseCliIO) {
   return results.some((result) => !result.valid) ? 1 : 0;
 }
 
+async function runTraceReplay(
+  targetPath: string | undefined,
+  args: string[],
+  io: RunwiseCliIO
+) {
+  if (!targetPath) {
+    io.error(["Missing trace file.", "", TRACE_HELP_TEXT].join("\n"));
+    return 1;
+  }
+
+  const parseResult = parseReplayArgs(args);
+  if (!parseResult.ok) {
+    io.error(parseResult.message);
+    return 1;
+  }
+
+  const absolutePath = path.resolve(targetPath);
+  const stat = await fs.stat(absolutePath);
+  if (stat.isDirectory()) {
+    io.error("Trace replay requires a JSON trace file, not a directory.");
+    return 1;
+  }
+
+  const validation = await validateRunwiseTraceFile(absolutePath);
+  const errors = getTraceIssues(validation, "error");
+  if (errors.length > 0) {
+    io.error(formatTraceReplayInvalidSummary(errors));
+    return 1;
+  }
+
+  const trace = JSON.parse(await fs.readFile(absolutePath, "utf8")) as RunwiseAgentTrace;
+  const summary = buildRunwiseTraceReplaySummary(trace, targetPath);
+  const outputDir = path.isAbsolute(parseResult.output)
+    ? parseResult.output
+    : path.join(process.cwd(), parseResult.output);
+  await fs.mkdir(outputDir, { recursive: true });
+
+  const replayPath = path.join(outputDir, `${sanitizeFileName(summary.runId)}-replay.md`);
+  await fs.writeFile(replayPath, `${renderTraceReplayMarkdown(summary)}\n`, "utf8");
+
+  io.log(formatTraceReplaySummary(targetPath, summary, replayPath));
+  return 0;
+}
+
 type ParseDoctorArgsResult =
   | { ok: true; cwd: string; output: string }
+  | { ok: false; message: string };
+
+type ParseReplayArgsResult =
+  | { ok: true; output: string }
   | { ok: false; message: string };
 
 function parseDoctorArgs(args: string[]): ParseDoctorArgsResult {
@@ -172,6 +239,33 @@ function parseDoctorArgs(args: string[]): ParseDoctorArgsResult {
   }
 
   return { ok: true, cwd, output };
+}
+
+function parseReplayArgs(args: string[]): ParseReplayArgsResult {
+  let output = DEFAULT_REPLAY_DIRECTORY;
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+
+    if (arg === "--output") {
+      const value = args[index + 1];
+      if (!value) {
+        return { ok: false, message: "Missing value for --output." };
+      }
+      output = value;
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith("--output=")) {
+      output = arg.slice("--output=".length);
+      continue;
+    }
+
+    return { ok: false, message: `Unknown trace replay option: ${arg}` };
+  }
+
+  return { ok: true, output };
 }
 
 async function runView(args: string[], io: RunwiseCliIO) {
@@ -349,6 +443,49 @@ function getTraceIssues(
 
 function formatTraceIssue(issue: RunwiseTraceValidationResult["issues"][number]) {
   return `- ${issue.message} / ${issue.messageZh}`;
+}
+
+export function formatTraceReplaySummary(
+  displayPath: string,
+  summary: RunwiseTraceReplaySummary,
+  replayPath: string
+) {
+  const lines = [
+    "Runwise Trace Replay",
+    "",
+    `Trace: ${displayPath}`,
+    `Run ID: ${summary.runId}`,
+    `Status: ${summary.status}`,
+    `Steps: ${summary.totalSteps}`,
+    `Errors: ${summary.errors.count}`,
+    `Risk: ${summary.riskSummary.critical} critical, ${summary.riskSummary.high} high, ${summary.riskSummary.medium} medium, ${summary.riskSummary.low} low`,
+    `Approval: ${summary.approval.requests} request, ${summary.approval.responses} response`,
+    "",
+    "Timeline:",
+    ...summary.steps.map((step) => `${step.index + 1}. [${step.type}] ${step.summary}`),
+    "",
+    "Replay report:",
+    formatReportPath(process.cwd(), replayPath)
+  ];
+
+  return lines.join("\n");
+}
+
+function formatTraceReplayInvalidSummary(
+  errors: RunwiseTraceValidationResult["issues"]
+) {
+  return [
+    "Runwise Trace Replay",
+    "",
+    "Trace is invalid. Fix validation errors before replay.",
+    "",
+    "Errors:",
+    ...errors.map(formatTraceIssue)
+  ].join("\n");
+}
+
+function sanitizeFileName(value: string) {
+  return value.replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "") || "trace";
 }
 
 function normalizePath(filePath: string) {

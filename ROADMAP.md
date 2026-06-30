@@ -54,5 +54,14 @@
 ## Phase 7: Trace Replay
 
 - Add local replay fixtures.
+- Add static replay summary builder.
+- Generate Markdown replay reports.
+- Summarize risk, approvals, and errors.
 - Validate replay preconditions.
 - Keep replay separate from hosted storage or agent runtime orchestration.
+
+## Phase 8: Failure-to-Eval
+
+- Convert reviewed failures into eval case drafts.
+- Keep eval generation local and reviewable.
+- Avoid automatic model calls or hosted eval storage.

@@ -31,3 +31,7 @@ Runwise GitHub Action starts as a local-first composite action using the same Do
 ## D008: Start trace support with local JSON validation
 
 Runwise trace schema starts as a lightweight JSON format with local validation before replay, eval generation, or observability integrations. The validator checks structure, step shape, timeline sanity, and risk/approval hints without storing traces, calling models, or introducing hosted trace infrastructure.
+
+## D009: Keep Trace Replay static and local
+
+Trace Replay is a static local interpretation of a validated trace, not a re-execution engine. It reads trace JSON, builds replay summaries, and writes Markdown artifacts without executing tools, re-running agents, calling models, generating eval cases, or storing traces in hosted infrastructure.

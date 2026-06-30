@@ -13,7 +13,7 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 6 is Phase 6 - Trace Schema and Validation. It introduces a lightweight local trace JSON schema and `runwise trace validate` without replay, eval generation, hosted storage, or agent runtime behavior.
+Loop 7 is Phase 7 - Trace Replay. It introduces static local replay reports from validated trace files without agent re-execution, tool execution, model calls, eval generation, or hosted trace storage.
 
 ## Check Strategy
 

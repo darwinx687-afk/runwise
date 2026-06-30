@@ -70,6 +70,48 @@ try {
   assert.equal(riskWarningRun.status, 0);
   assert.match(riskWarningRun.stdout, /Trace has high or critical tool risk but no approval step/);
 
+  const replayRun = runCli(["trace", "replay", "examples/traces/mcp-risk-agent-run.json"]);
+  const replayPath = join(rootDir, ".runwise/replays/mcp-risk-run-001-replay.md");
+  assert.equal(
+    replayRun.status,
+    0,
+    `trace replay failed\nstdout:\n${replayRun.stdout}\nstderr:\n${replayRun.stderr}`
+  );
+  assert.match(replayRun.stdout, /Runwise Trace Replay/);
+  assert.match(replayRun.stdout, /Steps: 3/);
+  assert.match(replayRun.stdout, /Risk: 0 critical, 1 high, 0 medium, 1 low/);
+  assert.match(replayRun.stdout, /Approval: 0 request, 0 response/);
+  assert.match(replayRun.stdout, /\.runwise\/replays\/mcp-risk-run-001-replay\.md/);
+  assert.equal(existsSync(replayPath), true, "Replay Markdown report should be generated");
+  const replayMarkdown = readFileSync(replayPath, "utf8");
+  assert.match(replayMarkdown, /# Runwise Trace Replay/);
+  assert.match(replayMarkdown, /## Summary \/ 摘要/);
+  assert.match(replayMarkdown, /## Timeline \/ 时间线/);
+  assert.match(replayMarkdown, /检测到高风险工具调用/);
+
+  const invalidReplayRun = runCli(["trace", "replay", "examples/traces/invalid-agent-run.json"]);
+  assert.equal(invalidReplayRun.status, 1);
+  assert.match(invalidReplayRun.stderr, /Trace is invalid/);
+  assert.match(invalidReplayRun.stderr, /runId is required \/ 缺少必填字段 runId/);
+
+  const approvalReplay = createApprovalReplayFixture();
+  const approvalReplayRun = runCli([
+    "trace",
+    "replay",
+    approvalReplay.tracePath,
+    "--output",
+    approvalReplay.outputDir
+  ]);
+  assert.equal(
+    approvalReplayRun.status,
+    0,
+    `approval replay failed\nstdout:\n${approvalReplayRun.stdout}\nstderr:\n${approvalReplayRun.stderr}`
+  );
+  assert.match(approvalReplayRun.stdout, /Steps: 5/);
+  assert.match(approvalReplayRun.stdout, /Risk: 0 critical, 1 high, 0 medium, 1 low/);
+  assert.match(approvalReplayRun.stdout, /Approval: 1 request, 1 response/);
+  assert.equal(existsSync(approvalReplay.replayPath), true);
+
   const traceDirectoryRun = runCli(["trace", "validate", "examples/traces"]);
   assert.equal(traceDirectoryRun.status, 1);
   assert.match(traceDirectoryRun.stdout, /Scanned directory: examples\/traces/);
@@ -382,6 +424,75 @@ function createTraceFixtureDirectory() {
   );
 
   return traceRoot;
+}
+
+function createApprovalReplayFixture() {
+  const replayRoot = realpathSync(mkdtempSync(join(tmpdir(), "runwise-replay-")));
+  fixtureRoots.push(replayRoot);
+  const tracePath = join(replayRoot, "approval-run.json");
+  const outputDir = join(replayRoot, "replays");
+  const replayPath = join(outputDir, "approval-run-001-replay.md");
+
+  writeFileSync(
+    tracePath,
+    `${JSON.stringify(
+      {
+        schema: "runwise.agent_trace",
+        schemaVersion: "0.1",
+        runId: "approval-run-001",
+        name: "Approval-gated MCP run",
+        status: "success",
+        startedAt: "2026-06-30T14:00:00.000Z",
+        endedAt: "2026-06-30T14:00:09.000Z",
+        steps: [
+          {
+            stepId: "approval-step-001",
+            type: "llm_call",
+            name: "plan",
+            durationMs: 1000,
+            risk: "low"
+          },
+          {
+            stepId: "approval-step-002",
+            type: "approval_request",
+            name: "request_delete_approval",
+            durationMs: 500,
+            risk: "none"
+          },
+          {
+            stepId: "approval-step-003",
+            type: "approval_response",
+            name: "approve_dry_run",
+            durationMs: 500,
+            risk: "none"
+          },
+          {
+            stepId: "approval-step-004",
+            type: "mcp_tool_call",
+            name: "filesystem.delete",
+            durationMs: 2000,
+            risk: "high"
+          },
+          {
+            stepId: "approval-step-005",
+            type: "final_output",
+            name: "result",
+            durationMs: 1000,
+            risk: "none"
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+
+  return {
+    tracePath,
+    outputDir,
+    replayPath
+  };
 }
 
 function runDoctor(projectRoot) {

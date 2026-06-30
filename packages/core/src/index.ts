@@ -22,3 +22,4 @@ export {
   validateRunwiseTraceFile,
   validateRunwiseTracePath
 } from "./trace-validator.js";
+export { buildRunwiseTraceReplaySummary } from "./trace-replay.js";

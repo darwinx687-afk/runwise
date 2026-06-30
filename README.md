@@ -69,6 +69,14 @@ Runwise defines a lightweight local trace format for AI Agent, MCP, RAG and LLM 
 pnpm exec runwise trace validate examples/traces/valid-agent-run.json
 ```
 
+## Trace Replay
+
+After validating a trace, Runwise can produce a static replay report. Replay reads the trace and explains the run timeline, risk points, approval flow, and errors without re-running the agent or calling any model.
+
+```bash
+pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json
+```
+
 ## GitHub Action
 
 Runwise can be used as a CI readiness gate. It runs locally in GitHub Actions, generates JSON/Markdown/HTML reports, writes a job summary, and can fail the workflow on blocking findings, critical findings, or a minimum score threshold.
