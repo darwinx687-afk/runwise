@@ -1,6 +1,6 @@
 # Security
 
-Runwise is in Phase 0 and does not yet perform real scanning.
+Runwise is local-first and currently avoids hidden network calls in runtime code.
 
 ## Reporting Security Issues
 
@@ -12,9 +12,10 @@ Please do not open public issues for suspected vulnerabilities. Use a private di
 - No cloud service.
 - No billing.
 - No database.
-- No production scanner.
 - No hidden network calls in runtime code.
+- No model calls inside Doctor, trace validation, replay, or Failure-to-Eval generation.
+- Generated `.runwise/` reports are local artifacts.
 
 ## Future Security Expectations
 
-Future readiness checks should be local-first, explicit, auditable, and safe to run in CI.
+Readiness checks should remain local-first, explicit, auditable, and safe to run in CI.

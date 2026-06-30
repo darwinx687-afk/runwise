@@ -2,6 +2,8 @@
   "name": "@runwise/dashboard",
   "version": "0.0.0",
   "private": true,
+  "description": "Local report-file Dashboard Viewer for Runwise Doctor reports.",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/index.ts"

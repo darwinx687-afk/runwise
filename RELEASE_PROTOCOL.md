@@ -1,6 +1,6 @@
 # Release Protocol
 
-Runwise is not release-ready in Phase 0.
+Runwise is preparing an initial open-source preview. This protocol covers repository readiness before public push, release tags, or package publishing.
 
 ## Pre-release Checklist
 
@@ -10,7 +10,9 @@ Runwise is not release-ready in Phase 0.
 - `RUN_STATE.md` is current.
 - `DECISION_LOG.md` captures structural decisions.
 - README files are mirrored in English and Simplified Chinese.
+- `CHANGELOG.md` and launch notes are current.
+- `.runwise/` generated artifacts are ignored and untracked.
 
 ## Versioning
 
-Phase 0 packages use `0.0.0`. Versioning policy will be finalized before the first public release.
+Preview packages use `0.0.0`. Versioning policy and npm publishing metadata should be finalized before the first public package release.

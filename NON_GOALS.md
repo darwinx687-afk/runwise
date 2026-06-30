@@ -1,13 +1,14 @@
 # Non Goals
 
-The following are out of scope for Phase 0:
+The following remain out of scope unless a future phase explicitly changes the boundary:
 
 - Login or identity management.
 - Cloud-hosted control planes.
 - Billing, pricing, plans, or subscriptions.
 - Database setup or migrations.
-- Complex dashboard logic.
-- Production scanning logic.
-- Agent runtime orchestration.
+- Hosted dashboard backend.
+- Agent framework or agent runtime orchestration.
+- Model training, fine-tuning, SFT, or DPO pipelines.
+- Model calls hidden inside readiness checks.
 - Hidden network calls.
 - Vendor-specific lock-in.

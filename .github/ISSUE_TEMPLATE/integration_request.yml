@@ -1,0 +1,33 @@
+name: Integration request
+description: Request a local ecosystem compatibility profile. / 请求本地生态兼容性 profile。
+title: "[Integration]: "
+labels:
+  - integration
+body:
+  - type: input
+    id: ecosystem
+    attributes:
+      label: Ecosystem name / 生态名称
+      placeholder: "Example: LangChain, Dify, internal MCP server"
+    validations:
+      required: true
+  - type: textarea
+    id: signals
+    attributes:
+      label: Local detection signals / 本地检测信号
+      description: File names, package names, config names, env examples, or docs strings.
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Recommended Runwise checks / 推荐的 Runwise 检查
+      placeholder: "Tool approvals, trace coverage, eval coverage, provider base URL docs..."
+    validations:
+      required: true
+  - type: textarea
+    id: samples
+    attributes:
+      label: Safe sample files / 安全样例文件
+      description: Paste sanitized snippets only. Do not include secrets.
+      render: text

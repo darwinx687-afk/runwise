@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">Runwise banner</title>
+  <desc id="desc">Runwise local-first readiness, trace replay and eval generation for AI agents.</desc>
+  <rect width="1280" height="420" fill="#0f172a"/>
+  <path d="M0 330c140-64 248-64 368 0s246 64 392 0 268-64 520 0v90H0z" fill="#0f766e" opacity="0.24"/>
+  <path d="M0 280c130-48 260-48 390 0s250 48 390 0 260-48 500 0" fill="none" stroke="#14b8a6" stroke-width="4" opacity="0.65"/>
+  <g transform="translate(90 82)">
+    <rect width="128" height="128" rx="28" fill="#111827" stroke="#38bdf8" stroke-width="3"/>
+    <circle cx="64" cy="64" r="42" fill="none" stroke="#14b8a6" stroke-width="8"/>
+    <path d="M30 66h20l10-24 16 50 10-26h20" fill="none" stroke="#f8fafc" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="250" y="145" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">Runwise</text>
+  <text x="254" y="202" fill="#a7f3d0" font-family="Arial, Helvetica, sans-serif" font-size="30">Local-first readiness, trace replay and eval generation for AI agents.</text>
+  <text x="254" y="250" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="24">AI Agent 上线体检 · 运行审计 · 失败复盘 · 评测生成</text>
+  <g fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.5">
+    <path d="M920 110h170l34 34h96"/>
+    <path d="M920 168h110l34 34h156"/>
+    <path d="M920 226h210l34 34h56"/>
+  </g>
+  <g fill="#38bdf8">
+    <circle cx="920" cy="110" r="6"/>
+    <circle cx="920" cy="168" r="6"/>
+    <circle cx="920" cy="226" r="6"/>
+    <circle cx="1220" cy="144" r="6"/>
+    <circle cx="1220" cy="202" r="6"/>
+    <circle cx="1220" cy="260" r="6"/>
+  </g>
+</svg>

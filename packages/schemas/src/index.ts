@@ -8,7 +8,8 @@ export type RunwisePhase =
   | "Phase 6"
   | "Phase 7"
   | "Phase 8"
-  | "Phase 9";
+  | "Phase 9"
+  | "Phase 10";
 
 export interface RunwiseManifest {
   name: string;

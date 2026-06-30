@@ -1,0 +1,54 @@
+name: Bug report
+description: Report a reproducible Runwise issue. / 提交可复现的问题。
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Runwise version or commit / Runwise 版本或 commit
+      placeholder: "0.0.0 or git SHA"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command run / 执行的命令
+      render: bash
+      placeholder: "pnpm exec runwise doctor"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / 实际行为
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Report snippet / 报告片段
+      description: Paste only safe, redacted report snippets.
+      render: text
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment / 环境
+      placeholder: "OS, Node.js version, pnpm version"
+  - type: dropdown
+    id: data-sharing
+    attributes:
+      label: Can you share a minimal fixture? / 是否可以分享最小复现 fixture？
+      options:
+        - "Yes, sanitized fixture is available"
+        - "No, data cannot be shared"
+        - "Not sure yet"
+    validations:
+      required: true

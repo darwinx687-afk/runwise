@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest a Runwise improvement. / 建议 Runwise 改进。
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / 问题
+      description: What workflow or gap should Runwise help with?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution / 方案
+      description: Describe the smallest useful version.
+    validations:
+      required: true
+  - type: input
+    id: workflow
+    attributes:
+      label: Affected workflow / 影响的流程
+      placeholder: "doctor, trace validate, trace replay, eval generate, GitHub Action, docs"
+  - type: textarea
+    id: bilingual
+    attributes:
+      label: English / Chinese description optional / 可选中英文说明

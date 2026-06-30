@@ -2,6 +2,8 @@
   "name": "@runwise/cli",
   "version": "0.0.0",
   "private": true,
+  "description": "Runwise command-line interface for local readiness, trace, replay, and eval workflows.",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "runwise": "./src/index.ts"

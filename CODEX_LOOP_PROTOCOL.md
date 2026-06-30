@@ -13,7 +13,7 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 9 is Phase 9 - Ecosystem Integrations and Compatibility Examples. It introduces local heuristic ecosystem detection and lightweight compatibility examples without executing external AI frameworks, importing runtime integrations, calling models, calling external APIs, or adding hosted integrations.
+Loop 10 is Phase 10 - Open Source Launch Polish and Repository Presentation. It polishes README files, docs, examples, community templates, launch notes, repository checklists, and safe package metadata without adding new core product capabilities, publishing packages, pushing to GitHub, or claiming hosted availability.
 
 ## Check Strategy
 

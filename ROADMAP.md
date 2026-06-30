@@ -81,3 +81,12 @@
 - Polish repository presentation and open-source contributor flow.
 - Review documentation consistency, examples, and release-readiness messaging.
 - Keep launch work separate from hosted product, cloud sync, login, billing, or agent runtime scope.
+- Add launch assets, docs, community templates, changelog, launch notes, and repository launch checklists.
+- Keep source installation as the current distribution path until repository and package metadata are reviewed.
+
+## Phase 10A: Repository Remote Setup and First Public Push Preparation
+
+- Create the public repository and confirm the final repository URL.
+- Replace placeholder repository URL text.
+- Run launch readiness checks one final time.
+- Push the initial branch and defer npm publishing until package metadata is reviewed.

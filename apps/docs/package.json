@@ -2,6 +2,8 @@
   "name": "@runwise/docs",
   "version": "0.0.0",
   "private": true,
+  "description": "Documentation app shell for future Runwise docs work.",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./src/index.ts"

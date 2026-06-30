@@ -52,6 +52,16 @@ const requiredGovernanceFiles = [
   "README.zh-CN.md"
 ];
 
+const requiredLaunchFiles = [
+  "assets/runwise-logo.svg",
+  "assets/runwise-banner.svg",
+  "CHANGELOG.md",
+  "LAUNCH_NOTES.md",
+  "LAUNCH_NOTES.zh-CN.md",
+  "examples/README.md",
+  "examples/README.zh-CN.md"
+];
+
 const sourceWorkspaceDirectories = requiredWorkspaceDirectories.filter(
   (directory) => directory.startsWith("apps/") ||
     directory.startsWith("packages/") ||
@@ -73,6 +83,7 @@ checkTypeScriptSources(tsFiles);
 if (mode === "full") {
   checkRequiredDirectories(requiredWorkspaceDirectories);
   checkRequiredFiles(requiredGovernanceFiles);
+  checkRequiredFiles(requiredLaunchFiles);
   checkRequiredFiles(requiredPackageEntryFiles);
   const jsonFiles = collectFiles(rootDir, (filePath) => filePath.endsWith("package.json"));
   checkPackageJsonFiles(jsonFiles);
@@ -81,6 +92,7 @@ if (mode === "full") {
   finish({
     workspaceDirectories: requiredWorkspaceDirectories.length,
     governanceFiles: requiredGovernanceFiles.length,
+    launchFiles: requiredLaunchFiles.length,
     packageEntryFiles: requiredPackageEntryFiles.length,
     packageJsonFiles: jsonFiles.length,
     tsFiles: tsFiles.length,
@@ -197,6 +209,7 @@ function finish(summary) {
       "Workspace check passed:",
       `${summary.workspaceDirectories} required workspace directories,`,
       `${summary.governanceFiles} governance files,`,
+      `${summary.launchFiles} launch files,`,
       `${summary.packageEntryFiles} package entry files,`,
       `${summary.packageJsonFiles} package files,`,
       `${summary.tsFiles} TypeScript files,`,

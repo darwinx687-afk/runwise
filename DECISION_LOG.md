@@ -43,3 +43,7 @@ Failure-to-Eval starts as deterministic local eval case generation from validate
 ## D011: Start ecosystem integration as local heuristic detection
 
 Ecosystem integration starts as local heuristic detection and compatibility examples, not runtime framework execution. Runwise detects local files, package metadata, config names, environment example names, and example documentation without importing external AI frameworks, running models, calling external APIs, adding hosted integrations, or claiming official ecosystem partnerships.
+
+## D012: Launch from source before package or marketplace release
+
+Runwise open-source launch uses local-first source installation and repository-based documentation before npm publishing or marketplace release. Public package names, release tags, and marketplace listings should be finalized only after repository setup and package metadata review.

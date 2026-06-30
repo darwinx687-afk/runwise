@@ -3,6 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "description": "Open-source readiness, tracing, replay, and eval toolkit for AI agents, MCP servers, and LLM applications.",
+  "keywords": [
+    "ai-agents",
+    "mcp",
+    "llm",
+    "readiness",
+    "tracing",
+    "replay",
+    "evals",
+    "local-first"
+  ],
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@9.15.4",
@@ -12,6 +22,8 @@
   },
   "scripts": {
     "dev:cli": "pnpm --filter @runwise/cli dev",
+    "doctor": "pnpm exec runwise doctor",
+    "view": "pnpm exec runwise view",
     "check": "node scripts/check-workspace.mjs",
     "check:types": "node scripts/check-workspace.mjs --ts-only",
     "test": "node scripts/test-cli.mjs"
