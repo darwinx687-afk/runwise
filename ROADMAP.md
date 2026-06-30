@@ -15,17 +15,18 @@
 - Add human-readable and machine-readable output modes.
 - Add fixture-based CLI tests.
 
-## Phase 2: Tracing, Replay, and Reporter Contracts
+## Phase 2: Risk Rule Engine and Scoring Refinement
 
-- Define trace data contracts.
-- Add replay fixture structure.
-- Add reporter format contracts.
+- Define structured Doctor rules.
+- Add rule execution summaries.
+- Add blocking finding support.
+- Refine readiness scoring.
 
-## Phase 3: Integrations
+## Phase 3: Report System Refinement and HTML Report
 
-- Add MCP server integration examples.
-- Add LLM app and agent framework adapters.
-- Add GitHub Action execution path.
+- Improve report layout and prioritization.
+- Add HTML report output.
+- Keep JSON and Markdown reports stable.
 
 ## Phase 4: Dashboard and Documentation
 

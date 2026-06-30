@@ -22,15 +22,43 @@ export type RunwiseCategory =
 
 export interface RunwiseFinding {
   id: string;
+  ruleId?: string;
+  category: RunwiseCategory;
+  severity: RunwiseSeverity;
   title: string;
   titleZh: string;
-  severity: RunwiseSeverity;
-  category: RunwiseCategory;
   message: string;
   messageZh: string;
   recommendation: string;
   recommendationZh: string;
   file?: string;
+  blocking?: boolean;
+}
+
+export type RunwiseRuleId = string;
+
+export type RunwiseRuleStatus = "passed" | "failed" | "not_applicable";
+
+export interface RunwiseRuleDefinition {
+  id: RunwiseRuleId;
+  category: RunwiseCategory;
+  severity: RunwiseSeverity;
+  title: string;
+  titleZh: string;
+  description: string;
+  descriptionZh: string;
+  message: string;
+  messageZh: string;
+  recommendation: string;
+  recommendationZh: string;
+  weight?: number;
+  blocking?: boolean;
+}
+
+export interface RunwiseRuleResult {
+  ruleId: RunwiseRuleId;
+  status: RunwiseRuleStatus;
+  finding?: RunwiseFinding;
 }
 
 export interface RunwiseDoctorReport {
@@ -47,6 +75,14 @@ export interface RunwiseDoctorReport {
     medium: number;
     low: number;
     info: number;
+    categoryScores?: Record<RunwiseCategory, number>;
+  };
+  rules: {
+    total: number;
+    passed: number;
+    failed: number;
+    notApplicable: number;
+    blocking: number;
   };
   checks: {
     workspaceDetected: boolean;

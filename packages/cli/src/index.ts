@@ -65,6 +65,7 @@ export function formatTerminalSummary(
     "",
     `Scanned: ${report.scannedPath}`,
     `Score: ${report.summary.overallScore}/100`,
+    `Rules: ${report.rules.passed} passed, ${report.rules.failed} failed, ${report.rules.notApplicable} not applicable, ${report.rules.blocking} blocking`,
     `Findings: ${report.summary.totalFindings} total, ${report.summary.critical} critical, ${report.summary.high} high, ${report.summary.medium} medium, ${report.summary.low} low, ${report.summary.info} info`,
     "",
     "Reports:",

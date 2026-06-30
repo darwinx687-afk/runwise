@@ -24,12 +24,12 @@ docs/zh-CN
 ## Package Roles
 
 - `@runwise/cli`: command-line entrypoint.
-- `@runwise/core`: shared domain primitives.
-- `@runwise/schemas`: shared schema and manifest contracts.
-- `@runwise/reporter`: report formatting boundary.
+- `@runwise/core`: local project scanner, rule engine, and scoring engine.
+- `@runwise/schemas`: shared schema, rule, finding, scoring, and report contracts.
+- `@runwise/reporter`: JSON and Markdown report formatting boundary.
 - `@runwise/integrations`: integration adapter boundary.
 - `@runwise/github-action`: GitHub Action boundary.
 
-## Phase 0 Runtime
+## Current Runtime
 
-The only runtime behavior in Phase 0 is the CLI doctor placeholder. Real scanning, tracing, replay, and eval logic starts in Phase 1 or later.
+The current runtime behavior is `runwise doctor`. It scans the local project, runs structured readiness rules, computes a readiness score, and writes JSON and Markdown reports under `.runwise/`.

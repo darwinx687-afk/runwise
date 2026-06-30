@@ -2,26 +2,22 @@
 
 ## Current Phase
 
-Phase 1
+Phase 2
 
 ## Current Loop
 
-Loop 1A - Git Baseline & Artifact Policy
+Loop 2 - Risk Rule Engine and Scoring Refinement
 
 ## Completed
 
-- Real local doctor scan
-- JSON report generation
-- Markdown report generation
-- Basic readiness scoring
-- Basic workspace/package/TypeScript/governance/AI/MCP/eval/trace checks
-
-## Baseline
-
-- Loop 0 and Loop 1 foundation committed locally.
-- Generated .runwise reports are ignored and reproducible.
-- Next Required Step: Phase 2 - Risk Rule Engine and Scoring Refinement.
+- Structured rule definitions
+- Rule engine execution
+- Blocking finding support
+- Refined readiness scoring
+- JSON report rule summary
+- Markdown report rule summary
+- Updated CLI doctor output
 
 ## Next Required Step
 
-Phase 2 - Risk Rule Engine and Scoring Refinement
+Phase 3 - Report System Refinement and HTML Report

@@ -12,4 +12,4 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 1 is Phase 1 Runwise Doctor CLI. It adds the first real local scanner, JSON and Markdown reports, basic scoring, and fixture-style CLI tests only.
+Loop 2 is Phase 2 - Risk Rule Engine and Scoring Refinement. It refactors Doctor findings to come from structured local rules, blocking finding metadata, refined scoring, and report rule summaries only.

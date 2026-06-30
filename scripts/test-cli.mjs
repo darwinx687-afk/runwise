@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cliBin = resolve(rootDir, "node_modules/.bin/runwise");
-const fixtureRoot = realpathSync(mkdtempSync(join(tmpdir(), "runwise-doctor-")));
+const expectedRuleCount = 15;
 
 const governanceFiles = [
   "PROJECT_CONSTITUTION.md",
@@ -28,56 +28,85 @@ const governanceFiles = [
   "NON_GOALS.md"
 ];
 
-try {
-  createFixtureProject(fixtureRoot);
+const fixtureRoots = [];
 
-  const result = spawnSync(cliBin, ["doctor"], {
-    cwd: fixtureRoot,
-    encoding: "utf8",
-    shell: process.platform === "win32"
+try {
+  const base = createFixtureProject();
+  const baseRun = runDoctor(base);
+
+  assert.match(baseRun.stdout, /Runwise Doctor/);
+  assert.match(baseRun.stdout, /Rules:/);
+  assert.match(baseRun.stdout, /Reports:/);
+  assert.equal(existsSync(baseRun.jsonPath), true, "JSON report should be generated");
+  assert.equal(existsSync(baseRun.markdownPath), true, "Markdown report should be generated");
+
+  assert.equal(baseRun.report.tool, "runwise");
+  assert.equal(baseRun.report.command, "doctor");
+  assert.equal(baseRun.report.scannedPath, base);
+  assert.equal(baseRun.report.rules.total, expectedRuleCount);
+  assert.equal(
+    baseRun.report.rules.passed +
+      baseRun.report.rules.failed +
+      baseRun.report.rules.notApplicable,
+    baseRun.report.rules.total
+  );
+  assert.equal(baseRun.report.checks.governanceFilesDetected, true);
+  assert.equal(baseRun.report.summary.overallScore >= 0, true);
+  assert.equal(baseRun.report.summary.overallScore <= 100, true);
+  assert.ok(baseRun.report.summary.categoryScores, "Category scores should be included");
+
+  assertFinding(baseRun.report, {
+    ruleId: "evals.coverage_present",
+    severity: "medium",
+    blocking: false
+  });
+  assertFinding(baseRun.report, {
+    ruleId: "tracing.coverage_present",
+    severity: "medium",
+    blocking: false
   });
 
-  assert.equal(
-    result.status,
-    0,
-    `runwise doctor failed\nstdout:\n${result.stdout}\nstderr:\n${result.stderr}`
-  );
-  assert.match(result.stdout, /Runwise Doctor/);
-  assert.match(result.stdout, /Reports:/);
+  assert.match(baseRun.markdown, /## Rule Execution/);
+  assert.match(baseRun.markdown, /Blocking findings/);
+  assert.match(baseRun.markdown, /## What to Fix First/);
+  assert.match(baseRun.markdown, /No eval coverage detected/);
+  assert.match(baseRun.markdown, /未检测到评测覆盖/);
+  assert.match(baseRun.markdown, /\.runwise\/runwise-report\.json/);
+  assert.match(baseRun.markdown, /\.runwise\/runwise-report\.md/);
 
-  const reportDir = join(fixtureRoot, ".runwise");
-  const jsonPath = join(reportDir, "runwise-report.json");
-  const markdownPath = join(reportDir, "runwise-report.md");
+  const missingConstitution = createFixtureProject({
+    omitGovernance: ["PROJECT_CONSTITUTION.md"]
+  });
+  const missingConstitutionRun = runDoctor(missingConstitution);
+  assertFinding(missingConstitutionRun.report, {
+    ruleId: "governance.constitution_present",
+    severity: "high",
+    blocking: true
+  });
+  assert.equal(missingConstitutionRun.report.rules.blocking, 1);
 
-  assert.equal(existsSync(jsonPath), true, "JSON report should be generated");
-  assert.equal(existsSync(markdownPath), true, "Markdown report should be generated");
-
-  const report = JSON.parse(readFileSync(jsonPath, "utf8"));
-  const markdown = readFileSync(markdownPath, "utf8");
-
-  assert.equal(report.tool, "runwise");
-  assert.equal(report.command, "doctor");
-  assert.equal(report.scannedPath, fixtureRoot);
-  assert.equal(report.checks.governanceFilesDetected, true);
-  assert.equal(report.summary.overallScore >= 0, true);
-  assert.equal(report.summary.overallScore <= 100, true);
-
-  assertFinding(report, "evals.missing", "medium");
-  assertFinding(report, "tracing.missing", "medium");
-  assertFinding(report, "governance.complete", "info");
-
-  assert.match(markdown, /# Runwise Doctor Report/);
-  assert.match(markdown, /No eval coverage detected/);
-  assert.match(markdown, /未检测到评测覆盖/);
-  assert.match(markdown, /No trace coverage detected/);
-  assert.match(markdown, /未检测到追踪覆盖/);
+  const missingProtocol = createFixtureProject({
+    omitGovernance: ["CODEX_LOOP_PROTOCOL.md"]
+  });
+  const missingProtocolRun = runDoctor(missingProtocol);
+  assertFinding(missingProtocolRun.report, {
+    ruleId: "governance.codex_loop_protocol_present",
+    severity: "high",
+    blocking: true
+  });
+  assert.equal(missingProtocolRun.report.rules.blocking, 1);
 } finally {
-  rmSync(fixtureRoot, { recursive: true, force: true });
+  for (const fixtureRoot of fixtureRoots) {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
 }
 
-console.log("Runwise Doctor CLI tests passed.");
+console.log("Runwise Doctor rule engine tests passed.");
 
-function createFixtureProject(projectRoot) {
+function createFixtureProject(options = {}) {
+  const projectRoot = realpathSync(mkdtempSync(join(tmpdir(), "runwise-doctor-")));
+  fixtureRoots.push(projectRoot);
+
   mkdirSync(join(projectRoot, "apps"), { recursive: true });
   mkdirSync(join(projectRoot, "packages"), { recursive: true });
 
@@ -109,13 +138,55 @@ function createFixtureProject(projectRoot) {
     )
   );
 
+  const omittedGovernance = new Set(options.omitGovernance ?? []);
   for (const file of governanceFiles) {
-    writeFileSync(join(projectRoot, file), `# ${file}\n`);
+    if (!omittedGovernance.has(file)) {
+      writeFileSync(join(projectRoot, file), `# ${file}\n`);
+    }
   }
+
+  return projectRoot;
 }
 
-function assertFinding(report, id, severity) {
-  const finding = report.findings.find((item) => item.id === id);
-  assert.ok(finding, `Expected finding ${id}`);
-  assert.equal(finding.severity, severity, `Expected ${id} severity ${severity}`);
+function runDoctor(projectRoot) {
+  const result = spawnSync(cliBin, ["doctor"], {
+    cwd: projectRoot,
+    encoding: "utf8",
+    shell: process.platform === "win32"
+  });
+
+  assert.equal(
+    result.status,
+    0,
+    `runwise doctor failed\nstdout:\n${result.stdout}\nstderr:\n${result.stderr}`
+  );
+
+  const reportDir = join(projectRoot, ".runwise");
+  const jsonPath = join(reportDir, "runwise-report.json");
+  const markdownPath = join(reportDir, "runwise-report.md");
+  const report = JSON.parse(readFileSync(jsonPath, "utf8"));
+  const markdown = readFileSync(markdownPath, "utf8");
+
+  return {
+    stdout: result.stdout,
+    jsonPath,
+    markdownPath,
+    report,
+    markdown
+  };
+}
+
+function assertFinding(report, expected) {
+  const finding = report.findings.find((item) => item.ruleId === expected.ruleId);
+  assert.ok(finding, `Expected finding for ${expected.ruleId}`);
+  assert.equal(
+    finding.severity,
+    expected.severity,
+    `Expected ${expected.ruleId} severity ${expected.severity}`
+  );
+  assert.equal(
+    finding.blocking === true,
+    expected.blocking,
+    `Expected ${expected.ruleId} blocking ${expected.blocking}`
+  );
 }
