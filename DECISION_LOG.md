@@ -47,3 +47,7 @@ Ecosystem integration starts as local heuristic detection and compatibility exam
 ## D012: Launch from source before package or marketplace release
 
 Runwise open-source launch uses local-first source installation and repository-based documentation before npm publishing or marketplace release. Public package names, release tags, and marketplace listings should be finalized only after repository setup and package metadata review.
+
+## D013: Defer public release tags and npm publishing until repository verification
+
+First public launch preparation keeps npm publishing and release tagging deferred until after the repository renders correctly and CI passes on GitHub.

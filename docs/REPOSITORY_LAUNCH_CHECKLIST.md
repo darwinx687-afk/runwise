@@ -2,16 +2,23 @@
 
 - [ ] Create GitHub repository.
 - [ ] Confirm repository name.
-- [ ] Update `<your-future-repo-url>` placeholders.
+- [ ] Confirm remote repository URL.
+- [ ] Update `<your-future-repo-url>` placeholders where appropriate.
 - [ ] Confirm MIT license.
 - [ ] Confirm security policy.
 - [ ] Confirm README links.
+- [ ] Confirm README banner and visual assets render on GitHub.
 - [ ] Run `pnpm check`.
+- [ ] Run `pnpm check:types`.
 - [ ] Run `pnpm test`.
 - [ ] Run `pnpm exec runwise doctor`.
+- [ ] Run `pnpm exec runwise trace validate examples/traces/valid-agent-run.json`.
 - [ ] Run `pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json`.
 - [ ] Run `pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json`.
 - [ ] Confirm `.runwise/` is ignored.
-- [ ] Push initial branch.
-- [ ] Create first tag later.
-- [ ] Do not publish npm until package metadata is reviewed.
+- [ ] Push initial branch after the confirmed remote URL is added.
+- [ ] Confirm GitHub Actions start after the first push.
+- [ ] Confirm `action.yml` is visible at the repository root.
+- [ ] Confirm issue templates and PR template appear in GitHub.
+- [ ] Do not create the first tag until release review is complete.
+- [ ] Defer npm publishing until package metadata is reviewed.

@@ -2,16 +2,23 @@
 
 - [ ] 创建 GitHub 仓库。
 - [ ] 确认仓库名称。
-- [ ] 更新 `<your-future-repo-url>` 占位。
+- [ ] 确认远程仓库 URL。
+- [ ] 在合适位置更新 `<your-future-repo-url>` 占位。
 - [ ] 确认 MIT License。
 - [ ] 确认安全策略。
 - [ ] 确认 README 链接。
+- [ ] 确认 README banner 和视觉资源在 GitHub 上正确渲染。
 - [ ] 运行 `pnpm check`。
+- [ ] 运行 `pnpm check:types`。
 - [ ] 运行 `pnpm test`。
 - [ ] 运行 `pnpm exec runwise doctor`。
+- [ ] 运行 `pnpm exec runwise trace validate examples/traces/valid-agent-run.json`。
 - [ ] 运行 `pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json`。
 - [ ] 运行 `pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json`。
 - [ ] 确认 `.runwise/` 被忽略。
-- [ ] 推送初始分支。
-- [ ] 后续再创建第一个 tag。
-- [ ] 在 package metadata 审查完成前不要发布 npm。
+- [ ] 在添加已确认的远程仓库 URL 后推送初始分支。
+- [ ] 确认 GitHub Actions 在首次推送后启动。
+- [ ] 确认仓库根目录可见 `action.yml`。
+- [ ] 确认 issue templates 和 PR template 在 GitHub 中可见。
+- [ ] 在 release review 完成前不要创建第一个 tag。
+- [ ] 在 package metadata 审查完成前继续暂缓 npm 发布。
