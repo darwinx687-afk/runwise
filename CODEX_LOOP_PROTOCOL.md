@@ -13,7 +13,7 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 3A is Phase 3 Stabilization - Check Pipeline Hardening and HTML Report QA. It clarifies the local quality gate and validates the generated static HTML report before Dashboard work begins.
+Loop 4 is Phase 4 - Lightweight Local Dashboard Viewer. It introduces a local report-file viewer for `.runwise/runwise-report.json` without hosted dashboard behavior.
 
 ## Check Strategy
 

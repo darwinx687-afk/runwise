@@ -31,5 +31,12 @@
 ## Phase 4: Dashboard and Documentation
 
 - Build local dashboard workflows.
+- Add a lightweight local report-file Dashboard Viewer.
 - Expand English and Chinese documentation.
 - Publish release-ready examples.
+
+## Phase 5: GitHub Action Readiness Check
+
+- Add GitHub Action entrypoint.
+- Run Runwise Doctor in CI.
+- Upload reproducible report artifacts.

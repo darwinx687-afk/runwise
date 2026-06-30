@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import {
   existsSync,
   mkdirSync,
@@ -9,6 +9,7 @@ import {
   rmSync,
   writeFileSync
 } from "node:fs";
+import { get } from "node:http";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,8 +30,22 @@ const governanceFiles = [
 ];
 
 const fixtureRoots = [];
+const viewerProcesses = [];
 
 try {
+  const helpRun = runCli(["--help"]);
+  assert.equal(helpRun.status, 0);
+  assert.match(helpRun.stdout, /Runwise/);
+  assert.match(helpRun.stdout, /doctor\s+Scan the current project and generate local reports/);
+  assert.match(helpRun.stdout, /view\s+Open a local dashboard viewer/);
+
+  const missingReportProject = createFixtureProject();
+  const missingReportRun = runCli(["view"], missingReportProject);
+  assert.equal(missingReportRun.status, 1);
+  assert.match(missingReportRun.stderr, /No local report found/);
+  assert.match(missingReportRun.stderr, /\.runwise\/runwise-report\.json/);
+  assert.match(missingReportRun.stderr, /pnpm exec runwise doctor/);
+
   const base = createFixtureProject();
   const baseRun = runDoctor(base);
 
@@ -101,6 +116,8 @@ try {
   assert.doesNotMatch(baseRun.html, /\[object Object\]/);
   assert.doesNotMatch(baseRun.html, /TODO|PLACEHOLDER/i);
 
+  await assertViewerServer(base);
+
   const missingConstitution = createFixtureProject({
     omitGovernance: ["PROJECT_CONSTITUTION.md"]
   });
@@ -123,12 +140,24 @@ try {
   });
   assert.equal(missingProtocolRun.report.rules.blocking, 1);
 } finally {
+  for (const child of viewerProcesses) {
+    child.kill("SIGTERM");
+  }
+
   for (const fixtureRoot of fixtureRoots) {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
 }
 
-console.log("Runwise Doctor rule engine tests passed.");
+console.log("Runwise CLI and viewer tests passed.");
+
+function runCli(args, cwd = rootDir) {
+  return spawnSync(cliBin, args, {
+    cwd,
+    encoding: "utf8",
+    shell: process.platform === "win32"
+  });
+}
 
 function createFixtureProject(options = {}) {
   const projectRoot = realpathSync(mkdtempSync(join(tmpdir(), "runwise-doctor-")));
@@ -176,11 +205,7 @@ function createFixtureProject(options = {}) {
 }
 
 function runDoctor(projectRoot) {
-  const result = spawnSync(cliBin, ["doctor"], {
-    cwd: projectRoot,
-    encoding: "utf8",
-    shell: process.platform === "win32"
-  });
+  const result = runCli(["doctor"], projectRoot);
 
   assert.equal(
     result.status,
@@ -205,6 +230,103 @@ function runDoctor(projectRoot) {
     markdown,
     html
   };
+}
+
+async function assertViewerServer(projectRoot) {
+  const child = spawn(cliBin, ["view", "--port", "0"], {
+    cwd: projectRoot,
+    stdio: ["ignore", "pipe", "pipe"],
+    shell: process.platform === "win32"
+  });
+  viewerProcesses.push(child);
+
+  const { stdout, url } = await waitForViewerUrl(child);
+  assert.match(stdout, /Runwise Viewer/);
+  assert.match(stdout, /Loaded report:/);
+  assert.match(stdout, /\.runwise\/runwise-report\.json/);
+  assert.match(stdout, /Local dashboard:/);
+
+  const dashboard = await httpGet(url);
+  assert.equal(dashboard.statusCode, 200);
+  assert.match(dashboard.body, /<h1>Runwise<\/h1>/);
+  assert.match(dashboard.body, /Local-first AI readiness, tracing, replay and eval toolkit/);
+  assert.match(dashboard.body, /Runwise is local-first\. This viewer reads your generated report file and does not send data anywhere\./);
+  assert.match(dashboard.body, /Runwise 采用本地优先设计。此查看器只读取本地生成的报告文件，不会上传数据。/);
+  assert.match(dashboard.body, /Overall score/);
+  assert.match(dashboard.body, /Rule Summary/);
+  assert.match(dashboard.body, /Findings Explorer/);
+  assert.match(dashboard.body, /No eval coverage detected/);
+
+  const reportJson = await httpGet(`${url}/report.json`);
+  assert.equal(reportJson.statusCode, 200);
+  assert.equal(JSON.parse(reportJson.body).tool, "runwise");
+
+  const health = await httpGet(`${url}/health`);
+  assert.equal(health.statusCode, 200);
+  assert.equal(JSON.parse(health.body).ok, true);
+
+  child.kill("SIGTERM");
+}
+
+function waitForViewerUrl(child) {
+  return new Promise((resolve, reject) => {
+    let stdout = "";
+    let stderr = "";
+    const timer = setTimeout(() => {
+      reject(new Error(`Timed out waiting for viewer URL\nstdout:\n${stdout}\nstderr:\n${stderr}`));
+    }, 5000);
+
+    child.stdout.setEncoding("utf8");
+    child.stderr.setEncoding("utf8");
+
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk;
+      const match = stdout.match(/http:\/\/localhost:\d+/);
+      if (!match) {
+        return;
+      }
+
+      clearTimeout(timer);
+      resolve({ stdout, url: match[0] });
+    });
+
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk;
+    });
+
+    child.on("error", (error) => {
+      clearTimeout(timer);
+      reject(error);
+    });
+
+    child.on("exit", (code) => {
+      if (!stdout.match(/http:\/\/localhost:\d+/)) {
+        clearTimeout(timer);
+        reject(new Error(`Viewer exited before URL with code ${code}\nstdout:\n${stdout}\nstderr:\n${stderr}`));
+      }
+    });
+  });
+}
+
+function httpGet(url) {
+  return new Promise((resolve, reject) => {
+    const request = get(url, (response) => {
+      let body = "";
+      response.setEncoding("utf8");
+      response.on("data", (chunk) => {
+        body += chunk;
+      });
+      response.on("end", () => {
+        resolve({
+          statusCode: response.statusCode,
+          body
+        });
+      });
+    });
+
+    request.on("error", reject);
+    request.end();
+  });
 }
 
 function assertFinding(report, expected) {

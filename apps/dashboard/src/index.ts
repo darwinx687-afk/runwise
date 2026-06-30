@@ -1,5 +1,10 @@
-export const dashboardPlaceholder = {
-  name: "Runwise Dashboard",
-  phase: "Phase 0",
-  status: "foundation-only"
-} as const;
+export {
+  DEFAULT_VIEWER_PORT,
+  RUNWISE_REPORT_PATH,
+  isRunwiseReportMissingError,
+  resolveRunwiseReportPath,
+  startRunwiseViewer,
+  type RunwiseViewerOptions,
+  type RunwiseViewerServer
+} from "./viewer-server.js";
+export { renderDashboardHtml } from "./render-dashboard.js";

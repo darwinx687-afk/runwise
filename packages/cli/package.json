@@ -10,6 +10,7 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
+    "@runwise/dashboard": "workspace:*",
     "@runwise/core": "workspace:*",
     "@runwise/reporter": "workspace:*",
     "@runwise/schemas": "workspace:*"

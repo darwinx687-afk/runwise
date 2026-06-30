@@ -3,6 +3,12 @@ import { promises as fs, realpathSync } from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { RUNWISE_DOCTOR_VERSION, scanRunwiseDoctor } from "@runwise/core";
+import {
+  DEFAULT_VIEWER_PORT,
+  RUNWISE_REPORT_PATH,
+  isRunwiseReportMissingError,
+  startRunwiseViewer
+} from "@runwise/dashboard";
 import { writeDoctorReports } from "@runwise/reporter";
 import type { RunwiseDoctorReport } from "@runwise/schemas";
 
@@ -13,16 +19,18 @@ export interface RunwiseCliIO {
   error(message: string): void;
 }
 
-const HELP_TEXT = `Runwise CLI
+const HELP_TEXT = `Runwise
 
 Usage:
   runwise doctor
+  runwise view [--port 4321]
 
 Commands:
-  doctor  Scan the current directory and generate Runwise readiness reports`;
+  doctor   Scan the current project and generate local reports
+  view     Open a local dashboard viewer for .runwise/runwise-report.json`;
 
 export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = console) {
-  const [command] = argv;
+  const [command, ...args] = argv;
 
   if (command === undefined || command === "--help" || command === "-h") {
     io.log(HELP_TEXT);
@@ -33,7 +41,11 @@ export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = conso
     return runDoctor(io);
   }
 
-  io.error(`Unknown command: ${command}`);
+  if (command === "view") {
+    return runView(args, io);
+  }
+
+  io.error([`Unknown command: ${command}`, "", HELP_TEXT].join("\n"));
   return 1;
 }
 
@@ -60,6 +72,104 @@ async function runDoctor(io: RunwiseCliIO) {
   );
 
   return 0;
+}
+
+async function runView(args: string[], io: RunwiseCliIO) {
+  const parseResult = parseViewArgs(args);
+
+  if (!parseResult.ok) {
+    io.error(parseResult.message);
+    return 1;
+  }
+
+  try {
+    const viewer = await startRunwiseViewer({
+      port: parseResult.port
+    });
+
+    io.log(
+      [
+        "Runwise Viewer",
+        "",
+        "Loaded report:",
+        RUNWISE_REPORT_PATH,
+        "",
+        "Local dashboard:",
+        viewer.url
+      ].join("\n")
+    );
+
+    return 0;
+  } catch (error) {
+    if (isRunwiseReportMissingError(error)) {
+      io.error(
+        [
+          "Runwise Viewer",
+          "",
+          "No local report found.",
+          "",
+          "Expected report:",
+          RUNWISE_REPORT_PATH,
+          "",
+          "Run this first:",
+          "pnpm exec runwise doctor"
+        ].join("\n")
+      );
+      return 1;
+    }
+
+    throw error;
+  }
+}
+
+type ParseViewArgsResult =
+  | { ok: true; port: number }
+  | { ok: false; message: string };
+
+function parseViewArgs(args: string[]): ParseViewArgsResult {
+  let port = DEFAULT_VIEWER_PORT;
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+
+    if (arg === "--port") {
+      const value = args[index + 1];
+      if (!value) {
+        return { ok: false, message: "Missing value for --port." };
+      }
+      const parsed = parsePort(value);
+      if (parsed === undefined) {
+        return { ok: false, message: `Invalid port: ${value}` };
+      }
+      port = parsed;
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith("--port=")) {
+      const value = arg.slice("--port=".length);
+      const parsed = parsePort(value);
+      if (parsed === undefined) {
+        return { ok: false, message: `Invalid port: ${value}` };
+      }
+      port = parsed;
+      continue;
+    }
+
+    return { ok: false, message: `Unknown view option: ${arg}` };
+  }
+
+  return { ok: true, port };
+}
+
+function parsePort(value: string): number | undefined {
+  const port = Number(value);
+
+  if (!Number.isInteger(port) || port < 0 || port > 65535) {
+    return undefined;
+  }
+
+  return port;
 }
 
 export function formatTerminalSummary(
@@ -107,7 +217,7 @@ if (currentFile === invokedFile) {
     })
     .catch((error: unknown) => {
       const message = error instanceof Error ? error.message : String(error);
-      console.error(`Runwise Doctor failed: ${message}`);
+      console.error(`Runwise failed: ${message}`);
       process.exitCode = 1;
     });
 }

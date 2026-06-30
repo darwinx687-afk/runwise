@@ -51,6 +51,16 @@ Runwise Doctor runs local readiness rules and does not require API keys, network
 
 Runwise generates a self-contained local HTML report that can be opened directly in a browser, shared as an artifact, or used as a baseline for future dashboards.
 
+## Local Dashboard Viewer
+
+After running `runwise doctor`, start the local viewer:
+
+```bash
+pnpm exec runwise view
+```
+
+The viewer reads `.runwise/runwise-report.json` locally and does not upload project data.
+
 ## Architecture Overview
 
 Runwise is a pnpm monorepo with TypeScript-first packages.

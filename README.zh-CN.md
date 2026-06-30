@@ -51,6 +51,16 @@ Runwise Doctor 运行本地就绪度规则，不需要 API key、网络访问、
 
 Runwise 会生成一个可直接在浏览器打开的本地 HTML 报告，可作为项目审计交付物、GitHub Actions artifact，或后续 Dashboard 的设计基础。
 
+## 本地 Dashboard 查看器
+
+运行 `runwise doctor` 后，可以启动本地查看器：
+
+```bash
+pnpm exec runwise view
+```
+
+查看器只读取本地 `.runwise/runwise-report.json`，不会上传项目数据。
+
 ## 架构概览
 
 Runwise 是一个 pnpm monorepo，并采用 TypeScript-first 架构。

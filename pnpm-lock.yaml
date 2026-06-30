@@ -21,7 +21,11 @@ importers:
         specifier: ^5.8.0
         version: 5.9.3
 
-  apps/dashboard: {}
+  apps/dashboard:
+    dependencies:
+      '@runwise/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
 
   apps/docs: {}
 
@@ -38,6 +42,9 @@ importers:
       '@runwise/core':
         specifier: workspace:*
         version: link:../core
+      '@runwise/dashboard':
+        specifier: workspace:*
+        version: link:../../apps/dashboard
       '@runwise/reporter':
         specifier: workspace:*
         version: link:../reporter

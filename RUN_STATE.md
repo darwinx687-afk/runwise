@@ -2,19 +2,21 @@
 
 ## Current Phase
 
-Phase 3 Stabilization
+Phase 4
 
 ## Current Loop
 
-Loop 3A - Check Pipeline Hardening and HTML Report QA
+Loop 4 - Lightweight Local Dashboard Viewer
 
 ## Completed
 
-- Check pipeline clarified and documented
-- HTML report QA performed
-- Generated .runwise reports confirmed ignored and reproducible
-- Project ready for Phase 4 Dashboard viewer
+- Local Dashboard Viewer introduced
+- `runwise view` command added
+- Viewer reads `.runwise/runwise-report.json`
+- Viewer is local-first and does not upload project data
+- Dashboard HTML includes bilingual readiness summary, rule summary, findings, and report paths
+- Tests updated for viewer behavior
 
 ## Next Required Step
 
-Phase 4 - Lightweight Local Dashboard Viewer
+Phase 5 - GitHub Action Readiness Check
