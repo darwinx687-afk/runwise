@@ -1,0 +1,47 @@
+{
+  "schema": "runwise.agent_trace",
+  "schemaVersion": "0.1",
+  "runId": "error-run-001",
+  "name": "Tool failure handling demo",
+  "status": "failed",
+  "startedAt": "2026-06-30T13:00:00.000Z",
+  "endedAt": "2026-06-30T13:00:05.000Z",
+  "input": {
+    "task": "Summarize a local file after reading it."
+  },
+  "steps": [
+    {
+      "stepId": "error-step-001",
+      "type": "tool_call",
+      "name": "filesystem.read",
+      "startedAt": "2026-06-30T13:00:01.000Z",
+      "endedAt": "2026-06-30T13:00:03.000Z",
+      "durationMs": 2000,
+      "risk": "low",
+      "input": {
+        "path": "demo-workspace/missing-file.md"
+      },
+      "error": {
+        "message": "File not found",
+        "code": "ENOENT"
+      }
+    },
+    {
+      "stepId": "error-step-002",
+      "type": "error",
+      "name": "surface_file_error",
+      "startedAt": "2026-06-30T13:00:03.500Z",
+      "endedAt": "2026-06-30T13:00:04.000Z",
+      "durationMs": 500,
+      "risk": "none",
+      "error": {
+        "message": "Unable to summarize because the requested file was missing.",
+        "code": "MISSING_INPUT"
+      }
+    }
+  ],
+  "metadata": {
+    "purpose": "Valid local failure trace fixture for Failure-to-Eval tests.",
+    "zhNote": "用于 Failure-to-Eval 测试的本地失败 trace 示例。"
+  }
+}

@@ -4,6 +4,7 @@ import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   RUNWISE_DOCTOR_VERSION,
+  buildRunwiseEvalCase,
   buildRunwiseTraceReplaySummary,
   scanRunwiseDoctor,
   validateRunwiseTraceFile,
@@ -15,16 +16,24 @@ import {
   isRunwiseReportMissingError,
   startRunwiseViewer
 } from "@runwise/dashboard";
-import { renderTraceReplayMarkdown, writeDoctorReports } from "@runwise/reporter";
+import {
+  renderEvalCaseJson,
+  renderEvalCaseMarkdown,
+  renderEvalCaseYaml,
+  renderTraceReplayMarkdown,
+  writeDoctorReports
+} from "@runwise/reporter";
 import type {
   RunwiseAgentTrace,
   RunwiseDoctorReport,
+  RunwiseEvalCase,
   RunwiseTraceReplaySummary,
   RunwiseTraceValidationResult
 } from "@runwise/schemas";
 
 export const DEFAULT_REPORT_DIRECTORY = ".runwise";
 export const DEFAULT_REPLAY_DIRECTORY = ".runwise/replays";
+export const DEFAULT_EVAL_DIRECTORY = ".runwise/evals";
 
 export interface RunwiseCliIO {
   log(message: string): void;
@@ -35,14 +44,16 @@ const HELP_TEXT = `Runwise
 
 Usage:
   runwise doctor [--cwd .] [--output .runwise]
+  runwise view [--port 4321]
   runwise trace validate <path>
   runwise trace replay <trace-file> [--output .runwise/replays]
-  runwise view [--port 4321]
+  runwise eval generate <trace-file> [--output .runwise/evals] [--format all]
 
 Commands:
   doctor   Scan the current project and generate local reports
   trace    Validate local Runwise trace JSON files
-  view     Open a local dashboard viewer for .runwise/runwise-report.json`;
+  view     Open a local dashboard viewer for .runwise/runwise-report.json
+  eval     Generate local eval case files from validated traces`;
 
 const TRACE_HELP_TEXT = `Runwise Trace
 
@@ -53,6 +64,17 @@ Usage:
 Commands:
   validate  Validate a Runwise trace JSON file or a directory of JSON traces
   replay    Build a static replay report from a valid Runwise trace file`;
+
+const EVAL_HELP_TEXT = `Runwise Eval
+
+Usage:
+  runwise eval generate <trace-file> [--output .runwise/evals] [--format all]
+
+Commands:
+  generate  Generate local eval case files from a valid Runwise trace file
+
+Formats:
+  json, yaml, markdown, all`;
 
 export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = console) {
   const [command, ...args] = argv;
@@ -72,6 +94,10 @@ export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = conso
 
   if (command === "trace") {
     return runTrace(args, io);
+  }
+
+  if (command === "eval") {
+    return runEval(args, io);
   }
 
   io.error([`Unknown command: ${command}`, "", HELP_TEXT].join("\n"));
@@ -190,12 +216,78 @@ async function runTraceReplay(
   return 0;
 }
 
+async function runEval(args: string[], io: RunwiseCliIO) {
+  const [subcommand, targetPath, ...rest] = args;
+
+  if (subcommand === "generate") {
+    return runEvalGenerate(targetPath, rest, io);
+  }
+
+  io.error(
+    [
+      subcommand ? `Unknown eval command: ${subcommand}` : "Missing eval command.",
+      "",
+      EVAL_HELP_TEXT
+    ].join("\n")
+  );
+  return 1;
+}
+
+async function runEvalGenerate(
+  targetPath: string | undefined,
+  args: string[],
+  io: RunwiseCliIO
+) {
+  if (!targetPath) {
+    io.error(["Missing trace file.", "", EVAL_HELP_TEXT].join("\n"));
+    return 1;
+  }
+
+  const parseResult = parseEvalGenerateArgs(args);
+  if (!parseResult.ok) {
+    io.error(parseResult.message);
+    return 1;
+  }
+
+  const absolutePath = path.resolve(targetPath);
+  const stat = await fs.stat(absolutePath);
+  if (stat.isDirectory()) {
+    io.error("Eval generation requires a JSON trace file, not a directory.");
+    return 1;
+  }
+
+  const validation = await validateRunwiseTraceFile(absolutePath);
+  const errors = getTraceIssues(validation, "error");
+  if (errors.length > 0) {
+    io.error(formatEvalGenerateInvalidSummary(errors));
+    return 1;
+  }
+
+  const trace = JSON.parse(await fs.readFile(absolutePath, "utf8")) as RunwiseAgentTrace;
+  const evalCase = buildRunwiseEvalCase(trace, targetPath);
+  const outputDir = path.isAbsolute(parseResult.output)
+    ? parseResult.output
+    : path.join(process.cwd(), parseResult.output);
+  await fs.mkdir(outputDir, { recursive: true });
+
+  const generatedPaths = await writeEvalCaseFiles(evalCase, outputDir, parseResult.format);
+
+  io.log(formatEvalGenerateSummary(targetPath, evalCase, generatedPaths));
+  return 0;
+}
+
 type ParseDoctorArgsResult =
   | { ok: true; cwd: string; output: string }
   | { ok: false; message: string };
 
 type ParseReplayArgsResult =
   | { ok: true; output: string }
+  | { ok: false; message: string };
+
+type EvalOutputFormat = "json" | "yaml" | "markdown" | "all";
+
+type ParseEvalGenerateArgsResult =
+  | { ok: true; output: string; format: EvalOutputFormat }
   | { ok: false; message: string };
 
 function parseDoctorArgs(args: string[]): ParseDoctorArgsResult {
@@ -266,6 +358,58 @@ function parseReplayArgs(args: string[]): ParseReplayArgsResult {
   }
 
   return { ok: true, output };
+}
+
+function parseEvalGenerateArgs(args: string[]): ParseEvalGenerateArgsResult {
+  let output = DEFAULT_EVAL_DIRECTORY;
+  let format: EvalOutputFormat = "all";
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+
+    if (arg === "--output") {
+      const value = args[index + 1];
+      if (!value) {
+        return { ok: false, message: "Missing value for --output." };
+      }
+      output = value;
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith("--output=")) {
+      output = arg.slice("--output=".length);
+      continue;
+    }
+
+    if (arg === "--format") {
+      const value = args[index + 1];
+      if (!value) {
+        return { ok: false, message: "Missing value for --format." };
+      }
+      const parsed = parseEvalOutputFormat(value);
+      if (!parsed) {
+        return { ok: false, message: `Unknown eval output format: ${value}` };
+      }
+      format = parsed;
+      index += 1;
+      continue;
+    }
+
+    if (arg.startsWith("--format=")) {
+      const value = arg.slice("--format=".length);
+      const parsed = parseEvalOutputFormat(value);
+      if (!parsed) {
+        return { ok: false, message: `Unknown eval output format: ${value}` };
+      }
+      format = parsed;
+      continue;
+    }
+
+    return { ok: false, message: `Unknown eval generate option: ${arg}` };
+  }
+
+  return { ok: true, output, format };
 }
 
 async function runView(args: string[], io: RunwiseCliIO) {
@@ -471,6 +615,28 @@ export function formatTraceReplaySummary(
   return lines.join("\n");
 }
 
+export function formatEvalGenerateSummary(
+  displayPath: string,
+  evalCase: RunwiseEvalCase,
+  generatedPaths: string[]
+) {
+  const lines = [
+    "Runwise Failure-to-Eval",
+    "",
+    `Trace: ${displayPath}`,
+    `Run ID: ${evalCase.source.runId}`,
+    `Eval Case: ${evalCase.caseId}`,
+    `Type: ${evalCase.type}`,
+    `Assertions: ${evalCase.assertions.length}`,
+    `Risk tags: ${evalCase.riskTags.length > 0 ? evalCase.riskTags.join(", ") : "none"}`,
+    "",
+    "Generated:",
+    ...generatedPaths.map((generatedPath) => `- ${formatReportPath(process.cwd(), generatedPath)}`)
+  ];
+
+  return lines.join("\n");
+}
+
 function formatTraceReplayInvalidSummary(
   errors: RunwiseTraceValidationResult["issues"]
 ) {
@@ -482,6 +648,56 @@ function formatTraceReplayInvalidSummary(
     "Errors:",
     ...errors.map(formatTraceIssue)
   ].join("\n");
+}
+
+function formatEvalGenerateInvalidSummary(
+  errors: RunwiseTraceValidationResult["issues"]
+) {
+  return [
+    "Runwise Failure-to-Eval",
+    "",
+    "Trace is invalid. Fix validation errors before generating eval cases.",
+    "",
+    "Errors:",
+    ...errors.map(formatTraceIssue)
+  ].join("\n");
+}
+
+async function writeEvalCaseFiles(
+  evalCase: RunwiseEvalCase,
+  outputDir: string,
+  format: EvalOutputFormat
+) {
+  const basePath = path.join(outputDir, sanitizeFileName(evalCase.caseId));
+  const generatedPaths: string[] = [];
+
+  if (format === "all" || format === "json") {
+    const jsonPath = `${basePath}.json`;
+    await fs.writeFile(jsonPath, `${renderEvalCaseJson(evalCase)}\n`, "utf8");
+    generatedPaths.push(jsonPath);
+  }
+
+  if (format === "all" || format === "yaml") {
+    const yamlPath = `${basePath}.yaml`;
+    await fs.writeFile(yamlPath, `${renderEvalCaseYaml(evalCase)}\n`, "utf8");
+    generatedPaths.push(yamlPath);
+  }
+
+  if (format === "all" || format === "markdown") {
+    const markdownPath = `${basePath}.md`;
+    await fs.writeFile(markdownPath, `${renderEvalCaseMarkdown(evalCase)}\n`, "utf8");
+    generatedPaths.push(markdownPath);
+  }
+
+  return generatedPaths;
+}
+
+function parseEvalOutputFormat(value: string): EvalOutputFormat | undefined {
+  if (value === "json" || value === "yaml" || value === "markdown" || value === "all") {
+    return value;
+  }
+
+  return undefined;
 }
 
 function sanitizeFileName(value: string) {

@@ -5,7 +5,7 @@ import { runRuleEngine } from "./rule-engine.js";
 import { summarizeFindings, summarizeRuleResults } from "./scoring.js";
 
 export const RUNWISE_PROJECT_NAME = "Runwise";
-export const RUNWISE_CURRENT_PHASE = "Phase 2";
+export const RUNWISE_CURRENT_PHASE = "Phase 8";
 export const RUNWISE_DOCTOR_VERSION = "0.0.0";
 
 export interface RunwiseDoctorScanOptions {

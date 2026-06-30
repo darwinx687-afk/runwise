@@ -23,3 +23,4 @@ export {
   validateRunwiseTracePath
 } from "./trace-validator.js";
 export { buildRunwiseTraceReplaySummary } from "./trace-replay.js";
+export { buildRunwiseEvalCase } from "./eval-generator.js";

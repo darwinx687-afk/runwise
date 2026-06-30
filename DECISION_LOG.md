@@ -35,3 +35,7 @@ Runwise trace schema starts as a lightweight JSON format with local validation b
 ## D009: Keep Trace Replay static and local
 
 Trace Replay is a static local interpretation of a validated trace, not a re-execution engine. It reads trace JSON, builds replay summaries, and writes Markdown artifacts without executing tools, re-running agents, calling models, generating eval cases, or storing traces in hosted infrastructure.
+
+## D010: Start Failure-to-Eval as deterministic local generation
+
+Failure-to-Eval starts as deterministic local eval case generation from validated traces, not as model-based eval execution. It writes reviewable JSON, YAML, and Markdown artifacts without executing evals, calling models, training models, re-running agents, executing tools, uploading datasets, or storing evals in hosted infrastructure.

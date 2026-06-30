@@ -35,7 +35,8 @@ pnpm test
 
 - Rule-based local Doctor checks for workspace shape, package manager state, TypeScript config, governance files, AI indicators, MCP indicators, eval coverage, and trace coverage.
 - JSON, Markdown, and static HTML reports for reviewable readiness evidence.
-- Shared TypeScript schemas for Doctor rules, findings, scoring, and reports.
+- Shared TypeScript schemas for Doctor rules, findings, scoring, reports, traces, replays, and eval cases.
+- Failure-to-Eval generation that turns validated traces into reusable local eval case files.
 - Package boundaries for future tracing, replay, eval, integrations, GitHub Action, dashboard, and docs work.
 
 ## Doctor Rule Engine
@@ -77,6 +78,16 @@ After validating a trace, Runwise can produce a static replay report. Replay rea
 pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json
 ```
 
+## Failure-to-Eval
+
+Runwise can turn a validated trace into reusable eval cases. This helps teams convert real failures, high-risk tool runs, missing approvals, and RAG grounding issues into regression tests.
+
+```bash
+pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
+```
+
+Runwise only generates eval case files in this phase. It does not execute evals or call any model.
+
 ## GitHub Action
 
 Runwise can be used as a CI readiness gate. It runs locally in GitHub Actions, generates JSON/Markdown/HTML reports, writes a job summary, and can fail the workflow on blocking findings, critical findings, or a minimum score threshold.
@@ -110,9 +121,9 @@ apps/
   docs/                      Future documentation app shell.
 packages/
   cli/                       Runwise command-line interface.
-  core/                      Local scanner, rule engine, and scoring logic.
+  core/                      Local scanner, rule engine, scoring, trace, replay, and eval generation logic.
   schemas/                   Shared TypeScript schema contracts.
-  reporter/                  JSON, Markdown, and HTML report generation.
+  reporter/                  JSON, YAML, Markdown, and HTML artifact generation.
   integrations/              Integration adapter boundary.
   github-action/             GitHub Action summary and threshold helper.
 examples/
@@ -135,10 +146,11 @@ docs/
 - Phase 5: GitHub Action readiness check.
 - Phase 6: Trace schema and validation.
 - Phase 7: Trace replay.
+- Phase 8: Failure-to-Eval generation.
 
 ## Contributing
 
-Runwise is intentionally small in Phase 6. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
+Runwise is intentionally small and local-first in the current phase. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
 
 ## License
 

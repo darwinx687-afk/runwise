@@ -2,22 +2,22 @@
 
 ## Current Phase
 
-Phase 7
+Phase 8
 
 ## Current Loop
 
-Loop 7 - Trace Replay
+Loop 8 - Failure-to-Eval
 
 ## Completed
 
-- Static trace replay command added
-- Replay summary schema introduced
-- Replay builder added
-- Markdown replay report generation added
-- High-risk and approval flow summary added
-- Replay tests added
+- Eval case schema introduced
+- Deterministic eval generator added
+- `runwise eval generate` command added
+- JSON/YAML/Markdown eval outputs added
+- High-risk, approval, error, RAG and success-baseline eval logic introduced
+- Eval generation tests added
 - README and architecture docs updated
 
 ## Next Required Step
 
-Phase 8 - Failure-to-Eval
+Phase 9 - Ecosystem Integrations and Compatibility Examples

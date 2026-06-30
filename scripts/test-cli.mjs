@@ -39,6 +39,7 @@ try {
   assert.match(helpRun.stdout, /Runwise/);
   assert.match(helpRun.stdout, /doctor\s+Scan the current project and generate local reports/);
   assert.match(helpRun.stdout, /trace\s+Validate local Runwise trace JSON files/);
+  assert.match(helpRun.stdout, /eval\s+Generate local eval case files from validated traces/);
   assert.match(helpRun.stdout, /view\s+Open a local dashboard viewer/);
 
   const missingReportProject = createFixtureProject();
@@ -112,11 +113,124 @@ try {
   assert.match(approvalReplayRun.stdout, /Approval: 1 request, 1 response/);
   assert.equal(existsSync(approvalReplay.replayPath), true);
 
+  const evalRun = runCli(["eval", "generate", "examples/traces/mcp-risk-agent-run.json"]);
+  const evalBasePath = join(rootDir, ".runwise/evals/mcp-risk-run-001-eval");
+  const evalJsonPath = `${evalBasePath}.json`;
+  const evalYamlPath = `${evalBasePath}.yaml`;
+  const evalMarkdownPath = `${evalBasePath}.md`;
+  assert.equal(
+    evalRun.status,
+    0,
+    `eval generate failed\nstdout:\n${evalRun.stdout}\nstderr:\n${evalRun.stderr}`
+  );
+  assert.match(evalRun.stdout, /Runwise Failure-to-Eval/);
+  assert.match(evalRun.stdout, /Run ID: mcp-risk-run-001/);
+  assert.match(evalRun.stdout, /Eval Case: mcp-risk-run-001-eval/);
+  assert.match(evalRun.stdout, /Type: approval_regression/);
+  assert.match(evalRun.stdout, /Assertions: 1/);
+  assert.match(evalRun.stdout, /Risk tags: partial, mcp, high-risk-tool, missing-approval/);
+  assert.match(evalRun.stdout, /\.runwise\/evals\/mcp-risk-run-001-eval\.json/);
+  assert.match(evalRun.stdout, /\.runwise\/evals\/mcp-risk-run-001-eval\.yaml/);
+  assert.match(evalRun.stdout, /\.runwise\/evals\/mcp-risk-run-001-eval\.md/);
+  assert.equal(existsSync(evalJsonPath), true, "Eval JSON should be generated");
+  assert.equal(existsSync(evalYamlPath), true, "Eval YAML should be generated");
+  assert.equal(existsSync(evalMarkdownPath), true, "Eval Markdown should be generated");
+  const evalCase = JSON.parse(readFileSync(evalJsonPath, "utf8"));
+  assert.equal(evalCase.schema, "runwise.eval_case");
+  assert.equal(evalCase.schemaVersion, "0.1");
+  assert.equal(evalCase.caseId, "mcp-risk-run-001-eval");
+  assert.equal(evalCase.type, "approval_regression");
+  assert.match(evalCase.title, /Approval regression/);
+  assert.match(evalCase.titleZh, /审批回归用例/);
+  assert.equal(evalCase.assertions[0].type, "must_ask_approval");
+  assert.match(evalCase.expectedBehaviorZh[0], /执行高风险工具前应请求审批/);
+  assert.deepEqual(evalCase.riskTags, [
+    "partial",
+    "mcp",
+    "high-risk-tool",
+    "missing-approval"
+  ]);
+  const evalYaml = readFileSync(evalYamlPath, "utf8");
+  assert.match(evalYaml, /schema: "runwise\.eval_case"/);
+  assert.match(evalYaml, /type: "approval_regression"/);
+  assert.match(evalYaml, /must_ask_approval/);
+  const evalMarkdown = readFileSync(evalMarkdownPath, "utf8");
+  assert.match(evalMarkdown, /# Runwise Eval Case/);
+  assert.match(evalMarkdown, /## Summary \/ 摘要/);
+  assert.match(evalMarkdown, /## Expected Behavior \/ 预期行为/);
+  assert.match(evalMarkdown, /Agent 在执行高风险工具前应请求审批/);
+
+  const invalidEvalRun = runCli(["eval", "generate", "examples/traces/invalid-agent-run.json"]);
+  assert.equal(invalidEvalRun.status, 1);
+  assert.match(invalidEvalRun.stderr, /Runwise Failure-to-Eval/);
+  assert.match(invalidEvalRun.stderr, /Trace is invalid/);
+  assert.match(invalidEvalRun.stderr, /runId is required \/ 缺少必填字段 runId/);
+
+  const errorEval = createEvalOutputFixture("runwise-error-eval-");
+  const errorEvalRun = runCli([
+    "eval",
+    "generate",
+    "examples/traces/error-agent-run.json",
+    "--output",
+    errorEval.outputDir
+  ]);
+  assert.equal(
+    errorEvalRun.status,
+    0,
+    `error eval failed\nstdout:\n${errorEvalRun.stdout}\nstderr:\n${errorEvalRun.stderr}`
+  );
+  assert.match(errorEvalRun.stdout, /Type: failure_regression/);
+  const errorEvalCase = JSON.parse(
+    readFileSync(join(errorEval.outputDir, "error-run-001-eval.json"), "utf8")
+  );
+  assert.equal(errorEvalCase.type, "failure_regression");
+  assert.equal(errorEvalCase.assertions[0].type, "must_handle_error");
+
+  const successEval = createEvalOutputFixture("runwise-success-eval-");
+  const successEvalRun = runCli([
+    "eval",
+    "generate",
+    "examples/traces/valid-agent-run.json",
+    "--output",
+    successEval.outputDir,
+    "--format",
+    "json"
+  ]);
+  assert.equal(successEvalRun.status, 0);
+  assert.match(successEvalRun.stdout, /Type: success_baseline/);
+  assert.match(successEvalRun.stdout, /Assertions: 1/);
+  assert.equal(existsSync(join(successEval.outputDir, "agent-run-001-eval.json")), true);
+  assert.equal(existsSync(join(successEval.outputDir, "agent-run-001-eval.yaml")), false);
+  assert.equal(existsSync(join(successEval.outputDir, "agent-run-001-eval.md")), false);
+  const successEvalCase = JSON.parse(
+    readFileSync(join(successEval.outputDir, "agent-run-001-eval.json"), "utf8")
+  );
+  assert.equal(successEvalCase.type, "success_baseline");
+  assert.equal(successEvalCase.assertions[0].type, "must_include");
+
+  const ragEval = createRagEvalFixture();
+  const ragEvalRun = runCli([
+    "eval",
+    "generate",
+    ragEval.tracePath,
+    "--output",
+    ragEval.outputDir
+  ]);
+  assert.equal(
+    ragEvalRun.status,
+    0,
+    `rag eval failed\nstdout:\n${ragEvalRun.stdout}\nstderr:\n${ragEvalRun.stderr}`
+  );
+  const ragEvalCase = JSON.parse(readFileSync(ragEval.jsonPath, "utf8"));
+  assert.equal(ragEvalCase.type, "rag_grounding_regression");
+  assert.equal(ragEvalCase.assertions[0].type, "must_cite_source");
+  assert.match(ragEvalCase.expectedBehavior[0], /retrieved context/);
+
   const traceDirectoryRun = runCli(["trace", "validate", "examples/traces"]);
   assert.equal(traceDirectoryRun.status, 1);
   assert.match(traceDirectoryRun.stdout, /Scanned directory: examples\/traces/);
-  assert.match(traceDirectoryRun.stdout, /Files: 3/);
-  assert.match(traceDirectoryRun.stdout, /Valid: 2/);
+  assert.match(traceDirectoryRun.stdout, /Files: 4/);
+  assert.match(traceDirectoryRun.stdout, /Valid: 3/);
   assert.match(traceDirectoryRun.stdout, /Invalid: 1/);
 
   const base = createFixtureProject();
@@ -240,7 +354,7 @@ try {
   }
 }
 
-console.log("Runwise CLI, trace, viewer, and action tests passed.");
+console.log("Runwise CLI, trace, eval, viewer, and action tests passed.");
 
 function runCli(args, cwd = rootDir) {
   return spawnSync(cliBin, args, {
@@ -492,6 +606,69 @@ function createApprovalReplayFixture() {
     tracePath,
     outputDir,
     replayPath
+  };
+}
+
+function createEvalOutputFixture(prefix) {
+  const evalRoot = realpathSync(mkdtempSync(join(tmpdir(), prefix)));
+  fixtureRoots.push(evalRoot);
+
+  return {
+    outputDir: join(evalRoot, "evals")
+  };
+}
+
+function createRagEvalFixture() {
+  const evalRoot = realpathSync(mkdtempSync(join(tmpdir(), "runwise-rag-eval-")));
+  fixtureRoots.push(evalRoot);
+  const tracePath = join(evalRoot, "rag-run.json");
+  const outputDir = join(evalRoot, "evals");
+  const jsonPath = join(outputDir, "rag-run-001-eval.json");
+
+  writeFileSync(
+    tracePath,
+    `${JSON.stringify(
+      {
+        schema: "runwise.agent_trace",
+        schemaVersion: "0.1",
+        runId: "rag-run-001",
+        name: "RAG grounded answer",
+        status: "success",
+        startedAt: "2026-06-30T15:00:00.000Z",
+        endedAt: "2026-06-30T15:00:07.000Z",
+        input: {
+          question: "What is the refund policy?"
+        },
+        steps: [
+          {
+            stepId: "rag-step-001",
+            type: "rag_retrieval",
+            name: "retrieve_policy",
+            durationMs: 1200,
+            risk: "low",
+            output: {
+              sources: ["policy-doc-001"]
+            }
+          },
+          {
+            stepId: "rag-step-002",
+            type: "final_output",
+            name: "answer",
+            durationMs: 900,
+            risk: "none"
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+
+  return {
+    tracePath,
+    outputDir,
+    jsonPath
   };
 }
 

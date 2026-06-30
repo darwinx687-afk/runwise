@@ -35,7 +35,8 @@ pnpm test
 
 - 基于规则的本地 Doctor 检查：工作区结构、包管理器状态、TypeScript 配置、治理文件、AI 迹象、MCP 迹象、评测覆盖和追踪覆盖。
 - 生成 JSON、Markdown 和静态 HTML 报告，作为可审阅的就绪度证据。
-- 为 Doctor rule、finding、scoring 和 report 提供共享 TypeScript schema。
+- 为 Doctor rule、finding、scoring、report、trace、replay 和 eval case 提供共享 TypeScript schema。
+- Failure-to-Eval 生成能力，可把验证过的 trace 转化为可复用的本地评测用例文件。
 - 为未来的追踪、回放、评测、集成、GitHub Action、Dashboard 和文档工作保留包边界。
 
 ## Doctor 规则引擎
@@ -77,6 +78,16 @@ pnpm exec runwise trace validate examples/traces/valid-agent-run.json
 pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json
 ```
 
+## Failure-to-Eval / 失败转评测
+
+Runwise 可以把验证过的 trace 转化为可复用的评测用例，帮助团队将真实失败、高风险工具调用、缺失审批和 RAG 证据问题沉淀为回归测试资产。
+
+```bash
+pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
+```
+
+当前阶段 Runwise 只生成评测用例文件，不执行评测，也不会调用任何模型。
+
 ## GitHub Action
 
 Runwise 可以作为 CI 上线准备度门禁使用。它会在 GitHub Actions 中本地运行，生成 JSON/Markdown/HTML 报告，写入 job summary，并可根据 blocking finding、critical finding 或最低分数阈值决定是否让 workflow 失败。
@@ -110,9 +121,9 @@ apps/
   docs/                      未来的文档应用外壳。
 packages/
   cli/                       Runwise 命令行界面。
-  core/                      本地扫描、规则引擎和评分逻辑。
+  core/                      本地扫描、规则引擎、评分、trace、replay 和 eval 生成逻辑。
   schemas/                   共享 TypeScript schema 契约。
-  reporter/                  JSON、Markdown 和 HTML 报告生成。
+  reporter/                  JSON、YAML、Markdown 和 HTML artifact 生成。
   integrations/              集成适配器边界。
   github-action/             GitHub Action summary 和 threshold helper。
 examples/
@@ -135,10 +146,11 @@ docs/
 - Phase 5：GitHub Action 上线准备度检查。
 - Phase 6：Trace schema 和验证。
 - Phase 7：Trace replay。
+- Phase 8：Failure-to-Eval 生成。
 
 ## 贡献
 
-Runwise 在 Phase 6 会刻意保持小范围。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
+Runwise 在当前阶段会刻意保持小范围和本地优先。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
 
 ## 许可证
 

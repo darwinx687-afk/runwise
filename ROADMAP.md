@@ -65,3 +65,12 @@
 - Convert reviewed failures into eval case drafts.
 - Keep eval generation local and reviewable.
 - Avoid automatic model calls or hosted eval storage.
+- Add deterministic trace-to-eval case generation.
+- Write JSON, YAML, and Markdown eval artifacts.
+- Preserve high-risk, approval, failure, RAG, and success-baseline signals.
+
+## Phase 9: Ecosystem Integrations and Compatibility Examples
+
+- Add integration compatibility examples.
+- Explore lightweight Promptfoo-compatible exports.
+- Keep integrations adapter-based and local-first unless a later phase explicitly changes scope.

@@ -13,7 +13,7 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 7 is Phase 7 - Trace Replay. It introduces static local replay reports from validated trace files without agent re-execution, tool execution, model calls, eval generation, or hosted trace storage.
+Loop 8 is Phase 8 - Failure-to-Eval. It introduces deterministic local eval case generation from validated trace files without eval execution, model calls, training, agent re-execution, tool execution, external APIs, or hosted eval storage.
 
 ## Check Strategy
 

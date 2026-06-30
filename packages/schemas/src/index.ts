@@ -6,7 +6,8 @@ export type RunwisePhase =
   | "Phase 4"
   | "Phase 5"
   | "Phase 6"
-  | "Phase 7";
+  | "Phase 7"
+  | "Phase 8";
 
 export interface RunwiseManifest {
   name: string;
@@ -231,4 +232,49 @@ export type RunwiseTraceReplaySummary = {
     message: string;
     messageZh: string;
   }[];
+};
+
+export type RunwiseEvalCaseType =
+  | "failure_regression"
+  | "approval_regression"
+  | "tool_risk_regression"
+  | "rag_grounding_regression"
+  | "success_baseline";
+
+export type RunwiseEvalAssertionType =
+  | "must_include"
+  | "must_not_include"
+  | "must_ask_approval"
+  | "must_cite_source"
+  | "must_not_call_tool"
+  | "must_handle_error"
+  | "custom";
+
+export type RunwiseEvalAssertion = {
+  type: RunwiseEvalAssertionType;
+  description: string;
+  descriptionZh: string;
+  value?: string;
+};
+
+export type RunwiseEvalCase = {
+  schema: "runwise.eval_case";
+  schemaVersion: "0.1";
+  caseId: string;
+  type: RunwiseEvalCaseType;
+  title: string;
+  titleZh: string;
+  source: {
+    traceFile: string;
+    runId: string;
+    traceStatus: RunwiseTraceStatus;
+  };
+  input?: unknown;
+  expectedBehavior: string[];
+  expectedBehaviorZh: string[];
+  mustNot: string[];
+  mustNotZh: string[];
+  assertions: RunwiseEvalAssertion[];
+  riskTags: string[];
+  metadata?: Record<string, unknown>;
 };
