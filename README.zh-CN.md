@@ -61,6 +61,14 @@ pnpm exec runwise view
 
 查看器只读取本地 `.runwise/runwise-report.json`，不会上传项目数据。
 
+## Trace Schema 与轨迹验证
+
+Runwise 定义了一套轻量的本地运行轨迹格式，用于描述 AI Agent、MCP、RAG 与大语言模型应用的运行过程。你可以先验证 trace 文件，再将其用于后续失败回放、评测生成或可观测性流程。
+
+```bash
+pnpm exec runwise trace validate examples/traces/valid-agent-run.json
+```
+
 ## GitHub Action
 
 Runwise 可以作为 CI 上线准备度门禁使用。它会在 GitHub Actions 中本地运行，生成 JSON/Markdown/HTML 报告，写入 job summary，并可根据 blocking finding、critical finding 或最低分数阈值决定是否让 workflow 失败。
@@ -118,10 +126,11 @@ docs/
 - Phase 4：完善 Dashboard 和文档。
 - Phase 5：GitHub Action 上线准备度检查。
 - Phase 6：Trace schema 和验证。
+- Phase 7：Trace replay。
 
 ## 贡献
 
-Runwise 在 Phase 5 会刻意保持小范围。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
+Runwise 在 Phase 6 会刻意保持小范围。提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。
 
 ## 许可证
 

@@ -15,3 +15,10 @@ export {
 } from "./scoring.js";
 export { runRuleEngine, type RunwiseRuleEvaluation } from "./rule-engine.js";
 export { RUNWISE_RULES, type RunwiseRule } from "./rules.js";
+export {
+  RUNWISE_TRACE_SCHEMA,
+  RUNWISE_TRACE_SCHEMA_VERSION,
+  validateRunwiseTrace,
+  validateRunwiseTraceFile,
+  validateRunwiseTracePath
+} from "./trace-validator.js";

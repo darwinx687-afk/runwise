@@ -38,6 +38,7 @@ try {
   assert.equal(helpRun.status, 0);
   assert.match(helpRun.stdout, /Runwise/);
   assert.match(helpRun.stdout, /doctor\s+Scan the current project and generate local reports/);
+  assert.match(helpRun.stdout, /trace\s+Validate local Runwise trace JSON files/);
   assert.match(helpRun.stdout, /view\s+Open a local dashboard viewer/);
 
   const missingReportProject = createFixtureProject();
@@ -46,6 +47,35 @@ try {
   assert.match(missingReportRun.stderr, /No local report found/);
   assert.match(missingReportRun.stderr, /\.runwise\/runwise-report\.json/);
   assert.match(missingReportRun.stderr, /pnpm exec runwise doctor/);
+
+  const validTraceRun = runCli(["trace", "validate", "examples/traces/valid-agent-run.json"]);
+  assert.equal(validTraceRun.status, 0);
+  assert.match(validTraceRun.stdout, /Runwise Trace Validator/);
+  assert.match(validTraceRun.stdout, /Result: valid/);
+  assert.match(validTraceRun.stdout, /Issues: 0 errors, 0 warnings/);
+
+  const invalidTraceRun = runCli(["trace", "validate", "examples/traces/invalid-agent-run.json"]);
+  assert.equal(invalidTraceRun.status, 1);
+  assert.match(invalidTraceRun.stdout, /Result: invalid/);
+  assert.match(invalidTraceRun.stdout, /runId is required \/ 缺少必填字段 runId/);
+  assert.match(invalidTraceRun.stdout, /type must be a supported trace step type/);
+
+  const traceFixtureDir = createTraceFixtureDirectory();
+  const emptyStepsRun = runCli(["trace", "validate", join(traceFixtureDir, "empty-steps.json")]);
+  assert.equal(emptyStepsRun.status, 0);
+  assert.match(emptyStepsRun.stdout, /Result: valid/);
+  assert.match(emptyStepsRun.stdout, /Trace has no steps \/ Trace 没有任何 step/);
+
+  const riskWarningRun = runCli(["trace", "validate", "examples/traces/mcp-risk-agent-run.json"]);
+  assert.equal(riskWarningRun.status, 0);
+  assert.match(riskWarningRun.stdout, /Trace has high or critical tool risk but no approval step/);
+
+  const traceDirectoryRun = runCli(["trace", "validate", "examples/traces"]);
+  assert.equal(traceDirectoryRun.status, 1);
+  assert.match(traceDirectoryRun.stdout, /Scanned directory: examples\/traces/);
+  assert.match(traceDirectoryRun.stdout, /Files: 3/);
+  assert.match(traceDirectoryRun.stdout, /Valid: 2/);
+  assert.match(traceDirectoryRun.stdout, /Invalid: 1/);
 
   const base = createFixtureProject();
   const baseRun = runDoctor(base);
@@ -168,7 +198,7 @@ try {
   }
 }
 
-console.log("Runwise CLI and viewer tests passed.");
+console.log("Runwise CLI, trace, viewer, and action tests passed.");
 
 function runCli(args, cwd = rootDir) {
   return spawnSync(cliBin, args, {
@@ -328,6 +358,30 @@ function createFixtureProject(options = {}) {
   }
 
   return projectRoot;
+}
+
+function createTraceFixtureDirectory() {
+  const traceRoot = realpathSync(mkdtempSync(join(tmpdir(), "runwise-traces-")));
+  fixtureRoots.push(traceRoot);
+
+  writeFileSync(
+    join(traceRoot, "empty-steps.json"),
+    `${JSON.stringify(
+      {
+        schema: "runwise.agent_trace",
+        schemaVersion: "0.1",
+        runId: "empty-steps-run",
+        status: "success",
+        startedAt: "2026-06-30T13:00:00.000Z",
+        steps: []
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+
+  return traceRoot;
 }
 
 function runDoctor(projectRoot) {

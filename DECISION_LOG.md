@@ -27,3 +27,7 @@ The first Dashboard Viewer is a local HTTP viewer for `.runwise/runwise-report.j
 ## D007: Start GitHub Action as local-first composite action
 
 Runwise GitHub Action starts as a local-first composite action using the same Doctor report artifacts instead of a hosted service or GitHub App. It runs in the repository workflow, writes a job summary and outputs, and applies configurable thresholds from the generated local report.
+
+## D008: Start trace support with local JSON validation
+
+Runwise trace schema starts as a lightweight JSON format with local validation before replay, eval generation, or observability integrations. The validator checks structure, step shape, timeline sanity, and risk/approval hints without storing traces, calling models, or introducing hosted trace infrastructure.

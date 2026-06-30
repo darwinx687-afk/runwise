@@ -47,4 +47,12 @@
 
 - Define trace schema contracts.
 - Add trace fixture validation.
+- Add local trace validation CLI.
+- Add example agent and MCP trace files.
 - Keep trace work local-first and reportable.
+
+## Phase 7: Trace Replay
+
+- Add local replay fixtures.
+- Validate replay preconditions.
+- Keep replay separate from hosted storage or agent runtime orchestration.

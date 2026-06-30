@@ -2,22 +2,21 @@
 
 ## Current Phase
 
-Phase 5
+Phase 6
 
 ## Current Loop
 
-Loop 5 - GitHub Action Readiness Check
+Loop 6 - Trace Schema and Validation
 
 ## Completed
 
-- Root GitHub Action definition added
-- CI-friendly doctor flags added
-- GitHub Action summary helper added
-- Action outputs and threshold handling added
-- Self-check workflow added
+- Runwise trace schema introduced
+- Local trace validator added
+- `runwise trace validate` command added
+- Example trace files added
+- Trace validation tests added
 - README and architecture docs updated
-- Tests updated for action helper and CI doctor behavior
 
 ## Next Required Step
 
-Phase 6 - Trace Schema and Validation
+Phase 7 - Trace Replay

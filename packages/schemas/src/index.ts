@@ -1,4 +1,11 @@
-export type RunwisePhase = "Phase 0" | "Phase 1" | "Phase 2" | "Phase 3" | "Phase 4";
+export type RunwisePhase =
+  | "Phase 0"
+  | "Phase 1"
+  | "Phase 2"
+  | "Phase 3"
+  | "Phase 4"
+  | "Phase 5"
+  | "Phase 6";
 
 export interface RunwiseManifest {
   name: string;
@@ -101,3 +108,80 @@ export interface RunwiseDoctorReport {
   };
   findings: RunwiseFinding[];
 }
+
+export type RunwiseTraceStepType =
+  | "llm_call"
+  | "tool_call"
+  | "mcp_tool_call"
+  | "rag_retrieval"
+  | "approval_request"
+  | "approval_response"
+  | "system_event"
+  | "error"
+  | "final_output";
+
+export type RunwiseTraceRiskLevel =
+  | "none"
+  | "low"
+  | "medium"
+  | "high"
+  | "critical";
+
+export type RunwiseTraceStatus =
+  | "success"
+  | "failed"
+  | "cancelled"
+  | "partial";
+
+export type RunwiseTraceStep = {
+  stepId: string;
+  type: RunwiseTraceStepType;
+  name?: string;
+  startedAt?: string;
+  endedAt?: string;
+  durationMs?: number;
+  risk?: RunwiseTraceRiskLevel;
+  input?: unknown;
+  output?: unknown;
+  error?: {
+    message: string;
+    code?: string;
+  };
+  metadata?: Record<string, unknown>;
+};
+
+export type RunwiseAgentTrace = {
+  schema: "runwise.agent_trace";
+  schemaVersion: "0.1";
+  runId: string;
+  name?: string;
+  status: RunwiseTraceStatus;
+  startedAt: string;
+  endedAt?: string;
+  input?: unknown;
+  output?: unknown;
+  model?: {
+    provider?: string;
+    name?: string;
+  };
+  environment?: {
+    framework?: string;
+    runtime?: string;
+    language?: string;
+  };
+  steps: RunwiseTraceStep[];
+  metadata?: Record<string, unknown>;
+};
+
+export type RunwiseTraceValidationIssue = {
+  path: string;
+  message: string;
+  messageZh: string;
+  severity: "error" | "warning";
+};
+
+export type RunwiseTraceValidationResult = {
+  file: string;
+  valid: boolean;
+  issues: RunwiseTraceValidationIssue[];
+};

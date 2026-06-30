@@ -1,0 +1,27 @@
+{
+  "schema": "runwise.agent_trace",
+  "schemaVersion": "0.1",
+  "status": "done",
+  "startedAt": "2026-06-30T11:00:00.000Z",
+  "steps": [
+    {
+      "stepId": "",
+      "type": "unknown_step",
+      "durationMs": -10,
+      "risk": "severe"
+    },
+    {
+      "stepId": "step-error",
+      "type": "error",
+      "startedAt": "2026-06-30T11:00:05.000Z",
+      "endedAt": "2026-06-30T11:00:04.000Z",
+      "error": {
+        "code": "DEMO_ERROR"
+      }
+    }
+  ],
+  "metadata": {
+    "purpose": "Invalid trace fixture for local validation tests.",
+    "zhNote": "用于本地验证测试的无效 trace 示例。"
+  }
+}

@@ -13,7 +13,7 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 5 is Phase 5 - GitHub Action Readiness Check. It introduces a local-first composite GitHub Action that runs the same Doctor report pipeline in CI without hosted service behavior.
+Loop 6 is Phase 6 - Trace Schema and Validation. It introduces a lightweight local trace JSON schema and `runwise trace validate` without replay, eval generation, hosted storage, or agent runtime behavior.
 
 ## Check Strategy
 

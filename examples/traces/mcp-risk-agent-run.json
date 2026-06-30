@@ -1,0 +1,72 @@
+{
+  "schema": "runwise.agent_trace",
+  "schemaVersion": "0.1",
+  "runId": "mcp-risk-run-001",
+  "name": "Filesystem cleanup proposal",
+  "status": "partial",
+  "startedAt": "2026-06-30T12:00:00.000Z",
+  "endedAt": "2026-06-30T12:00:12.000Z",
+  "input": {
+    "task": "Inspect a local workspace and propose cleanup actions."
+  },
+  "output": {
+    "summary": "Identified generated files that could be removed after human review."
+  },
+  "environment": {
+    "framework": "mcp-agent-demo",
+    "runtime": "node",
+    "language": "typescript"
+  },
+  "steps": [
+    {
+      "stepId": "mcp-step-001",
+      "type": "mcp_tool_call",
+      "name": "filesystem.scan",
+      "startedAt": "2026-06-30T12:00:01.000Z",
+      "endedAt": "2026-06-30T12:00:04.000Z",
+      "durationMs": 3000,
+      "risk": "low",
+      "input": {
+        "path": "demo-workspace"
+      },
+      "output": {
+        "filesScanned": 42
+      }
+    },
+    {
+      "stepId": "mcp-step-002",
+      "type": "mcp_tool_call",
+      "name": "filesystem.delete",
+      "startedAt": "2026-06-30T12:00:05.000Z",
+      "endedAt": "2026-06-30T12:00:06.500Z",
+      "durationMs": 1500,
+      "risk": "high",
+      "input": {
+        "path": "demo-workspace/generated"
+      },
+      "output": {
+        "mode": "dry-run",
+        "deleted": false
+      },
+      "metadata": {
+        "zhNote": "高风险 MCP tool call 示例；本示例未执行真实删除。"
+      }
+    },
+    {
+      "stepId": "mcp-step-003",
+      "type": "final_output",
+      "name": "cleanup_recommendation",
+      "startedAt": "2026-06-30T12:00:08.000Z",
+      "endedAt": "2026-06-30T12:00:12.000Z",
+      "durationMs": 4000,
+      "risk": "none",
+      "output": {
+        "requiresHumanApproval": true
+      }
+    }
+  ],
+  "metadata": {
+    "purpose": "Demonstrates high-risk MCP trace validation warning without storing secrets.",
+    "zhNote": "演示高风险 MCP trace 的本地验证 warning。"
+  }
+}

@@ -24,8 +24,8 @@ docs/zh-CN
 ## Package Roles
 
 - `@runwise/cli`: command-line entrypoint.
-- `@runwise/core`: local project scanner, rule engine, and scoring engine.
-- `@runwise/schemas`: shared schema, rule, finding, scoring, and report contracts.
+- `@runwise/core`: local project scanner, rule engine, scoring engine, and trace validator.
+- `@runwise/schemas`: shared schema, rule, finding, scoring, report, and trace contracts.
 - `@runwise/reporter`: JSON, Markdown, and static HTML report formatting boundary.
 - `@runwise/integrations`: integration adapter boundary.
 - `@runwise/github-action`: GitHub Action boundary.
@@ -36,8 +36,19 @@ docs/zh-CN
 The current runtime behavior is:
 
 - `runwise doctor`: scans the local project, runs structured readiness rules, computes a readiness score, and writes JSON, Markdown, and static HTML reports under `.runwise/`.
+- `runwise trace validate <path>`: validates a Runwise trace JSON file or a directory of trace JSON files locally.
 - `runwise view`: starts a lightweight local HTTP viewer for `.runwise/runwise-report.json`.
 - `action.yml`: runs Runwise Doctor in GitHub Actions, writes a job summary, sets outputs, and evaluates local threshold gates.
+
+## Trace Schema and Validation
+
+Runwise trace validation starts as a lightweight local JSON contract in `@runwise/schemas` with runtime validation in `@runwise/core`.
+
+The trace schema is for AI Agent, MCP, RAG, and LLM application runs. It records run metadata, status, model/environment hints, and ordered steps such as LLM calls, tool calls, MCP tool calls, RAG retrieval, approval requests/responses, errors, and final output.
+
+The validator checks required root fields, step fields, timeline sanity, error step shape, and high-risk tool calls without approval steps. Errors make a trace invalid; warnings provide guidance without blocking structurally usable traces.
+
+`runwise trace validate` does not call external services, require API keys, write to `.runwise/`, run replay, generate evals, or store traces. Replay and Failure-to-Eval remain later phases.
 
 ## GitHub Action Readiness Check
 

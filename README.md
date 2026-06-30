@@ -61,6 +61,14 @@ pnpm exec runwise view
 
 The viewer reads `.runwise/runwise-report.json` locally and does not upload project data.
 
+## Trace Schema and Validation
+
+Runwise defines a lightweight local trace format for AI Agent, MCP, RAG and LLM application runs. You can validate trace files before using them for replay, eval generation, or future observability workflows.
+
+```bash
+pnpm exec runwise trace validate examples/traces/valid-agent-run.json
+```
+
 ## GitHub Action
 
 Runwise can be used as a CI readiness gate. It runs locally in GitHub Actions, generates JSON/Markdown/HTML reports, writes a job summary, and can fail the workflow on blocking findings, critical findings, or a minimum score threshold.
@@ -118,10 +126,11 @@ docs/
 - Phase 4: Dashboard and docs refinement.
 - Phase 5: GitHub Action readiness check.
 - Phase 6: Trace schema and validation.
+- Phase 7: Trace replay.
 
 ## Contributing
 
-Runwise is intentionally small in Phase 5. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
+Runwise is intentionally small in Phase 6. Please read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.
 
 ## License
 

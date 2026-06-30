@@ -1,0 +1,69 @@
+{
+  "schema": "runwise.agent_trace",
+  "schemaVersion": "0.1",
+  "runId": "agent-run-001",
+  "name": "Customer support answer draft",
+  "status": "success",
+  "startedAt": "2026-06-30T10:00:00.000Z",
+  "endedAt": "2026-06-30T10:00:08.400Z",
+  "input": {
+    "ticketId": "demo-ticket-001",
+    "question": "How do I reset my workspace API key?"
+  },
+  "output": {
+    "summary": "Drafted a support reply with reset steps and security reminders."
+  },
+  "model": {
+    "provider": "local-demo",
+    "name": "demo-agent-model"
+  },
+  "environment": {
+    "framework": "custom-agent",
+    "runtime": "node",
+    "language": "typescript"
+  },
+  "steps": [
+    {
+      "stepId": "step-001",
+      "type": "system_event",
+      "name": "run_started",
+      "startedAt": "2026-06-30T10:00:00.000Z",
+      "durationMs": 0,
+      "risk": "none",
+      "metadata": {
+        "description": "Demo trace only; no real customer data."
+      }
+    },
+    {
+      "stepId": "step-002",
+      "type": "llm_call",
+      "name": "draft_answer",
+      "startedAt": "2026-06-30T10:00:01.000Z",
+      "endedAt": "2026-06-30T10:00:05.200Z",
+      "durationMs": 4200,
+      "risk": "low",
+      "input": {
+        "prompt": "Draft a safe API key reset response."
+      },
+      "output": {
+        "text": "Use the workspace settings page and rotate dependent secrets."
+      }
+    },
+    {
+      "stepId": "step-003",
+      "type": "final_output",
+      "name": "final_reply",
+      "startedAt": "2026-06-30T10:00:06.000Z",
+      "endedAt": "2026-06-30T10:00:08.400Z",
+      "durationMs": 2400,
+      "risk": "none",
+      "output": {
+        "readyForReview": true
+      }
+    }
+  ],
+  "metadata": {
+    "locale": "en",
+    "zhNote": "示例 trace，不包含真实密钥或敏感数据。"
+  }
+}

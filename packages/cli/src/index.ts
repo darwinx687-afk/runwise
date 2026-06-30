@@ -2,7 +2,7 @@
 import { promises as fs, realpathSync } from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-import { RUNWISE_DOCTOR_VERSION, scanRunwiseDoctor } from "@runwise/core";
+import { RUNWISE_DOCTOR_VERSION, scanRunwiseDoctor, validateRunwiseTracePath } from "@runwise/core";
 import {
   DEFAULT_VIEWER_PORT,
   RUNWISE_REPORT_PATH,
@@ -10,7 +10,7 @@ import {
   startRunwiseViewer
 } from "@runwise/dashboard";
 import { writeDoctorReports } from "@runwise/reporter";
-import type { RunwiseDoctorReport } from "@runwise/schemas";
+import type { RunwiseDoctorReport, RunwiseTraceValidationResult } from "@runwise/schemas";
 
 export const DEFAULT_REPORT_DIRECTORY = ".runwise";
 
@@ -23,11 +23,21 @@ const HELP_TEXT = `Runwise
 
 Usage:
   runwise doctor [--cwd .] [--output .runwise]
+  runwise trace validate <path>
   runwise view [--port 4321]
 
 Commands:
   doctor   Scan the current project and generate local reports
+  trace    Validate local Runwise trace JSON files
   view     Open a local dashboard viewer for .runwise/runwise-report.json`;
+
+const TRACE_HELP_TEXT = `Runwise Trace
+
+Usage:
+  runwise trace validate <path>
+
+Commands:
+  validate  Validate a Runwise trace JSON file or a directory of JSON traces`;
 
 export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = console) {
   const [command, ...args] = argv;
@@ -43,6 +53,10 @@ export async function run(argv = process.argv.slice(2), io: RunwiseCliIO = conso
 
   if (command === "view") {
     return runView(args, io);
+  }
+
+  if (command === "trace") {
+    return runTrace(args, io);
   }
 
   io.error([`Unknown command: ${command}`, "", HELP_TEXT].join("\n"));
@@ -81,6 +95,36 @@ async function runDoctor(args: string[], io: RunwiseCliIO) {
   );
 
   return 0;
+}
+
+async function runTrace(args: string[], io: RunwiseCliIO) {
+  const [subcommand, targetPath, ...rest] = args;
+
+  if (subcommand !== "validate") {
+    io.error([subcommand ? `Unknown trace command: ${subcommand}` : "Missing trace command.", "", TRACE_HELP_TEXT].join("\n"));
+    return 1;
+  }
+
+  if (!targetPath) {
+    io.error(["Missing trace path.", "", TRACE_HELP_TEXT].join("\n"));
+    return 1;
+  }
+
+  if (rest.length > 0) {
+    io.error(`Unknown trace validate option: ${rest[0]}`);
+    return 1;
+  }
+
+  const absolutePath = path.resolve(targetPath);
+  const stat = await fs.stat(absolutePath);
+  const results = await validateRunwiseTracePath(absolutePath);
+  const summary = stat.isDirectory()
+    ? formatTraceDirectorySummary(targetPath, results)
+    : formatTraceFileSummary(targetPath, results[0]);
+
+  io.log(summary);
+
+  return results.some((result) => !result.valid) ? 1 : 0;
 }
 
 type ParseDoctorArgsResult =
@@ -248,6 +292,63 @@ export function formatTerminalSummary(
     `- ${formatReportPath(cwd, markdownPath)}`,
     `- ${formatReportPath(cwd, htmlPath)}`
   ].join("\n");
+}
+
+export function formatTraceFileSummary(
+  displayPath: string,
+  result: RunwiseTraceValidationResult
+) {
+  const errors = getTraceIssues(result, "error");
+  const warnings = getTraceIssues(result, "warning");
+  const lines = [
+    "Runwise Trace Validator",
+    "",
+    `Validated: ${displayPath}`,
+    `Result: ${result.valid ? "valid" : "invalid"}`,
+    `Issues: ${errors.length} errors, ${warnings.length} warnings`
+  ];
+
+  if (errors.length > 0) {
+    lines.push("", "Errors:", ...errors.map(formatTraceIssue));
+  }
+
+  if (warnings.length > 0) {
+    lines.push("", "Warnings:", ...warnings.map(formatTraceIssue));
+  }
+
+  return lines.join("\n");
+}
+
+export function formatTraceDirectorySummary(
+  displayPath: string,
+  results: RunwiseTraceValidationResult[]
+) {
+  const errors = results.flatMap((result) => getTraceIssues(result, "error"));
+  const warnings = results.flatMap((result) => getTraceIssues(result, "warning"));
+  const validCount = results.filter((result) => result.valid).length;
+  const invalidCount = results.length - validCount;
+
+  return [
+    "Runwise Trace Validator",
+    "",
+    `Scanned directory: ${displayPath}`,
+    `Files: ${results.length}`,
+    `Valid: ${validCount}`,
+    `Invalid: ${invalidCount}`,
+    `Errors: ${errors.length}`,
+    `Warnings: ${warnings.length}`
+  ].join("\n");
+}
+
+function getTraceIssues(
+  result: RunwiseTraceValidationResult,
+  severity: "error" | "warning"
+) {
+  return result.issues.filter((issue) => issue.severity === severity);
+}
+
+function formatTraceIssue(issue: RunwiseTraceValidationResult["issues"][number]) {
+  return `- ${issue.message} / ${issue.messageZh}`;
 }
 
 function normalizePath(filePath: string) {
