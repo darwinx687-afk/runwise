@@ -39,3 +39,7 @@ Trace Replay is a static local interpretation of a validated trace, not a re-exe
 ## D010: Start Failure-to-Eval as deterministic local generation
 
 Failure-to-Eval starts as deterministic local eval case generation from validated traces, not as model-based eval execution. It writes reviewable JSON, YAML, and Markdown artifacts without executing evals, calling models, training models, re-running agents, executing tools, uploading datasets, or storing evals in hosted infrastructure.
+
+## D011: Start ecosystem integration as local heuristic detection
+
+Ecosystem integration starts as local heuristic detection and compatibility examples, not runtime framework execution. Runwise detects local files, package metadata, config names, environment example names, and example documentation without importing external AI frameworks, running models, calling external APIs, adding hosted integrations, or claiming official ecosystem partnerships.

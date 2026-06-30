@@ -24,10 +24,10 @@ docs/zh-CN
 ## Package Roles
 
 - `@runwise/cli`: command-line entrypoint.
-- `@runwise/core`: local project scanner, rule engine, scoring engine, trace validator, static trace replay builder, and deterministic eval generator.
-- `@runwise/schemas`: shared schema, rule, finding, scoring, report, trace, replay, and eval case contracts.
+- `@runwise/core`: local project scanner, rule engine, scoring engine, trace validator, static trace replay builder, deterministic eval generator, and Doctor integration detection caller.
+- `@runwise/schemas`: shared schema, rule, finding, scoring, report, trace, replay, eval case, and integration profile contracts.
 - `@runwise/reporter`: JSON, YAML, Markdown, static HTML report, replay Markdown, and eval case formatting boundary.
-- `@runwise/integrations`: integration adapter boundary.
+- `@runwise/integrations`: local ecosystem profile and heuristic detection boundary.
 - `@runwise/github-action`: GitHub Action boundary.
 - `@runwise/dashboard`: local report-file dashboard viewer.
 
@@ -35,7 +35,7 @@ docs/zh-CN
 
 The current runtime behavior is:
 
-- `runwise doctor`: scans the local project, runs structured readiness rules, computes a readiness score, and writes JSON, Markdown, and static HTML reports under `.runwise/`.
+- `runwise doctor`: scans the local project, runs structured readiness rules, detects local ecosystem compatibility signals, computes a readiness score, and writes JSON, Markdown, and static HTML reports under `.runwise/`.
 - `runwise trace validate <path>`: validates a Runwise trace JSON file or a directory of trace JSON files locally.
 - `runwise trace replay <trace-file>`: validates a trace file, builds a static replay summary, prints a terminal timeline, and writes Markdown under `.runwise/replays/`.
 - `runwise eval generate <trace-file>`: validates a trace file, builds a deterministic Failure-to-Eval case, and writes JSON, YAML, and Markdown under `.runwise/evals/`.
@@ -63,6 +63,14 @@ Replay output is written under `.runwise/replays/` by default and remains a repr
 Failure-to-Eval is deterministic local eval case generation from a validated `runwise.agent_trace` JSON file. It reads the trace, derives a simple eval case type, expected behavior, prohibited behavior, assertions, and risk tags, then writes JSON, YAML, and Markdown artifacts.
 
 Eval output is written under `.runwise/evals/` by default and remains a reproducible local artifact. The command does not execute evals, run model judges, call models, train models, re-run agents, execute tools, call external APIs, upload datasets, or store evals in a hosted system.
+
+## Ecosystem Compatibility Detection
+
+Ecosystem compatibility starts as local heuristic detection in `@runwise/integrations`. Profiles cover MCP, OpenAI Agents, LangChain, Dify, browser-use, Claude Code, Codex, Cursor, Windsurf, Ollama, OpenAI-compatible APIs, and China-ready LLM providers.
+
+Detection uses only local file names, directory names, package metadata, environment example names, lightweight config files, and example documentation. It does not import or execute external AI frameworks, run models, call external APIs, add hosted integrations, or turn Runwise into an agent framework.
+
+Doctor reports include a compact detected-ecosystem summary in JSON, Markdown, static HTML, and the local Dashboard Viewer. Compatibility examples under `examples/` are inert documentation and detection fixtures, not runnable AI apps.
 
 ## GitHub Action Readiness Check
 

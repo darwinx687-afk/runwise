@@ -335,6 +335,11 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
       ${renderCategoryScores(report.summary.categoryScores)}
     </section>
 
+    <section class="section" aria-labelledby="ecosystems-title">
+      <h2 id="ecosystems-title">Detected Ecosystems / 检测到的生态</h2>
+      ${renderIntegrations(report)}
+    </section>
+
     <section class="section" aria-labelledby="fix-title">
       <h2 id="fix-title">What to Fix First / 优先修复项</h2>
       ${renderPriorityFindings(priorityFindings)}
@@ -421,6 +426,48 @@ function renderPriorityFindings(findings: RunwiseFinding[]): string {
   }
 
   return `<div class="finding-list">${findings.map(renderFindingCard).join("\n")}</div>`;
+}
+
+function renderIntegrations(report: RunwiseDoctorReport): string {
+  const integrations = report.integrations?.detected ?? [];
+
+  if (integrations.length === 0) {
+    return `<div class="empty-state">No ecosystem signals detected.<br>未检测到生态信号。</div>`;
+  }
+
+  return `<div class="finding-list">${integrations
+    .map((integration) => {
+      const signals = integration.signals
+        .slice(0, 5)
+        .map((signal) => `<li>${escapeHtml(signal)}</li>`)
+        .join("\n");
+      const recommendations = integration.recommendations
+        .map((recommendation, index) => {
+          const recommendationZh = integration.recommendationsZh[index] ?? "";
+          return `<li>${escapeHtml(recommendation)}<br><span class="detail">${escapeHtml(recommendationZh)}</span></li>`;
+        })
+        .join("\n");
+
+      return `<article class="finding">
+  <div class="finding-head">
+    <span class="badge">${escapeHtml(integration.strength)}</span>
+    <span class="badge">${escapeHtml(integration.id)}</span>
+  </div>
+  <h3>${escapeHtml(integration.name)} / ${escapeHtml(integration.nameZh)}</h3>
+  <p class="detail">Local heuristic detection only. No framework execution or external API call was performed.</p>
+  <div class="finding-grid">
+    <div>
+      <p><strong>Signals</strong></p>
+      <ul>${signals}</ul>
+    </div>
+    <div>
+      <p><strong>Recommendations / 建议</strong></p>
+      <ul>${recommendations}</ul>
+    </div>
+  </div>
+</article>`;
+    })
+    .join("\n")}</div>`;
 }
 
 function renderFilters(categories: RunwiseCategory[]): string {

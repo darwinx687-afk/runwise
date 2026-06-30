@@ -159,6 +159,10 @@ export function renderMarkdownReport(
     `| Info | ${report.summary.info} |`,
     `| Blocking findings | ${report.rules.blocking} |`,
     "",
+    "## Detected Ecosystems / 检测到的生态",
+    "",
+    ...formatIntegrationsMarkdown(report),
+    "",
     "## What to Fix First",
     "",
     ...formatFixFirstMarkdown(report.findings),
@@ -277,6 +281,7 @@ export function renderHtmlReport(
       ? `<div class="finding-list">${fixFirst.map(renderFindingCard).join("\n")}</div>`
       : `<div class="empty-state">No priority findings. / 暂无优先修复项。</div>`;
   const findingsHtml = renderFindingsBySeverity(report.findings);
+  const integrationsHtml = renderIntegrations(report);
   const jsonReportPath = formatReportPath(
     options.cwd,
     options.jsonPath,
@@ -464,6 +469,11 @@ export function renderHtmlReport(
       ${renderCategoryScores(report.summary.categoryScores)}
     </section>
 
+    <section class="section" aria-labelledby="ecosystems-title">
+      <h2 id="ecosystems-title">Detected Ecosystems / 检测到的生态</h2>
+      ${integrationsHtml}
+    </section>
+
     <section class="section" aria-labelledby="fix-first-title">
       <h2 id="fix-first-title">What to Fix First / 优先修复项</h2>
       ${fixFirstHtml}
@@ -529,6 +539,36 @@ function formatFindingMarkdown(finding: RunwiseFinding): string[] {
     `- Recommendation: ${escapeMarkdown(finding.recommendation)}`,
     `- 中文建议: ${escapeMarkdown(finding.recommendationZh)}`
   );
+
+  return lines;
+}
+
+function formatIntegrationsMarkdown(report: RunwiseDoctorReport): string[] {
+  const integrations = report.integrations?.detected ?? [];
+
+  if (integrations.length === 0) {
+    return ["No ecosystem signals detected. / 未检测到生态信号。"];
+  }
+
+  const lines = [
+    "| Ecosystem | Strength | Signals | Recommendation |",
+    "| --- | --- | --- | --- |"
+  ];
+
+  for (const integration of integrations) {
+    const signals = integration.signals.map(escapeMarkdown).join("<br>");
+    const recommendation = integration.recommendations
+      .map((item, index) => {
+        const zh = integration.recommendationsZh[index];
+        return zh ? `${item} / ${zh}` : item;
+      })
+      .map(escapeMarkdown)
+      .join("<br>");
+
+    lines.push(
+      `| ${escapeMarkdown(integration.name)} / ${escapeMarkdown(integration.nameZh)} | ${integration.strength} | ${signals} | ${recommendation} |`
+    );
+  }
 
   return lines;
 }
@@ -692,6 +732,48 @@ function renderFindingsBySeverity(findings: RunwiseFinding[]): string {
   })
     .filter(Boolean)
     .join("\n");
+}
+
+function renderIntegrations(report: RunwiseDoctorReport): string {
+  const integrations = report.integrations?.detected ?? [];
+
+  if (integrations.length === 0) {
+    return `<div class="empty-state">No ecosystem signals detected.<br>未检测到生态信号。</div>`;
+  }
+
+  return `<div class="finding-list">${integrations
+    .map((integration) => {
+      const signals = integration.signals
+        .slice(0, 5)
+        .map((signal) => `<li>${escapeHtml(signal)}</li>`)
+        .join("\n");
+      const recommendations = integration.recommendations
+        .map((recommendation, index) => {
+          const recommendationZh = integration.recommendationsZh[index] ?? "";
+          return `<li>${escapeHtml(recommendation)}<br><span class="detail">${escapeHtml(recommendationZh)}</span></li>`;
+        })
+        .join("\n");
+
+      return `<article class="finding">
+  <div class="finding-head">
+    <span class="badge">${escapeHtml(integration.strength)}</span>
+    <span class="badge">${escapeHtml(integration.id)}</span>
+  </div>
+  <h3>${escapeHtml(integration.name)} / ${escapeHtml(integration.nameZh)}</h3>
+  <p class="detail">Local heuristic detection only. No framework execution or external API call was performed.</p>
+  <div class="finding-grid">
+    <div>
+      <p><strong>Signals</strong></p>
+      <ul>${signals}</ul>
+    </div>
+    <div>
+      <p><strong>Recommendations / 建议</strong></p>
+      <ul>${recommendations}</ul>
+    </div>
+  </div>
+</article>`;
+    })
+    .join("\n")}</div>`;
 }
 
 function renderFindingCard(finding: RunwiseFinding): string {

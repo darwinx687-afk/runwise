@@ -517,6 +517,7 @@ export function formatTerminalSummary(
   markdownPath: string,
   htmlPath: string
 ) {
+  const integrationLines = formatDoctorIntegrationSummary(report);
   return [
     "Runwise Doctor",
     "",
@@ -524,12 +525,25 @@ export function formatTerminalSummary(
     `Score: ${report.summary.overallScore}/100`,
     `Rules: ${report.rules.passed} passed, ${report.rules.failed} failed, ${report.rules.notApplicable} not applicable, ${report.rules.blocking} blocking`,
     `Findings: ${report.summary.totalFindings} total, ${report.summary.critical} critical, ${report.summary.high} high, ${report.summary.medium} medium, ${report.summary.low} low, ${report.summary.info} info`,
+    ...integrationLines,
     "",
     "Reports:",
     `- ${formatReportPath(cwd, jsonPath)}`,
     `- ${formatReportPath(cwd, markdownPath)}`,
     `- ${formatReportPath(cwd, htmlPath)}`
   ].join("\n");
+}
+
+function formatDoctorIntegrationSummary(report: RunwiseDoctorReport): string[] {
+  const integrations = report.integrations?.detected ?? [];
+  if (integrations.length === 0) {
+    return ["Integrations: 0 detected"];
+  }
+
+  return [
+    `Integrations: ${integrations.length} detected`,
+    ...integrations.map((integration) => `- ${integration.name}: ${integration.strength}`)
+  ];
 }
 
 export function formatTraceFileSummary(

@@ -71,6 +71,13 @@
 
 ## Phase 9: Ecosystem Integrations and Compatibility Examples
 
-- Add integration compatibility examples.
-- Explore lightweight Promptfoo-compatible exports.
-- Keep integrations adapter-based and local-first unless a later phase explicitly changes scope.
+- Add integration profile schema and local compatibility detection.
+- Show detected ecosystems in Doctor JSON, Markdown, HTML, and Dashboard Viewer reports.
+- Add lightweight compatibility examples for MCP, RAG, browser agents, Dify-style workflow signals, Codex-style projects, and China-ready LLM provider signals.
+- Keep integrations adapter-based, heuristic, and local-first.
+
+## Phase 10: Open Source Launch Polish and Repository Presentation
+
+- Polish repository presentation and open-source contributor flow.
+- Review documentation consistency, examples, and release-readiness messaging.
+- Keep launch work separate from hosted product, cloud sync, login, billing, or agent runtime scope.

@@ -6,6 +6,9 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "dependencies": {
+    "@runwise/schemas": "workspace:*"
+  },
   "scripts": {
     "check": "tsc --noEmit -p tsconfig.json"
   }

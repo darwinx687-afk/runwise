@@ -37,6 +37,7 @@ pnpm test
 - JSON, Markdown, and static HTML reports for reviewable readiness evidence.
 - Shared TypeScript schemas for Doctor rules, findings, scoring, reports, traces, replays, and eval cases.
 - Failure-to-Eval generation that turns validated traces into reusable local eval case files.
+- Local ecosystem compatibility detection for common AI project stacks.
 - Package boundaries for future tracing, replay, eval, integrations, GitHub Action, dashboard, and docs work.
 
 ## Doctor Rule Engine
@@ -88,6 +89,12 @@ pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 
 Runwise only generates eval case files in this phase. It does not execute evals or call any model.
 
+## Ecosystem Compatibility
+
+Runwise detects local signals for common AI project ecosystems such as MCP, LangChain, OpenAI Agents, Dify, browser-use, Claude Code, Codex, Cursor, Windsurf, Ollama, OpenAI-compatible APIs, and China-ready LLM providers.
+
+Detection is local and heuristic. Runwise does not execute these frameworks or send data anywhere.
+
 ## GitHub Action
 
 Runwise can be used as a CI readiness gate. It runs locally in GitHub Actions, generates JSON/Markdown/HTML reports, writes a job summary, and can fail the workflow on blocking findings, critical findings, or a minimum score threshold.
@@ -124,13 +131,15 @@ packages/
   core/                      Local scanner, rule engine, scoring, trace, replay, and eval generation logic.
   schemas/                   Shared TypeScript schema contracts.
   reporter/                  JSON, YAML, Markdown, and HTML artifact generation.
-  integrations/              Integration adapter boundary.
+  integrations/              Local ecosystem profile and detection boundary.
   github-action/             GitHub Action summary and threshold helper.
 examples/
   mcp-demo/                  Future MCP server demo.
   rag-demo/                  Future RAG app demo.
   browser-agent-demo/        Future browser-agent demo.
   enterprise-workflow-demo/  Future enterprise workflow demo.
+  china-ready-llm-demo/      Local provider compatibility demo.
+  codex-project-demo/        Codex-style project compatibility demo.
 docs/
   en/                        English docs.
   zh-CN/                     Simplified Chinese docs.
@@ -147,6 +156,7 @@ docs/
 - Phase 6: Trace schema and validation.
 - Phase 7: Trace replay.
 - Phase 8: Failure-to-Eval generation.
+- Phase 9: Ecosystem integrations and compatibility examples.
 
 ## Contributing
 

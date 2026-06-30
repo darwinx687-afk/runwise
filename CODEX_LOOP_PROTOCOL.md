@@ -13,7 +13,7 @@ Runwise development proceeds in explicit loops.
 
 ## Current Loop
 
-Loop 8 is Phase 8 - Failure-to-Eval. It introduces deterministic local eval case generation from validated trace files without eval execution, model calls, training, agent re-execution, tool execution, external APIs, or hosted eval storage.
+Loop 9 is Phase 9 - Ecosystem Integrations and Compatibility Examples. It introduces local heuristic ecosystem detection and lightweight compatibility examples without executing external AI frameworks, importing runtime integrations, calling models, calling external APIs, or adding hosted integrations.
 
 ## Check Strategy
 

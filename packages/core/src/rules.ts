@@ -264,6 +264,44 @@ export const RUNWISE_RULES: readonly RunwiseRule[] = [
     })
   },
   {
+    id: "integrations.openai_compatible_api_review",
+    category: "integrations",
+    severity: "info",
+    title: "OpenAI-compatible API usage detected",
+    titleZh: "检测到 OpenAI-compatible API 使用迹象",
+    description: "Checks for local OpenAI-compatible API configuration indicators.",
+    descriptionZh: "检查本地 OpenAI-compatible API 配置信号。",
+    message:
+      "OpenAI-compatible API usage detected. Verify provider-specific base URLs, rate limits, and data handling assumptions.",
+    messageZh:
+      "检测到 OpenAI-compatible API 使用迹象。请核对服务商特定 base URL、速率限制和数据处理假设。",
+    recommendation:
+      "Document provider-specific base URLs, rate limits, data boundaries, and fallback behavior.",
+    recommendationZh: "记录服务商特定 base URL、速率限制、数据边界和降级策略。",
+    evaluate: (context) => ({
+      status: hasIntegration(context, "openai-compatible-api") ? "failed" : "not_applicable"
+    })
+  },
+  {
+    id: "integrations.china_ready_llm_review",
+    category: "integrations",
+    severity: "info",
+    title: "China-ready LLM provider indicators detected",
+    titleZh: "检测到国内大模型服务商相关信号",
+    description: "Checks for local China-ready LLM provider configuration indicators.",
+    descriptionZh: "检查本地国内大模型服务商配置信号。",
+    message:
+      "China-ready LLM provider indicators were detected. Ensure deployment documentation covers base URL, model provider, data boundary, and fallback behavior.",
+    messageZh:
+      "检测到国内大模型服务商相关信号。建议在部署文档中说明 base URL、模型服务商、数据边界和降级策略。",
+    recommendation:
+      "Add deployment notes for provider base URLs, model names, data handling, and fallback behavior.",
+    recommendationZh: "补充服务商 base URL、模型名称、数据处理和降级策略的部署说明。",
+    evaluate: (context) => ({
+      status: hasIntegration(context, "china-ready-llm") ? "failed" : "not_applicable"
+    })
+  },
+  {
     id: "tracing.coverage_present",
     category: "tracing",
     severity: "medium",
@@ -308,4 +346,8 @@ function hasAnyPackageManager(context: RunwiseProjectContext) {
 
 function hasMcpIndicators(context: RunwiseProjectContext) {
   return context.mcp.configFiles.length > 0 || context.mcp.packageIndicators.length > 0;
+}
+
+function hasIntegration(context: RunwiseProjectContext, id: string) {
+  return context.integrations.detected.some((integration) => integration.id === id);
 }

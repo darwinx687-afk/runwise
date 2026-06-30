@@ -1,11 +1,16 @@
 import { promises as fs } from "node:fs";
 import * as path from "node:path";
-import type { RunwiseDoctorReport } from "@runwise/schemas";
+import {
+  detectRunwiseIntegrations,
+  type RunwisePackageJsonSource,
+  type RunwiseTextSource
+} from "@runwise/integrations";
+import type { RunwiseDoctorReport, RunwiseIntegrationDetection } from "@runwise/schemas";
 import { runRuleEngine } from "./rule-engine.js";
 import { summarizeFindings, summarizeRuleResults } from "./scoring.js";
 
 export const RUNWISE_PROJECT_NAME = "Runwise";
-export const RUNWISE_CURRENT_PHASE = "Phase 8";
+export const RUNWISE_CURRENT_PHASE = "Phase 9";
 export const RUNWISE_DOCTOR_VERSION = "0.0.0";
 
 export interface RunwiseDoctorScanOptions {
@@ -57,6 +62,9 @@ export type RunwiseProjectContext = {
   };
   reports: {
     outputDirectoryAvailable: boolean;
+  };
+  integrations: {
+    detected: RunwiseIntegrationDetection[];
   };
 };
 
@@ -143,6 +151,7 @@ export async function scanRunwiseDoctor(
       evalsDetected: context.evals.detected,
       tracesDetected: context.tracing.detected
     },
+    integrations: context.integrations,
     findings
   };
 }
@@ -166,10 +175,18 @@ export async function buildProjectContext(cwd: string): Promise<RunwiseProjectCo
     present: presentAiIndicators
   };
   const packageJsonFiles = files.filter((file) => path.basename(file) === "package.json");
+  const parsedPackageJsonFiles: RunwisePackageJsonSource[] = [];
   const packageIndicators = [];
 
   for (const packageJsonFile of packageJsonFiles) {
     const parsed = await readJsonFile(rootPath, packageJsonFile);
+    if (parsed) {
+      parsedPackageJsonFiles.push({
+        file: packageJsonFile,
+        data: parsed
+      });
+    }
+
     if (parsed && packageJsonContainsMcp(parsed)) {
       packageIndicators.push(packageJsonFile);
     }
@@ -177,6 +194,13 @@ export async function buildProjectContext(cwd: string): Promise<RunwiseProjectCo
 
   const evalLocations = await getCoverageLocations(rootPath, files, directories, "eval");
   const traceLocations = await getCoverageLocations(rootPath, files, directories, "trace");
+  const integrationTextFiles = await getIntegrationTextSources(rootPath, files);
+  const detectedIntegrations = detectRunwiseIntegrations({
+    files,
+    directories,
+    packageJsonFiles: parsedPackageJsonFiles,
+    textFiles: integrationTextFiles
+  });
 
   return {
     rootPath,
@@ -216,6 +240,9 @@ export async function buildProjectContext(cwd: string): Promise<RunwiseProjectCo
     },
     reports: {
       outputDirectoryAvailable: await directoryExists(rootPath, ".runwise")
+    },
+    integrations: {
+      detected: detectedIntegrations
     }
   };
 }
@@ -315,6 +342,68 @@ async function readJsonFile(root: string, relativePath: string) {
     const raw = await fs.readFile(path.join(root, relativePath), "utf8");
     const parsed: unknown = JSON.parse(raw);
     return isRecord(parsed) ? parsed : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+async function getIntegrationTextSources(
+  rootPath: string,
+  files: string[]
+): Promise<RunwiseTextSource[]> {
+  const textSources: RunwiseTextSource[] = [];
+
+  for (const file of files) {
+    if (!isIntegrationTextCandidate(file)) {
+      continue;
+    }
+
+    const text = await readTextFile(rootPath, file);
+    if (text === undefined) {
+      continue;
+    }
+
+    textSources.push({
+      file,
+      text
+    });
+  }
+
+  return textSources;
+}
+
+function isIntegrationTextCandidate(relativePath: string) {
+  const normalized = normalizeRelativePath(relativePath);
+  const baseName = getBaseName(normalized);
+  const lowerBaseName = baseName.toLowerCase();
+
+  return (
+    lowerBaseName === "requirements.txt" ||
+    lowerBaseName === "pyproject.toml" ||
+    lowerBaseName.startsWith("docker-compose") ||
+    lowerBaseName.startsWith(".env") ||
+    lowerBaseName === "agents.md" ||
+    lowerBaseName === "claude.md" ||
+    lowerBaseName === ".cursorrules" ||
+    lowerBaseName === ".windsurfrules" ||
+    lowerBaseName === "mcp.json" ||
+    lowerBaseName === ".mcp.json" ||
+    lowerBaseName === "mcp.config.json" ||
+    (normalized.startsWith("examples/") && lowerBaseName.startsWith("readme")) ||
+    (normalized.startsWith("examples/") &&
+      normalized.includes("/src/") &&
+      [".ts", ".js", ".py", ".json"].some((extension) => lowerBaseName.endsWith(extension)))
+  );
+}
+
+async function readTextFile(root: string, relativePath: string) {
+  try {
+    const stat = await fs.stat(path.join(root, relativePath));
+    if (!stat.isFile() || stat.size > 200_000) {
+      return undefined;
+    }
+
+    return await fs.readFile(path.join(root, relativePath), "utf8");
   } catch {
     return undefined;
   }

@@ -1,0 +1,15 @@
+{
+  "name": "runwise-mcp-demo",
+  "description": "Detection-only MCP config. No server is executed by this example.",
+  "tools": [
+    {
+      "name": "filesystem.scan",
+      "risk": "low"
+    },
+    {
+      "name": "filesystem.delete",
+      "risk": "high",
+      "approvalRequired": true
+    }
+  ]
+}

@@ -25,6 +25,7 @@ Runwise is an open-source readiness, tracing, replay, and eval toolkit for AI ag
 - Local trace schema validation.
 - Static trace replay reports.
 - Failure-to-Eval case generation from validated traces.
+- Local ecosystem compatibility detection and examples.
 - Replay fixtures and runners.
 - Eval adapters and reporting.
 - CI and GitHub Action integration.

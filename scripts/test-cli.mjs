@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cliBin = resolve(rootDir, "node_modules/.bin/runwise");
 const actionSummaryBin = resolve(rootDir, "packages/github-action/src/action-summary.mjs");
-const expectedRuleCount = 15;
+const expectedRuleCount = 17;
 
 const governanceFiles = [
   "PROJECT_CONSTITUTION.md",
@@ -255,6 +255,7 @@ try {
 
   assert.match(baseRun.stdout, /Runwise Doctor/);
   assert.match(baseRun.stdout, /Rules:/);
+  assert.match(baseRun.stdout, /Integrations: \d+ detected/);
   assert.match(baseRun.stdout, /Reports:/);
   assert.match(baseRun.stdout, /\.runwise\/runwise-report\.html/);
   assert.equal(existsSync(baseRun.jsonPath), true, "JSON report should be generated");
@@ -275,6 +276,8 @@ try {
   assert.equal(baseRun.report.summary.overallScore >= 0, true);
   assert.equal(baseRun.report.summary.overallScore <= 100, true);
   assert.ok(baseRun.report.summary.categoryScores, "Category scores should be included");
+  assert.ok(Array.isArray(baseRun.report.integrations.detected), "Integrations should be included");
+  assertIntegration(baseRun.report, "codex", "confirmed");
   assert.deepEqual(baseRun.report.reportFiles, {
     json: ".runwise/runwise-report.json",
     markdown: ".runwise/runwise-report.md",
@@ -295,6 +298,8 @@ try {
   assert.match(baseRun.markdown, /## Rule Summary/);
   assert.match(baseRun.markdown, /Blocking findings/);
   assert.match(baseRun.markdown, /## What to Fix First/);
+  assert.match(baseRun.markdown, /## Detected Ecosystems \/ 检测到的生态/);
+  assert.match(baseRun.markdown, /Codex/);
   assert.match(baseRun.markdown, /## Report Files/);
   assert.match(baseRun.markdown, /No eval coverage detected/);
   assert.match(baseRun.markdown, /未检测到评测覆盖/);
@@ -308,6 +313,7 @@ try {
   assert.match(baseRun.html, /Overall score/);
   assert.match(baseRun.html, /Score and Severity Summary/);
   assert.match(baseRun.html, /Rule Summary/);
+  assert.match(baseRun.html, /Detected Ecosystems \/ 检测到的生态/);
   assert.match(baseRun.html, /What to Fix First/);
   assert.match(baseRun.html, /Findings/);
   assert.match(baseRun.html, /medium/);
@@ -322,6 +328,35 @@ try {
 
   await assertViewerServer(base);
   assertActionSummaryHelper(baseRun.report);
+
+  const integrationFixture = createIntegrationFixtureProject();
+  const integrationRun = runDoctor(integrationFixture);
+  assertIntegration(integrationRun.report, "mcp", "confirmed");
+  assertIntegration(integrationRun.report, "codex", "confirmed");
+  assertIntegration(integrationRun.report, "claude-code", "confirmed");
+  assertIntegration(integrationRun.report, "cursor", "confirmed");
+  assertIntegration(integrationRun.report, "windsurf", "confirmed");
+  assertIntegration(integrationRun.report, "langchain", "confirmed");
+  assertIntegration(integrationRun.report, "openai-agents", "confirmed");
+  assertIntegration(integrationRun.report, "browser-use", "confirmed");
+  assertIntegration(integrationRun.report, "dify", "likely");
+  assertIntegration(integrationRun.report, "ollama", "likely");
+  assertIntegration(integrationRun.report, "openai-compatible-api", "likely");
+  assertIntegration(integrationRun.report, "china-ready-llm", "likely");
+  assertFinding(integrationRun.report, {
+    ruleId: "integrations.openai_compatible_api_review",
+    severity: "info",
+    blocking: false
+  });
+  assertFinding(integrationRun.report, {
+    ruleId: "integrations.china_ready_llm_review",
+    severity: "info",
+    blocking: false
+  });
+  assert.match(integrationRun.markdown, /OpenAI-compatible API/);
+  assert.match(integrationRun.markdown, /China-ready LLM/);
+  assert.match(integrationRun.html, /Detected Ecosystems \/ 检测到的生态/);
+  assert.match(integrationRun.html, /LangChain/);
 
   const missingConstitution = createFixtureProject({
     omitGovernance: ["PROJECT_CONSTITUTION.md"]
@@ -512,6 +547,84 @@ function createFixtureProject(options = {}) {
       writeFileSync(join(projectRoot, file), `# ${file}\n`);
     }
   }
+
+  return projectRoot;
+}
+
+function createIntegrationFixtureProject() {
+  const projectRoot = createFixtureProject();
+
+  mkdirSync(join(projectRoot, ".cursor"), { recursive: true });
+  mkdirSync(join(projectRoot, ".windsurf"), { recursive: true });
+  mkdirSync(join(projectRoot, "examples", "integration"), { recursive: true });
+
+  writeFileSync(
+    join(projectRoot, "package.json"),
+    JSON.stringify(
+      {
+        name: "runwise-integration-fixture",
+        private: true,
+        type: "module",
+        scripts: {
+          "demo:mcp": "node mcp-demo.js",
+          "demo:ollama": "echo ollama"
+        },
+        dependencies: {
+          "@openai/agents": "0.0.0-detection-only",
+          langchain: "0.0.0-detection-only"
+        },
+        devDependencies: {
+          "browser-use": "0.0.0-detection-only"
+        }
+      },
+      null,
+      2
+    )
+  );
+  writeFileSync(
+    join(projectRoot, "mcp.json"),
+    JSON.stringify(
+      {
+        name: "integration-fixture",
+        tools: [{ name: "filesystem.delete", approvalRequired: true }]
+      },
+      null,
+      2
+    )
+  );
+  writeFileSync(join(projectRoot, "AGENTS.md"), "# Agent Instructions\nUse local checks only.\n");
+  writeFileSync(join(projectRoot, "CLAUDE.md"), "# Claude Code Notes\nDetection fixture only.\n");
+  writeFileSync(join(projectRoot, ".cursor", "rules.md"), "Cursor detection fixture.\n");
+  writeFileSync(join(projectRoot, ".windsurf", "rules.md"), "Windsurf detection fixture.\n");
+  writeFileSync(
+    join(projectRoot, "requirements.txt"),
+    [
+      "# Detection-only fixture. Do not install.",
+      "langchain==0.0.0",
+      "openai-agents==0.0.0",
+      "browser-use==0.0.0"
+    ].join("\n")
+  );
+  writeFileSync(
+    join(projectRoot, ".env.example"),
+    [
+      "# Detection-only placeholders. Do not add secrets.",
+      "OPENAI_API_KEY=",
+      "OPENAI_BASE_URL=https://dashscope.example-compatible.local/v1",
+      "DASHSCOPE_API_KEY=",
+      "DEEPSEEK_API_KEY=",
+      "QWEN_MODEL=qwen-plus",
+      "OLLAMA_HOST=http://localhost:11434"
+    ].join("\n")
+  );
+  writeFileSync(
+    join(projectRoot, "docker-compose.yml"),
+    ["services:", "  dify-placeholder:", "    image: dify/dify-api:example-only"].join("\n")
+  );
+  writeFileSync(
+    join(projectRoot, "examples", "integration", "README.md"),
+    "This example mentions Dify, browser-use, and Ollama for local detection only.\n"
+  );
 
   return projectRoot;
 }
@@ -810,4 +923,15 @@ function assertFinding(report, expected) {
     expected.blocking,
     `Expected ${expected.ruleId} blocking ${expected.blocking}`
   );
+}
+
+function assertIntegration(report, id, strength) {
+  const integration = report.integrations.detected.find((item) => item.id === id);
+  assert.ok(integration, `Expected integration detection for ${id}`);
+  assert.equal(
+    integration.strength,
+    strength,
+    `Expected ${id} strength ${strength}, got ${integration.strength}`
+  );
+  assert.ok(integration.signals.length > 0, `Expected ${id} to include local signals`);
 }

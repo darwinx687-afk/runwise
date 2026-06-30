@@ -37,6 +37,7 @@ pnpm test
 - 生成 JSON、Markdown 和静态 HTML 报告，作为可审阅的就绪度证据。
 - 为 Doctor rule、finding、scoring、report、trace、replay 和 eval case 提供共享 TypeScript schema。
 - Failure-to-Eval 生成能力，可把验证过的 trace 转化为可复用的本地评测用例文件。
+- 面向常见 AI 项目技术栈的本地生态兼容性检测。
 - 为未来的追踪、回放、评测、集成、GitHub Action、Dashboard 和文档工作保留包边界。
 
 ## Doctor 规则引擎
@@ -88,6 +89,12 @@ pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 
 当前阶段 Runwise 只生成评测用例文件，不执行评测，也不会调用任何模型。
 
+## 生态兼容性
+
+Runwise 会基于本地文件和配置线索识别常见 AI 项目生态，例如 MCP、LangChain、OpenAI Agents、Dify、browser-use、Claude Code、Codex、Cursor、Windsurf、Ollama、OpenAI-compatible API 以及国内大模型服务商。
+
+检测过程是本地启发式识别。Runwise 不会执行这些框架，也不会上传项目数据。
+
 ## GitHub Action
 
 Runwise 可以作为 CI 上线准备度门禁使用。它会在 GitHub Actions 中本地运行，生成 JSON/Markdown/HTML 报告，写入 job summary，并可根据 blocking finding、critical finding 或最低分数阈值决定是否让 workflow 失败。
@@ -124,13 +131,15 @@ packages/
   core/                      本地扫描、规则引擎、评分、trace、replay 和 eval 生成逻辑。
   schemas/                   共享 TypeScript schema 契约。
   reporter/                  JSON、YAML、Markdown 和 HTML artifact 生成。
-  integrations/              集成适配器边界。
+  integrations/              本地生态 profile 和检测边界。
   github-action/             GitHub Action summary 和 threshold helper。
 examples/
   mcp-demo/                  未来的 MCP Server 示例。
   rag-demo/                  未来的 RAG 应用示例。
   browser-agent-demo/        未来的浏览器 Agent 示例。
   enterprise-workflow-demo/  未来的企业工作流示例。
+  china-ready-llm-demo/      本地模型服务商兼容性示例。
+  codex-project-demo/        Codex 风格项目兼容性示例。
 docs/
   en/                        英文文档。
   zh-CN/                     简体中文文档。
@@ -147,6 +156,7 @@ docs/
 - Phase 6：Trace schema 和验证。
 - Phase 7：Trace replay。
 - Phase 8：Failure-to-Eval 生成。
+- Phase 9：生态集成和兼容性示例。
 
 ## 贡献
 

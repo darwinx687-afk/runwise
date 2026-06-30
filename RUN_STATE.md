@@ -2,22 +2,22 @@
 
 ## Current Phase
 
-Phase 8
+Phase 9
 
 ## Current Loop
 
-Loop 8 - Failure-to-Eval
+Loop 9 - Ecosystem Integrations and Compatibility Examples
 
 ## Completed
 
-- Eval case schema introduced
-- Deterministic eval generator added
-- `runwise eval generate` command added
-- JSON/YAML/Markdown eval outputs added
-- High-risk, approval, error, RAG and success-baseline eval logic introduced
-- Eval generation tests added
-- README and architecture docs updated
+- Integration profile schema introduced
+- Local ecosystem detection added
+- Doctor report includes detected ecosystems
+- JSON/Markdown/HTML reports include ecosystem compatibility section
+- Lightweight compatibility examples added
+- README and docs updated for ecosystem detection
+- Tests added for integration detection
 
 ## Next Required Step
 
-Phase 9 - Ecosystem Integrations and Compatibility Examples
+Phase 10 - Open Source Launch Polish and Repository Presentation

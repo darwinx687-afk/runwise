@@ -23,6 +23,7 @@ const RUNWISE_CATEGORIES: RunwiseCategory[] = [
   "governance",
   "ai-indicators",
   "mcp",
+  "integrations",
   "evals",
   "tracing",
   "reports",

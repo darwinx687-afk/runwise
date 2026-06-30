@@ -7,7 +7,8 @@ export type RunwisePhase =
   | "Phase 5"
   | "Phase 6"
   | "Phase 7"
-  | "Phase 8";
+  | "Phase 8"
+  | "Phase 9";
 
 export interface RunwiseManifest {
   name: string;
@@ -24,6 +25,7 @@ export type RunwiseCategory =
   | "governance"
   | "ai-indicators"
   | "mcp"
+  | "integrations"
   | "evals"
   | "tracing"
   | "reports"
@@ -108,8 +110,52 @@ export interface RunwiseDoctorReport {
     markdown: string;
     html: string;
   };
+  integrations?: {
+    detected: RunwiseIntegrationDetection[];
+  };
   findings: RunwiseFinding[];
 }
+
+export type RunwiseIntegrationId =
+  | "mcp"
+  | "openai-agents"
+  | "langchain"
+  | "dify"
+  | "browser-use"
+  | "claude-code"
+  | "codex"
+  | "cursor"
+  | "windsurf"
+  | "ollama"
+  | "openai-compatible-api"
+  | "china-ready-llm";
+
+export type RunwiseIntegrationDetectionStrength =
+  | "none"
+  | "possible"
+  | "likely"
+  | "confirmed";
+
+export type RunwiseIntegrationProfile = {
+  id: RunwiseIntegrationId;
+  name: string;
+  nameZh: string;
+  description: string;
+  descriptionZh: string;
+  signals: string[];
+  recommendedChecks: string[];
+  recommendedChecksZh: string[];
+};
+
+export type RunwiseIntegrationDetection = {
+  id: RunwiseIntegrationId;
+  name: string;
+  nameZh: string;
+  strength: RunwiseIntegrationDetectionStrength;
+  signals: string[];
+  recommendations: string[];
+  recommendationsZh: string[];
+};
 
 export type RunwiseTraceStepType =
   | "llm_call"

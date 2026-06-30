@@ -1,0 +1,5 @@
+services:
+  dify-placeholder:
+    image: dify/dify-api:example-only
+    profiles:
+      - detection-only
