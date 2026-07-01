@@ -2,23 +2,19 @@
 
 ## Current Phase
 
-Phase 11I
+Phase 11J
 
 ## Current Loop
 
-Phase 11I - v0.1.1 Release Candidate Preparation
+Phase 11J - Approve and Create v0.1.1-preview.0 Tag
 
 ## Completed
 
-- Changes since v0.1.0-preview.0 reviewed
-- Version metadata reviewed and updated to v0.1.1-preview.0
-- Changelog prepared for v0.1.1-preview.0
-- v0.1.1 release candidate checklist added
-- GitHub release draft added
-- Tag creation instructions added for next approval loop
-- GitHub prerelease instructions added for next approval loop
-- v0.1.1 plan updated
-- Roadmap updated
+- Release candidate checks rerun
+- Annotated tag v0.1.1-preview.0 created
+- Tag pushed to origin
+- Remote tag verified
+- GitHub prerelease remains pending
 
 ## Remote
 
@@ -32,9 +28,13 @@ Phase 11I - v0.1.1 Release Candidate Preparation
 
 - v0.1.1-preview.0
 
+## Tag
+
+- v0.1.1-preview.0
+
 ## Next Required Step
 
-Phase 11J - Approve and Create v0.1.1-preview.0 Tag
+Phase 11K - Create GitHub Prerelease v0.1.1-preview.0
 
 ## Known Non-blocking Follow-up
 

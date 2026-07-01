@@ -23,7 +23,8 @@ This checklist prepares `v0.1.1-preview.0` for approval. It does not create a ta
 | GitHub Action | Ready | Existing workflow passes |
 | Clean-machine review | Ready | Passed |
 | Release notes | Ready | Drafted |
-| Tag | Pending approval | Do not create in this loop |
+| Tag | Created and pushed | `v0.1.1-preview.0` |
+| GitHub prerelease | Pending | Create in Phase 11K |
 
 ## Local Verification
 
@@ -58,13 +59,18 @@ Known non-blocking follow-ups:
 - GitHub Actions still reports a Node.js 20 deprecation annotation from referenced upstream actions.
 - Custom output directories outside `.runwise/` may need explicit ignore guidance in future docs.
 
+## Post-tag Status
+
+- Tag: Created and pushed
+- GitHub prerelease: Pending
+
 ## Approval Gate
 
-Before the next loop creates the tag:
+Before the next loop creates the GitHub prerelease:
 
 - user approval is required
 - `main` should be clean
 - local checks should pass
-- GitHub Actions should pass on the release-candidate commit
+- GitHub Actions should pass
 - `.runwise/` should remain ignored and untracked
-- tag and release commands should be run only in the approved release loop
+- release commands should be run only in the approved prerelease loop
