@@ -4,7 +4,15 @@ All notable changes to Runwise will be documented here.
 
 ## Unreleased
 
-No changes after `0.1.0-preview.0` yet.
+### Planned for v0.1.1-preview.0
+
+- First-time user documentation refinements.
+- Comparison docs.
+- Source-install clarity.
+- Report and example readability improvements.
+- Early feedback workflow improvements.
+
+This is a planning section only. `v0.1.1-preview.0` has not been tagged or released.
 
 ## 0.1.0-preview.0 - Public preview prerelease
 

@@ -67,7 +67,7 @@ Focus:
 
 ### 11F - Self-review and v0.1.1-preview.0 Planning
 
-Recommended next loop.
+Status: completed in this loop.
 
 Focus:
 
@@ -75,6 +75,40 @@ Focus:
 - check whether plugin implementation should wait or move into Phase 12
 - prepare a small v0.1.1-preview.0 plan if useful
 - keep npm publishing, tags, and new releases deferred unless explicitly approved
+
+### 11G - First v0.1.1 Usability Fixes
+
+Tentative next loop.
+
+Focus:
+
+- tighten README scanning path
+- improve source-install and Corepack guidance
+- add "test Runwise on your own AI project" guidance
+- improve Doctor feedback workflow
+- avoid runtime plugin implementation
+
+### 11H - Clean-machine Install Review
+
+Tentative follow-up.
+
+Focus:
+
+- test source install from a clean environment
+- document common install friction
+- verify report generation and local viewer behavior
+- keep npm publishing deferred unless explicitly approved
+
+### 11I - v0.1.1 Release Candidate
+
+Tentative follow-up.
+
+Focus:
+
+- prepare release notes only after usability fixes land
+- run full local and GitHub checks
+- verify `.runwise/` artifacts remain ignored
+- create no tag until a release candidate loop is explicitly approved
 
 ## Feedback Inputs
 

@@ -95,3 +95,7 @@ Runwise report polish focuses on self-contained local HTML and lightweight dashb
 ## D025: Explore JSON rule packs before executable plugins
 
 Runwise will explore local JSON rule packs before executable plugins, keeping plugin support local-first, reviewable, and safe.
+
+## D026: Plan v0.1.1-preview.0 as usability and trust polish
+
+`v0.1.1-preview.0` is planned as a usability and trust polish release, not a feature expansion or plugin implementation release.

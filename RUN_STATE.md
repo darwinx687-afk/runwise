@@ -2,21 +2,22 @@
 
 ## Current Phase
 
-Phase 11E
+Phase 11F
 
 ## Current Loop
 
-Phase 11E - Plugin Architecture Exploration
+Phase 11F - Self-review and v0.1.1-preview.0 Planning
 
 ## Completed
 
-- Plugin architecture exploration docs added
-- Draft plugin manifest documented
-- Draft JSON rule pack format documented
-- Documentation-only plugin examples added
-- README and docs linked to plugin exploration
-- Architecture and product spec updated with future plugin direction
-- Roadmap and next iteration plan updated
+- Self-review docs added
+- v0.1.1-preview.0 plan added
+- Draft issue backlog added
+- Comparison docs added
+- README linked to comparison docs
+- Next iteration plan updated
+- Roadmap updated
+- Changelog unreleased planning section updated
 
 ## Remote
 
@@ -28,7 +29,7 @@ Phase 11E - Plugin Architecture Exploration
 
 ## Next Required Step
 
-Phase 11F - Self-review and v0.1.1-preview.0 Planning
+Phase 11G - First v0.1.1 Usability Fixes
 
 ## Known Non-blocking Follow-up
 

@@ -156,6 +156,10 @@ Runwise 目前还不支持插件。我们正在探索一种简单的本地规则
 
 见：[插件架构探索](./docs/PLUGIN_ARCHITECTURE_EXPLORATION.zh-CN.md)
 
+想知道 Runwise 和 Langfuse、Promptfoo、Dify、Open WebUI 的区别？
+
+见：[对比说明](./docs/COMPARISON.zh-CN.md)
+
 ## 路线图
 
 - Phase 0-2：项目基础、Doctor CLI、规则引擎和评分。

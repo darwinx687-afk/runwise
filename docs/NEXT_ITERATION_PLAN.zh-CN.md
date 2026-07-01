@@ -67,7 +67,7 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ### 11F - Self-review and v0.1.1-preview.0 Planning
 
-建议作为下一轮。
+状态：本轮已完成。
 
 重点：
 
@@ -75,6 +75,40 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - 判断插件实现应该继续等待，还是进入 Phase 12
 - 如有必要，准备一个小的 v0.1.1-preview.0 计划
 - 除非明确批准，继续暂缓 npm 发布、tag 和新 release
+
+### 11G - First v0.1.1 Usability Fixes
+
+暂定下一轮。
+
+重点：
+
+- 收紧 README 扫描路径
+- 改进源码安装和 Corepack 指引
+- 添加“在自己的 AI 项目上测试 Runwise”指南
+- 改进 Doctor 反馈流程
+- 不实现 runtime plugin
+
+### 11H - Clean-machine Install Review
+
+暂定后续。
+
+重点：
+
+- 在干净环境中测试源码安装
+- 记录常见安装摩擦
+- 验证 report generation 和本地 viewer 行为
+- 除非明确批准，继续暂缓 npm 发布
+
+### 11I - v0.1.1 Release Candidate
+
+暂定后续。
+
+重点：
+
+- 只有在 usability fix 完成后才准备 release notes
+- 运行完整本地和 GitHub 检查
+- 验证 `.runwise/` artifact 仍然被忽略
+- 未明确批准 release candidate loop 前，不创建 tag
 
 ## 反馈来源
 

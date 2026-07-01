@@ -156,6 +156,10 @@ Runwise does not support plugins yet. We are exploring a simple local rule-pack 
 
 See: [Plugin Architecture Exploration](./docs/PLUGIN_ARCHITECTURE_EXPLORATION.md)
 
+Wondering how Runwise relates to Langfuse, Promptfoo, Dify, or Open WebUI?
+
+See: [Comparison](./docs/COMPARISON.md)
+
 ## Roadmap
 
 - Phase 0-2: Foundation, Doctor CLI, rule engine, and scoring.

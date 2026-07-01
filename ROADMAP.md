@@ -99,9 +99,12 @@
 - Improve README, docs landing pages, walkthroughs, and report readability.
 - Phase 11D polishes Markdown reports, static HTML reports, local dashboard scanability, empty states, and score explanation.
 - Phase 11E explores future plugin architecture with docs, draft manifests, draft JSON rule packs, and documentation-only examples.
+- Phase 11F reviews the Phase 11 surface and plans `v0.1.1-preview.0` as a small usability and trust polish release.
 - Avoid feature bloat while public preview feedback is still early.
 - Plugin support is future work and should not be listed as implemented.
-- Next recommended loop: Self-review and v0.1.1-preview.0 planning.
+- v0.1.1 should focus on usability, trust, comparison clarity, install guidance, and feedback workflow.
+- npm publishing remains deferred until install behavior and package metadata are reviewed.
+- Next recommended loop: First v0.1.1 usability fixes.
 
 ## Phase 12 Candidate: Local Rule Pack MVP
 
