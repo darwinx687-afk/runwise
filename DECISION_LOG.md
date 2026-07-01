@@ -63,3 +63,7 @@ First release candidate preparation uses `v0.1.0-preview.0`, with npm publishing
 ## D016: Prepare GitHub prerelease from existing preview tag
 
 `v0.1.0-preview.0` GitHub Release will be created as a prerelease from the existing tag, while npm publishing remains deferred.
+
+## D017: Create v0.1.0-preview.0 as GitHub prerelease only
+
+`v0.1.0-preview.0` GitHub Release was created as a prerelease from the existing tag; npm publishing and Marketplace release remain deferred.
