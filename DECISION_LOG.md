@@ -99,3 +99,7 @@ Runwise will explore local JSON rule packs before executable plugins, keeping pl
 ## D026: Plan v0.1.1-preview.0 as usability and trust polish
 
 `v0.1.1-preview.0` is planned as a usability and trust polish release, not a feature expansion or plugin implementation release.
+
+## D027: Prioritize source-install clarity before npm publishing
+
+v0.1.1 usability work prioritizes source-install clarity, user feedback quality, and first-run confidence before npm publishing.

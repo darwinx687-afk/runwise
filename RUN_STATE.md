@@ -2,22 +2,23 @@
 
 ## Current Phase
 
-Phase 11F
+Phase 11G
 
 ## Current Loop
 
-Phase 11F - Self-review and v0.1.1-preview.0 Planning
+Phase 11G - First v0.1.1 Usability Fixes
 
 ## Completed
 
-- Self-review docs added
-- v0.1.1-preview.0 plan added
-- Draft issue backlog added
-- Comparison docs added
-- README linked to comparison docs
-- Next iteration plan updated
-- Roadmap updated
-- Changelog unreleased planning section updated
+- Clean install checklist added
+- Test-on-your-project guide added
+- Finding feedback guide added
+- README useful links tightened
+- Docs landing pages updated
+- CLI help reviewed and improved
+- GitHub Actions Node.js 20 annotation reviewed and deferred
+- v0.1.1 plan updated
+- Changelog Unreleased section updated
 
 ## Remote
 
@@ -29,7 +30,7 @@ Phase 11F - Self-review and v0.1.1-preview.0 Planning
 
 ## Next Required Step
 
-Phase 11G - First v0.1.1 Usability Fixes
+Phase 11H - Clean-machine Install Review
 
 ## Known Non-blocking Follow-up
 

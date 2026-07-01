@@ -39,6 +39,20 @@ The release should make the existing source-install experience easier to trust, 
 - telemetry
 - non-preview release
 
+## Phase 11G Progress
+
+Completed locally:
+
+- Clean install checklist added.
+- Test-on-your-own-project guide added.
+- Finding feedback guide added.
+- README link structure tightened.
+- Docs landing pages now surface install, project-test, feedback, comparison, examples, and report-reading links.
+- CLI help reviewed and improved with source-preview, local-only, `--cwd`, and report-output wording.
+- GitHub Actions Node.js 20 annotation reviewed and deferred for a later CI/action-version review.
+
+This does not make `v0.1.1-preview.0` released. It only moves the planned usability work forward.
+
 ## Review Before Any Tag
 
 Before creating a future `v0.1.1-preview.0` tag:

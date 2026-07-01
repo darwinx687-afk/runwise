@@ -31,6 +31,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:docs`
 - Area label: `area:quick-start`
 - Priority: high
+- Status: addressed locally in Phase 11G by `docs/CLEAN_INSTALL_CHECKLIST.md`.
 - Why it matters: source-install only is the biggest current adoption friction.
 - Acceptance criteria:
   - covers Node.js and pnpm/Corepack.
@@ -42,6 +43,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:docs`
 - Area label: `area:doctor`
 - Priority: medium
+- Status: addressed locally in Phase 11G by `docs/TEST_ON_YOUR_PROJECT.md`.
 - Why it matters: users need to know whether Runwise applies to their own repo.
 - Acceptance criteria:
   - shows safe commands with `--cwd`.
@@ -55,6 +57,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:dx`
 - Area label: `area:install`
 - Priority: high
+- Status: moved forward in Phase 11G with clean install and source-run guidance.
 - Why it matters: no npm package exists yet.
 - Acceptance criteria:
   - documented source install works from a clean environment.
@@ -66,6 +69,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:dx`
 - Area label: `area:package-manager`
 - Priority: medium
+- Status: moved forward in Phase 11G by documenting Corepack and `npx -y pnpm@9.15.4`.
 - Why it matters: global pnpm version differences can confuse users.
 - Acceptance criteria:
   - README or Quick Start points to the declared package manager version.
@@ -76,6 +80,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:dx`
 - Area label: `area:cli`
 - Priority: medium
+- Status: addressed locally in Phase 11G with source-preview and local-output wording.
 - Why it matters: users may inspect CLI help before reading docs.
 - Acceptance criteria:
   - help text says source preview.
@@ -192,6 +197,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:test`
 - Area label: `area:doctor`
 - Priority: medium
+- Status: still open; Phase 11G added the feedback guide, but not fixtures.
 - Why it matters: feedback-driven rule tuning needs reproducible examples.
 - Acceptance criteria:
   - fixtures are small.
@@ -205,6 +211,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:ci`
 - Area label: `area:github-action`
 - Priority: medium
+- Status: reviewed in Phase 11G and deferred; current workflow/action references `actions/checkout@v4`, `actions/setup-node@v4`, and `actions/upload-artifact@v4`, and there is no low-risk local-only fix without an action major-version review.
 - Why it matters: CI passes, but the annotation can reduce trust.
 - Acceptance criteria:
   - identify which actions trigger the annotation.

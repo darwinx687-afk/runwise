@@ -78,7 +78,7 @@ Focus:
 
 ### 11G - First v0.1.1 Usability Fixes
 
-Tentative next loop.
+Status: completed in this loop.
 
 Focus:
 
@@ -90,7 +90,7 @@ Focus:
 
 ### 11H - Clean-machine Install Review
 
-Tentative follow-up.
+Tentative next loop.
 
 Focus:
 

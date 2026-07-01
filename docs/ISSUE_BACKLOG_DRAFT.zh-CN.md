@@ -31,6 +31,7 @@
 - Type label: `type:docs`
 - Area label: `area:quick-start`
 - Priority: high
+- 状态：Phase 11G 已在 `docs/CLEAN_INSTALL_CHECKLIST.zh-CN.md` 中本地补充。
 - 为什么重要：当前只支持源码安装，这是最大的试用摩擦。
 - Acceptance criteria:
   - 覆盖 Node.js 和 pnpm/Corepack。
@@ -42,6 +43,7 @@
 - Type label: `type:docs`
 - Area label: `area:doctor`
 - Priority: medium
+- 状态：Phase 11G 已在 `docs/TEST_ON_YOUR_PROJECT.zh-CN.md` 中本地补充。
 - 为什么重要：用户需要知道 Runwise 能不能用在自己的 repo 上。
 - Acceptance criteria:
   - 展示带 `--cwd` 的安全命令。
@@ -55,6 +57,7 @@
 - Type label: `type:dx`
 - Area label: `area:install`
 - Priority: high
+- 状态：Phase 11G 已通过干净安装清单和源码运行说明推进。
 - 为什么重要：目前还没有 npm package。
 - Acceptance criteria:
   - 文档中的源码安装能在干净环境跑通。
@@ -66,6 +69,7 @@
 - Type label: `type:dx`
 - Area label: `area:package-manager`
 - Priority: medium
+- 状态：Phase 11G 已补充 Corepack 和 `npx -y pnpm@9.15.4` 指引。
 - 为什么重要：全局 pnpm 版本差异可能让用户困惑。
 - Acceptance criteria:
   - README 或 Quick Start 指向声明的 package manager 版本。
@@ -76,6 +80,7 @@
 - Type label: `type:dx`
 - Area label: `area:cli`
 - Priority: medium
+- 状态：Phase 11G 已补充 source preview、本地运行和输出路径说明。
 - 为什么重要：用户可能先看 CLI help，再看文档。
 - Acceptance criteria:
   - help text 说明 source preview。
@@ -192,6 +197,7 @@
 - Type label: `type:test`
 - Area label: `area:doctor`
 - Priority: medium
+- 状态：仍然 open；Phase 11G 添加了反馈指南，但没有添加 fixture。
 - 为什么重要：基于反馈调规则需要可复现示例。
 - Acceptance criteria:
   - fixture 很小。
@@ -205,6 +211,7 @@
 - Type label: `type:ci`
 - Area label: `area:github-action`
 - Priority: medium
+- 状态：Phase 11G 已 review 并暂缓；当前 workflow/action 使用 `actions/checkout@v4`、`actions/setup-node@v4` 和 `actions/upload-artifact@v4`，没有不经过 action major-version review 的低风险本地修复。
 - 为什么重要：CI 通过，但 annotation 会影响信任感。
 - Acceptance criteria:
   - 找到触发 annotation 的 action。

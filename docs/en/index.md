@@ -6,10 +6,14 @@ It runs locally, generates reports, validates traces, replays runs, and turns fa
 
 ## Start Here
 
+- [Clean install checklist](../CLEAN_INSTALL_CHECKLIST.md)
 - [First Run Walkthrough](../FIRST_RUN_WALKTHROUGH.md)
+- [Test Runwise on your own project](../TEST_ON_YOUR_PROJECT.md)
 - [Example Gallery](../EXAMPLE_GALLERY.md)
 - [Demo Output Samples](../demo-output/README.md)
 - [Report Reading Guide](../REPORT_READING_GUIDE.md)
+- [Finding Feedback Guide](../FINDING_FEEDBACK_GUIDE.md)
+- [Comparison](../COMPARISON.md)
 - [Quick Start](./quick-start.md)
 - [Command Reference](./commands.md)
 - [GitHub Action](./github-action.md)

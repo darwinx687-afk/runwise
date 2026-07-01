@@ -6,10 +6,14 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ## 从这里开始
 
+- [干净安装检查清单](../CLEAN_INSTALL_CHECKLIST.zh-CN.md)
 - [首次运行 Walkthrough](../FIRST_RUN_WALKTHROUGH.zh-CN.md)
+- [在你自己的项目上试用 Runwise](../TEST_ON_YOUR_PROJECT.zh-CN.md)
 - [示例 Gallery](../EXAMPLE_GALLERY.zh-CN.md)
 - [Demo Output 示例](../demo-output/README.zh-CN.md)
 - [报告阅读指南](../REPORT_READING_GUIDE.zh-CN.md)
+- [检查结果反馈指南](../FINDING_FEEDBACK_GUIDE.zh-CN.md)
+- [对比说明](../COMPARISON.zh-CN.md)
 - [快速开始](./quick-start.md)
 - [命令参考](./commands.md)
 - [GitHub Action](./github-action.md)

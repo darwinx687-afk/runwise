@@ -39,6 +39,20 @@ v0.1.1-preview.0 = usability and trust polish。
 - telemetry
 - 非 preview release
 
+## Phase 11G 进展
+
+已在本地完成：
+
+- 添加干净安装检查清单。
+- 添加在自己项目上试用 Runwise 的指南。
+- 添加误报 / 漏报反馈指南。
+- 收紧 README 链接结构。
+- 文档入口已补充安装、项目试用、反馈、对比、示例和报告阅读链接。
+- CLI help 已 review，并补充 source preview、本地运行、`--cwd` 和报告输出路径说明。
+- GitHub Actions Node.js 20 annotation 已 review，并暂缓到后续 CI/action-version review。
+
+这不表示 `v0.1.1-preview.0` 已发布，只是推进计划中的 usability 工作。
+
 ## 打 Tag 前需要 Review
 
 未来创建 `v0.1.1-preview.0` tag 前：

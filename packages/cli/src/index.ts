@@ -42,6 +42,8 @@ export interface RunwiseCliIO {
 
 const HELP_TEXT = `Runwise
 
+Public preview. Source-install only. Runs locally and does not upload project data.
+
 Usage:
   runwise doctor [--cwd .] [--output .runwise]
   runwise view [--port 4321]
@@ -49,8 +51,15 @@ Usage:
   runwise trace replay <trace-file> [--output .runwise/replays]
   runwise eval generate <trace-file> [--output .runwise/evals] [--format all]
 
+Outputs:
+  doctor writes .runwise/runwise-report.json, .md, and .html by default
+
+Examples:
+  runwise doctor
+  runwise doctor --cwd /path/to/project --output .runwise
+
 Commands:
-  doctor   Scan the current project and generate local reports
+  doctor   Check a project and generate local .runwise reports
   trace    Validate local Runwise trace JSON files
   view     Open a local dashboard viewer for .runwise/runwise-report.json
   eval     Generate local eval case files from validated traces`;

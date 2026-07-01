@@ -37,7 +37,11 @@ try {
   const helpRun = runCli(["--help"]);
   assert.equal(helpRun.status, 0);
   assert.match(helpRun.stdout, /Runwise/);
-  assert.match(helpRun.stdout, /doctor\s+Scan the current project and generate local reports/);
+  assert.match(helpRun.stdout, /Public preview/);
+  assert.match(helpRun.stdout, /does not upload project data/);
+  assert.match(helpRun.stdout, /doctor writes \.runwise\/runwise-report\.json/);
+  assert.match(helpRun.stdout, /runwise doctor --cwd \/path\/to\/project --output \.runwise/);
+  assert.match(helpRun.stdout, /doctor\s+Check a project and generate local \.runwise reports/);
   assert.match(helpRun.stdout, /trace\s+Validate local Runwise trace JSON files/);
   assert.match(helpRun.stdout, /eval\s+Generate local eval case files from validated traces/);
   assert.match(helpRun.stdout, /view\s+Open a local dashboard viewer/);

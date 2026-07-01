@@ -100,11 +100,12 @@
 - Phase 11D polishes Markdown reports, static HTML reports, local dashboard scanability, empty states, and score explanation.
 - Phase 11E explores future plugin architecture with docs, draft manifests, draft JSON rule packs, and documentation-only examples.
 - Phase 11F reviews the Phase 11 surface and plans `v0.1.1-preview.0` as a small usability and trust polish release.
+- Phase 11G adds clean install, source-run, and finding-feedback guidance for first-time users.
 - Avoid feature bloat while public preview feedback is still early.
 - Plugin support is future work and should not be listed as implemented.
 - v0.1.1 should focus on usability, trust, comparison clarity, install guidance, and feedback workflow.
 - npm publishing remains deferred until install behavior and package metadata are reviewed.
-- Next recommended loop: First v0.1.1 usability fixes.
+- Next recommended loop: Clean-machine install review.
 
 ## Phase 12 Candidate: Local Rule Pack MVP
 
