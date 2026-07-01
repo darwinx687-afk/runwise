@@ -4,7 +4,9 @@
 
 Runwise `v0.1.0-preview.0` 是 Runwise public preview 的第一个 release candidate 草稿。Runwise 是一个本地优先的就绪度、追踪回放和评测用例生成工具，面向 AI Agent、MCP server、RAG 和 LLM application。
 
-此 release candidate 仅供审查。git tag 和 GitHub Release 尚未创建。
+这是一个公开预览版本。Runwise 已适合通过源码方式试用和反馈，但 npm 发布和 GitHub Marketplace 发布仍然推迟。
+
+git tag `v0.1.0-preview.0` 已存在。本文档是供下一轮使用的 GitHub Release 草稿。GitHub Release 尚未创建。
 
 ## 已包含
 
@@ -54,11 +56,11 @@ pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 
 - 此 release candidate 草稿仍采用源码分发。
 - 生成的 `.runwise/` 产物是本地、被忽略且可复现的文件。
-- 在 release tag 存在前，GitHub Action 是仓库本地 composite action。
+- GitHub Action 已在本仓库验证；公开版本化用法应在 GitHub prerelease 创建后再检查。
 - GitHub Actions 当前会因引用的 actions 报告非阻塞 Node.js 20 deprecation annotation，但 CI 通过。
 
 ## 继续暂缓
 
 - npm 发布继续暂缓。
 - GitHub Marketplace release 继续暂缓。
-- 第一个 preview tag 已准备，但本 loop 不创建。
+- GitHub prerelease 已准备，但本 loop 不创建。

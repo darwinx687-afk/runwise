@@ -24,16 +24,16 @@
 - [x] Node.js 20 annotation 已审查。
 - [x] npm 发布继续暂缓。
 - [x] GitHub Marketplace release 继续暂缓。
-- [x] 第一个 tag 命令已准备但未执行。
+- [x] 第一个 preview tag 已存在。
+- [x] GitHub prerelease 命令已准备但未执行。
 
-## 已准备的 Tag 命令
+## Preview Tag
 
 ```bash
-git tag -a v0.1.0-preview.0 -m "Runwise v0.1.0-preview.0"
-git push origin v0.1.0-preview.0
+v0.1.0-preview.0
 ```
 
-在 release candidate review 获得批准前，不要创建或推送 tag。
+该 tag 已在 Loop 10F 创建，不应移动或重新创建。
 
 ## 已知非阻塞后续事项
 

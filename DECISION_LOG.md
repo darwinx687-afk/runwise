@@ -55,3 +55,11 @@ First public launch preparation keeps npm publishing and release tagging deferre
 ## D014: Prepare first release candidate as v0.1.0-preview.0
 
 First release candidate preparation uses `v0.1.0-preview.0`, with npm publishing and GitHub Marketplace release deferred until after tag and CI verification.
+
+## D015: Create first preview as git tag only
+
+`v0.1.0-preview.0` is created as a git tag only. GitHub Release and npm publishing remain deferred.
+
+## D016: Prepare GitHub prerelease from existing preview tag
+
+`v0.1.0-preview.0` GitHub Release will be created as a prerelease from the existing tag, while npm publishing remains deferred.

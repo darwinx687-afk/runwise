@@ -2,25 +2,24 @@
 
 ## Current Phase
 
-Phase 10F
+Phase 10G
 
 ## Current Loop
 
-Loop 10F - Approve and Create First Preview Tag
+Loop 10G - GitHub Release Draft Review
 
 ## Completed
 
-- Release candidate checks passed
-- Annotated tag v0.1.0-preview.0 created locally
-- Tag v0.1.0-preview.0 pushed to origin
-- Remote tag verified
-- No npm package published
-- No GitHub Release created
+- GitHub Release draft reviewed
+- English and Chinese release draft documents finalized
+- Prerelease creation command documented but not executed
+- Release protocol updated for prerelease creation
+- Local release-draft checks passed
 - Generated .runwise artifacts confirmed ignored and untracked
 
 ## Next Required Step
 
-Phase 10G - GitHub Release Draft Review and Optional Preview Release Creation
+Phase 10H - Create GitHub Preview Release
 
 ## Remote
 

@@ -24,16 +24,16 @@ Target candidate: `v0.1.0-preview.0`
 - [x] Node.js 20 annotation reviewed.
 - [x] npm publishing deferred.
 - [x] GitHub Marketplace release deferred.
-- [x] First tag command prepared but not run.
+- [x] First preview tag exists.
+- [x] GitHub prerelease command prepared but not run.
 
-## Tag Command Prepared
+## Preview Tag
 
 ```bash
-git tag -a v0.1.0-preview.0 -m "Runwise v0.1.0-preview.0"
-git push origin v0.1.0-preview.0
+v0.1.0-preview.0
 ```
 
-Do not create or push the tag until release candidate review is approved.
+The tag was created in Loop 10F and should not be moved or recreated.
 
 ## Known Non-blocking Follow-up
 
