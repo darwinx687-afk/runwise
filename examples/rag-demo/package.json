@@ -1,6 +1,6 @@
 {
   "name": "@runwise/example-rag-demo",
-  "version": "0.0.0",
+  "version": "0.1.0-preview.0",
   "private": true,
   "description": "Detection-only RAG compatibility example for Runwise.",
   "license": "MIT",

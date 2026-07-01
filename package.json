@@ -1,6 +1,6 @@
 {
   "name": "runwise",
-  "version": "0.0.0",
+  "version": "0.1.0-preview.0",
   "private": true,
   "description": "Open-source readiness, tracing, replay, and eval toolkit for AI agents, MCP servers, and LLM applications.",
   "keywords": [

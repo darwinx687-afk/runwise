@@ -15,4 +15,24 @@ Runwise is preparing an initial open-source preview. This protocol covers reposi
 
 ## Versioning
 
-Preview packages use `0.0.0`. Versioning policy and npm publishing metadata should be finalized before the first public package release.
+The first release candidate uses `0.1.0-preview.0`.
+
+Package metadata remains private in this loop. npm publishing metadata should be finalized only in a later publishing loop.
+
+## First Tag Preparation
+
+The following commands are prepared for the first preview tag, but they have not been executed:
+
+```bash
+git status --short
+pnpm check
+pnpm check:types
+pnpm test
+pnpm exec runwise doctor
+git tag -a v0.1.0-preview.0 -m "Runwise v0.1.0-preview.0"
+git push origin v0.1.0-preview.0
+```
+
+Do not create or push the tag until release candidate review is approved.
+
+Before creating the tag, verify GitHub Actions is green on `main`, generated `.runwise/` artifacts are still ignored, and npm publishing plus GitHub Marketplace release remain deferred.

@@ -1,6 +1,6 @@
 {
   "name": "@runwise/core",
-  "version": "0.0.0",
+  "version": "0.1.0-preview.0",
   "private": true,
   "description": "Core local scanner, rule engine, trace validation, replay, and eval generation logic for Runwise.",
   "license": "MIT",

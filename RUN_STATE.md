@@ -2,25 +2,25 @@
 
 ## Current Phase
 
-Phase 10D
+Phase 10E
 
 ## Current Loop
 
-Loop 10D - Repository Metadata, Topics, and Final Public Preview Review
+Loop 10E - First Release Candidate Review and Tag Preparation
 
 ## Completed
 
-- Repository description reviewed and set
-- Repository topics reviewed and set
-- README rendering reviewed
-- GitHub Actions status reviewed
-- Issue and PR templates remain available
-- Launch checklist updated
-- Public preview repository presentation finalized
+- First release candidate readiness reviewed
+- Release candidate checklist added
+- CHANGELOG updated for 0.1.0-preview.0 draft
+- Release protocol tag-preparation steps documented
+- GitHub Release draft added
+- Local release-candidate checks passed
+- Generated .runwise artifacts confirmed ignored and untracked
 
 ## Next Required Step
 
-Phase 10E - First Release Candidate Review and Tag Preparation
+Phase 10F - Approve and Create First Preview Tag
 
 ## Remote
 
@@ -28,4 +28,4 @@ Phase 10E - First Release Candidate Review and Tag Preparation
 
 ## Known Non-blocking Follow-up
 
-- GitHub Actions reports a Node.js 20 deprecation annotation from referenced actions, but CI passes. Review action runtime upgrades before first release tag.
+- GitHub Actions reports a Node.js 20 deprecation annotation from referenced actions. CI passes. Review action runtime upgrades before stable release.

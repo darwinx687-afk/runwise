@@ -20,4 +20,6 @@ Runwise 不是 agent framework、聊天机器人平台、hosted SaaS、Dify/Open
 
 ## 当前分发方式
 
-Runwise 当前从源码运行。npm 发布、Marketplace listing、release tag 和公开 package 名称应在仓库设置和元数据审查之后再确定。
+Runwise 当前从源码运行。第一个 release candidate 已按 `0.1.0-preview.0` 准备，但 preview tag 尚未创建。
+
+npm 发布和 GitHub Marketplace release 继续暂缓。

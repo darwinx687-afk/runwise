@@ -51,3 +51,7 @@ Runwise open-source launch uses local-first source installation and repository-b
 ## D013: Defer public release tags and npm publishing until repository verification
 
 First public launch preparation keeps npm publishing and release tagging deferred until after the repository renders correctly and CI passes on GitHub.
+
+## D014: Prepare first release candidate as v0.1.0-preview.0
+
+First release candidate preparation uses `v0.1.0-preview.0`, with npm publishing and GitHub Marketplace release deferred until after tag and CI verification.
