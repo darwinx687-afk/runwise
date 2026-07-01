@@ -102,11 +102,12 @@
 - Phase 11F reviews the Phase 11 surface and plans `v0.1.1-preview.0` as a small usability and trust polish release.
 - Phase 11G adds clean install, source-run, and finding-feedback guidance for first-time users.
 - Phase 11H verifies the clean-clone source-install path and records remaining release-candidate friction.
+- Phase 11I prepares `v0.1.1-preview.0` as the next planned prerelease candidate.
 - Avoid feature bloat while public preview feedback is still early.
 - Plugin support is future work and should not be listed as implemented.
-- v0.1.1 should focus on usability, trust, comparison clarity, install guidance, and feedback workflow.
+- `v0.1.1-preview.0` should focus on usability, trust, comparison clarity, install guidance, and feedback workflow.
 - npm publishing remains deferred until install behavior and package metadata are reviewed.
-- Next recommended loop: v0.1.1 release candidate preparation.
+- Next recommended loop: approve and create the `v0.1.1-preview.0` tag.
 
 ## Phase 12 Candidate: Local Rule Pack MVP
 

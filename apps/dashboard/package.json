@@ -1,6 +1,6 @@
 {
   "name": "@runwise/dashboard",
-  "version": "0.1.0-preview.0",
+  "version": "0.1.1-preview.0",
   "private": true,
   "description": "Local report-file Dashboard Viewer for Runwise Doctor reports.",
   "license": "MIT",

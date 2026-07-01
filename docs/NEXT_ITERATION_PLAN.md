@@ -101,7 +101,7 @@ Focus:
 
 ### 11I - v0.1.1 Release Candidate
 
-Tentative next loop.
+Status: completed in this loop.
 
 Focus:
 
@@ -109,6 +109,17 @@ Focus:
 - run full local and GitHub checks
 - verify `.runwise/` artifacts remain ignored
 - create no tag until a release candidate loop is explicitly approved
+
+### 11J - Approve and Create v0.1.1-preview.0 Tag
+
+Tentative next loop.
+
+Focus:
+
+- require explicit user approval before tag creation
+- run final status and check commands
+- create and push `v0.1.1-preview.0` only if approved
+- do not create a GitHub Release unless the next loop explicitly includes it
 
 ## Feedback Inputs
 

@@ -72,6 +72,29 @@ v0.1.1-preview.0 = usability and trust polish。
 - 考虑是否需要给自定义输出目录增加更清楚的提醒或 ignore 指引。
 - 在 review docs 合入后确认 GitHub Actions 为绿色。
 
+## Phase 11I 进展
+
+已在本地完成 release-candidate 准备：
+
+- Review 了从 `v0.1.0-preview.0` 以来的变更。
+- Review version metadata，并对齐到 `0.1.1-preview.0`。
+- 为 `v0.1.1-preview.0` 准备 changelog。
+- 添加 release candidate checklist。
+- 添加中英文 GitHub release draft。
+- 为下一轮审批流程添加 tag 创建说明。
+- 为后续批准后的 release loop 添加 GitHub prerelease 创建说明。
+
+Release blocker：
+
+- 当前没有已知阻塞 release candidate 的问题。
+
+打 tag 前剩余事项：
+
+- 用户明确批准
+- 最终状态检查
+- 在单独 loop 中创建 tag
+- tag 存在后，在单独 loop 中创建 GitHub prerelease
+
 ## 打 Tag 前需要 Review
 
 未来创建 `v0.1.1-preview.0` tag 前：

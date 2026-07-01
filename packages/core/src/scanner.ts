@@ -11,7 +11,7 @@ import { summarizeFindings, summarizeRuleResults } from "./scoring.js";
 
 export const RUNWISE_PROJECT_NAME = "Runwise";
 export const RUNWISE_CURRENT_PHASE = "Phase 10";
-export const RUNWISE_DOCTOR_VERSION = "0.1.0-preview.0";
+export const RUNWISE_DOCTOR_VERSION = "0.1.1-preview.0";
 
 export interface RunwiseDoctorScanOptions {
   cwd?: string;

@@ -107,3 +107,7 @@ v0.1.1 usability work prioritizes source-install clarity, user feedback quality,
 ## D028: Require clean-clone install review before the next preview tag
 
 v0.1.1 release preparation requires a clean-clone install review before tagging a new preview release.
+
+## D029: Prepare v0.1.1-preview.0 as usability and trust polish
+
+v0.1.1-preview.0 will be prepared as a usability and trust polish prerelease, with npm publishing and plugin runtime still deferred.

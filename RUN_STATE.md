@@ -2,36 +2,39 @@
 
 ## Current Phase
 
-Phase 11H
+Phase 11I
 
 ## Current Loop
 
-Phase 11H - Clean-machine Install Review
+Phase 11I - v0.1.1 Release Candidate Preparation
 
 ## Completed
 
-- Clean clone install review performed
-- Repo-declared pnpm install verified
-- Check/typecheck/test verified from clean clone
-- Doctor output verified from clean clone
-- Local viewer smoke-tested safely
-- Trace validate/replay/eval smoke-tested from clean clone
-- `--cwd` documentation checked against actual CLI behavior
-- Clean-machine install review docs added
-- v0.1.1 plan and issue backlog updated
-- Changelog Unreleased section updated
+- Changes since v0.1.0-preview.0 reviewed
+- Version metadata reviewed and updated to v0.1.1-preview.0
+- Changelog prepared for v0.1.1-preview.0
+- v0.1.1 release candidate checklist added
+- GitHub release draft added
+- Tag creation instructions added for next approval loop
+- GitHub prerelease instructions added for next approval loop
+- v0.1.1 plan updated
+- Roadmap updated
 
 ## Remote
 
 - https://github.com/darwinx687-afk/runwise
 
-## Release
+## Current Release
 
 - https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
 
+## Target Release
+
+- v0.1.1-preview.0
+
 ## Next Required Step
 
-Phase 11I - v0.1.1 Release Candidate Preparation
+Phase 11J - Approve and Create v0.1.1-preview.0 Tag
 
 ## Known Non-blocking Follow-up
 

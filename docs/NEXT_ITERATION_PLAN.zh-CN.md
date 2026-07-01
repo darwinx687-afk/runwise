@@ -101,7 +101,7 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ### 11I - v0.1.1 Release Candidate
 
-暂定下一轮。
+状态：本轮已完成。
 
 重点：
 
@@ -109,6 +109,17 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - 运行完整本地和 GitHub 检查
 - 验证 `.runwise/` artifact 仍然被忽略
 - 未明确批准 release candidate loop 前，不创建 tag
+
+### 11J - Approve and Create v0.1.1-preview.0 Tag
+
+暂定下一轮。
+
+重点：
+
+- 创建 tag 前需要用户明确批准
+- 运行最终状态和检查命令
+- 只有在批准后才创建并推送 `v0.1.1-preview.0`
+- 除非下一轮明确包含 GitHub Release 创建，否则不创建 GitHub Release
 
 ## 反馈来源
 

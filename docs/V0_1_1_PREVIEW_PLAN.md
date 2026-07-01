@@ -72,6 +72,29 @@ Remaining follow-ups before a release candidate:
 - Consider whether custom output directories need clearer warnings or ignore guidance.
 - Confirm GitHub Actions is green after the review docs land.
 
+## Phase 11I Progress
+
+Release-candidate preparation completed locally:
+
+- Changes since `v0.1.0-preview.0` reviewed.
+- Version metadata reviewed and aligned to `0.1.1-preview.0`.
+- Changelog prepared for `v0.1.1-preview.0`.
+- Release candidate checklist added.
+- GitHub release draft added in English and Chinese.
+- Tag creation instructions added for the next approval loop.
+- GitHub prerelease creation instructions added for the later approved release loop.
+
+Release blockers:
+
+- No blocking release-candidate issues are known.
+
+Remaining before tag:
+
+- user approval
+- final status check
+- tag creation in a separate loop
+- GitHub prerelease creation in a separate loop after the tag exists
+
 ## Review Before Any Tag
 
 Before creating a future `v0.1.1-preview.0` tag:
