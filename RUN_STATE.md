@@ -2,29 +2,33 @@
 
 ## Current Phase
 
-Phase 10E
+Phase 10F
 
 ## Current Loop
 
-Loop 10E - First Release Candidate Review and Tag Preparation
+Loop 10F - Approve and Create First Preview Tag
 
 ## Completed
 
-- First release candidate readiness reviewed
-- Release candidate checklist added
-- CHANGELOG updated for 0.1.0-preview.0 draft
-- Release protocol tag-preparation steps documented
-- GitHub Release draft added
-- Local release-candidate checks passed
+- Release candidate checks passed
+- Annotated tag v0.1.0-preview.0 created locally
+- Tag v0.1.0-preview.0 pushed to origin
+- Remote tag verified
+- No npm package published
+- No GitHub Release created
 - Generated .runwise artifacts confirmed ignored and untracked
 
 ## Next Required Step
 
-Phase 10F - Approve and Create First Preview Tag
+Phase 10G - GitHub Release Draft Review and Optional Preview Release Creation
 
 ## Remote
 
 - https://github.com/darwinx687-afk/runwise
+
+## Tag
+
+- v0.1.0-preview.0
 
 ## Known Non-blocking Follow-up
 
