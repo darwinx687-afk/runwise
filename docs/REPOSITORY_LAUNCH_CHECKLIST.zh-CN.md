@@ -24,9 +24,15 @@
 - [x] 确认仓库 description 已设置。
 - [x] 确认仓库 topics 已设置。
 - [x] 确认 `.runwise/` 未被推送。
-- [x] 在 release review 完成前不要创建第一个 tag。
+- [x] 第一个 preview tag 已存在。
+- [x] GitHub prerelease 已创建。
+- [x] Release body 已在创建后修正。
+- [x] 已添加 finalized release notes 文件。
+- [x] 已添加 launch sharing pack。
 - [x] 在 package metadata 审查完成前继续暂缓 npm 发布。
+- [x] GitHub Marketplace release 继续暂缓。
+- [x] Node.js 20 annotation 仍为非阻塞事项。
 
 ## 已知非阻塞后续事项
 
-- GitHub Actions 会因引用的 actions 报告 Node.js 20 deprecation annotation，但 CI 通过。请在第一个 release tag 前审查 action runtime 升级。
+- GitHub Actions 会因引用的 actions 报告 Node.js 20 deprecation annotation，但 CI 通过。请在 stable release 前审查 action runtime 升级。

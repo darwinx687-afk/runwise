@@ -25,7 +25,12 @@
 - [x] npm 发布继续暂缓。
 - [x] GitHub Marketplace release 继续暂缓。
 - [x] 第一个 preview tag 已存在。
-- [x] GitHub prerelease 命令已准备但未执行。
+- [x] GitHub prerelease 已创建。
+- [x] Release body 已在创建后修正。
+- [x] 已添加英文和中文 finalized release notes 文件。
+- [x] 已添加 launch sharing pack。
+- [x] 已添加 project one-pager。
+- [x] Node.js 20 annotation 仍为非阻塞事项。
 
 ## Preview Tag
 
@@ -34,6 +39,12 @@ v0.1.0-preview.0
 ```
 
 该 tag 已在 Loop 10F 创建，不应移动或重新创建。
+
+## GitHub Prerelease
+
+https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
+
+该 prerelease 已从现有 tag 创建。npm 发布和 GitHub Marketplace release 继续暂缓。
 
 ## 已知非阻塞后续事项
 

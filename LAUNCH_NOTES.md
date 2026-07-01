@@ -4,6 +4,13 @@ Runwise is an open-source local-first toolkit for checking AI agent readiness, g
 
 This initial open-source preview is for developers and teams building AI Agents, MCP servers, RAG systems, and LLM applications who want reviewable local evidence before demos, CI gates, or releases.
 
+## Current Release
+
+- GitHub prerelease: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
+- Tag: `v0.1.0-preview.0`
+- Status: public preview prerelease
+- Distribution: source install only
+
 ## What You Can Do Today
 
 - Run local readiness checks with `runwise doctor`.
@@ -20,6 +27,6 @@ Runwise is not an agent framework, chatbot platform, hosted SaaS, Dify/OpenWebUI
 
 ## Current Distribution
 
-Runwise currently runs from source. The preview tag `v0.1.0-preview.0` exists, and the GitHub prerelease is prepared for review but not created yet.
+Runwise currently runs from source. The preview tag `v0.1.0-preview.0` exists, and the GitHub prerelease has been created.
 
-npm publishing and GitHub Marketplace release remain deferred.
+npm publishing and GitHub Marketplace release remain deferred. Feedback is welcome on AI Agent readiness, trace replay, Failure-to-Eval, and China-ready LLM detection.

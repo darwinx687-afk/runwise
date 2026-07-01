@@ -1,12 +1,14 @@
-# Runwise v0.1.0-preview.0
+# Historical GitHub Release Draft v0.1.0-preview.0
+
+This file is retained as the reviewed pre-release draft from Loop 10G. The live GitHub prerelease body is maintained from `docs/GITHUB_RELEASE_NOTES_v0.1.0-preview.0.md`.
 
 ## Summary
 
-Runwise `v0.1.0-preview.0` is the first release candidate draft for the public preview of Runwise, a local-first readiness, trace replay, and eval generation toolkit for AI agents, MCP servers, RAG, and LLM applications.
+Runwise `v0.1.0-preview.0` is the first public preview prerelease of Runwise, a local-first readiness, trace replay, and eval generation toolkit for AI agents, MCP servers, RAG, and LLM applications.
 
 This is a public preview release. Runwise is ready for source-based testing and feedback, but npm publishing and Marketplace release are deferred.
 
-The git tag `v0.1.0-preview.0` exists. This document is the reviewed GitHub Release draft for the next loop. The GitHub Release has not been created yet.
+The git tag `v0.1.0-preview.0` exists, and the GitHub prerelease has been created from that tag.
 
 ## Included
 
@@ -54,13 +56,13 @@ pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 
 ## Known Limitations
 
-- Distribution is source-based for this release candidate draft.
+- Distribution is source-based for this public preview prerelease.
 - Generated `.runwise/` artifacts are local, ignored, and reproducible.
-- The GitHub Action is validated from this repository; public versioned use should be checked after the GitHub prerelease is created.
+- The GitHub Action is validated from this repository; public versioned use should be checked separately before broader adoption.
 - GitHub Actions currently reports a non-blocking Node.js 20 deprecation annotation from referenced actions, while CI passes.
 
 ## Deferred
 
 - npm publishing is deferred.
 - GitHub Marketplace release is deferred.
-- The GitHub prerelease is prepared but not created in this loop.
+- The GitHub prerelease has been created and should use the finalized release notes file for live body updates.

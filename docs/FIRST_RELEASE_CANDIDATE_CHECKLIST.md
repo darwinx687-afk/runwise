@@ -25,7 +25,12 @@ Target candidate: `v0.1.0-preview.0`
 - [x] npm publishing deferred.
 - [x] GitHub Marketplace release deferred.
 - [x] First preview tag exists.
-- [x] GitHub prerelease command prepared but not run.
+- [x] GitHub prerelease created.
+- [x] Release body corrected after creation.
+- [x] Final English and Chinese release notes files added.
+- [x] Launch sharing pack added.
+- [x] Project one-pager added.
+- [x] Node.js 20 annotation remains non-blocking.
 
 ## Preview Tag
 
@@ -34,6 +39,12 @@ v0.1.0-preview.0
 ```
 
 The tag was created in Loop 10F and should not be moved or recreated.
+
+## GitHub Prerelease
+
+https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
+
+The prerelease was created from the existing tag. npm publishing and GitHub Marketplace release remain deferred.
 
 ## Known Non-blocking Follow-up
 

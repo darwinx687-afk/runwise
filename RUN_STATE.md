@@ -2,27 +2,27 @@
 
 ## Current Phase
 
-Phase 10H
+Phase 10I
 
 ## Current Loop
 
-Loop 10H - Create GitHub Preview Release
+Loop 10I - Post-Release Verification and Launch Sharing Assets
 
 ## Completed
 
-- Final prerelease checks passed
-- Existing remote tag v0.1.0-preview.0 verified
-- GitHub prerelease created from existing tag
-- Release notes loaded from docs/GITHUB_RELEASE_DRAFT_v0.1.0-preview.0.md
-- Prerelease verified on GitHub
-- No npm package published
-- No Marketplace release created
-- No tag moved or recreated
+- GitHub prerelease verified
+- Release body corrected from draft-era wording
+- Final English and Chinese release notes added
+- Existing GitHub prerelease updated with finalized release notes
+- Launch sharing pack added
+- Project one-pager added
+- Launch notes updated for post-release status
+- Post-release checks passed
 - Generated .runwise artifacts confirmed ignored and untracked
 
 ## Next Required Step
 
-Phase 10I - Post-Release Verification and Launch Sharing Assets
+Phase 10J - Public Launch Sharing and Feedback Intake Setup
 
 ## Remote
 
@@ -32,7 +32,7 @@ Phase 10I - Post-Release Verification and Launch Sharing Assets
 
 - v0.1.0-preview.0
 
-## GitHub Release
+## Release
 
 - https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
 

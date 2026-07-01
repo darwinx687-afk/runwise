@@ -67,3 +67,7 @@ First release candidate preparation uses `v0.1.0-preview.0`, with npm publishing
 ## D017: Create v0.1.0-preview.0 as GitHub prerelease only
 
 `v0.1.0-preview.0` GitHub Release was created as a prerelease from the existing tag; npm publishing and Marketplace release remain deferred.
+
+## D018: Keep post-release launch assets as draft materials
+
+Post-release launch assets are prepared as draft sharing materials only; external posting remains a manual step.

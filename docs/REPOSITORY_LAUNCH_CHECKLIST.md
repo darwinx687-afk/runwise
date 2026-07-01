@@ -24,9 +24,15 @@
 - [x] Confirm repository description is set.
 - [x] Confirm repository topics are set.
 - [x] Confirm `.runwise/` was not pushed.
-- [x] Do not create the first tag until release review is complete.
+- [x] First preview tag exists.
+- [x] GitHub prerelease created.
+- [x] Release body corrected after creation.
+- [x] Final release notes file added.
+- [x] Launch sharing pack added.
 - [x] Defer npm publishing until package metadata is reviewed.
+- [x] GitHub Marketplace release deferred.
+- [x] Node.js 20 annotation remains non-blocking.
 
 ## Known Non-blocking Follow-up
 
-- GitHub Actions reports a Node.js 20 deprecation annotation from referenced actions, but CI passes. Review action runtime upgrades before the first release tag.
+- GitHub Actions reports a Node.js 20 deprecation annotation from referenced actions, but CI passes. Review action runtime upgrades before stable release.

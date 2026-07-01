@@ -1,8 +1,15 @@
-# Runwise 发布说明草稿
+# Runwise 发布说明
 
 Runwise 是一个本地优先的开源工具，用于 AI Agent 项目上线体检、报告生成、运行轨迹验证、静态复盘和失败转评测。
 
 这个 initial open-source preview 面向正在构建 AI Agent、MCP Server、RAG 系统和大语言模型应用的开发者与团队，帮助他们在 demo、CI 门禁或发布前获得可审阅的本地证据。
+
+## 当前版本
+
+- GitHub prerelease: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
+- Tag: `v0.1.0-preview.0`
+- 状态：public preview prerelease
+- 分发方式：仅支持源码安装
 
 ## 当前可用能力
 
@@ -20,6 +27,6 @@ Runwise 不是 agent framework、聊天机器人平台、hosted SaaS、Dify/Open
 
 ## 当前分发方式
 
-Runwise 当前从源码运行。Preview tag `v0.1.0-preview.0` 已存在，GitHub prerelease 已准备审查但尚未创建。
+Runwise 当前从源码运行。Preview tag `v0.1.0-preview.0` 已存在，GitHub prerelease 已创建。
 
-npm 发布和 GitHub Marketplace release 继续暂缓。
+npm 发布和 GitHub Marketplace release 继续暂缓。欢迎反馈 AI Agent 就绪度、trace replay、Failure-to-Eval 和国内大模型服务商检测相关问题。

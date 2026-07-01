@@ -1,12 +1,14 @@
-# Runwise v0.1.0-preview.0
+# 历史 GitHub Release 草稿 v0.1.0-preview.0
+
+本文档保留 Loop 10G 已审查的预发布草稿。当前 GitHub prerelease 的正式正文由 `docs/GITHUB_RELEASE_NOTES_v0.1.0-preview.0.md` 维护。
 
 ## 摘要
 
-Runwise `v0.1.0-preview.0` 是 Runwise public preview 的第一个 release candidate 草稿。Runwise 是一个本地优先的就绪度、追踪回放和评测用例生成工具，面向 AI Agent、MCP server、RAG 和 LLM application。
+Runwise `v0.1.0-preview.0` 是 Runwise 的第一个 public preview prerelease。Runwise 是一个本地优先的就绪度、追踪回放和评测用例生成工具，面向 AI Agent、MCP server、RAG 和 LLM application。
 
 这是一个公开预览版本。Runwise 已适合通过源码方式试用和反馈，但 npm 发布和 GitHub Marketplace 发布仍然推迟。
 
-git tag `v0.1.0-preview.0` 已存在。本文档是供下一轮使用的 GitHub Release 草稿。GitHub Release 尚未创建。
+git tag `v0.1.0-preview.0` 已存在，GitHub prerelease 已从该 tag 创建。
 
 ## 已包含
 
@@ -54,13 +56,13 @@ pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 
 ## 已知限制
 
-- 此 release candidate 草稿仍采用源码分发。
+- 此 public preview prerelease 采用源码分发。
 - 生成的 `.runwise/` 产物是本地、被忽略且可复现的文件。
-- GitHub Action 已在本仓库验证；公开版本化用法应在 GitHub prerelease 创建后再检查。
+- GitHub Action 已在本仓库验证；更广泛采用前应单独检查公开版本化用法。
 - GitHub Actions 当前会因引用的 actions 报告非阻塞 Node.js 20 deprecation annotation，但 CI 通过。
 
 ## 继续暂缓
 
 - npm 发布继续暂缓。
 - GitHub Marketplace release 继续暂缓。
-- GitHub prerelease 已准备，但本 loop 不创建。
+- GitHub prerelease 已创建，后续 live body 更新应使用 finalized release notes 文件。

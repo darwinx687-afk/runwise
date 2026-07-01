@@ -6,7 +6,7 @@ All notable changes to Runwise will be documented here.
 
 No changes after `0.1.0-preview.0` yet.
 
-## 0.1.0-preview.0 - Release candidate draft
+## 0.1.0-preview.0 - Public preview prerelease
 
 Initial open-source preview foundation.
 
