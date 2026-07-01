@@ -1,24 +1,32 @@
 # Repository Launch Checklist
 
-- [ ] Create GitHub repository.
-- [ ] Confirm repository name.
-- [ ] Confirm remote repository URL.
-- [ ] Confirm repository URL placeholders were replaced where appropriate.
-- [ ] Confirm MIT license.
-- [ ] Confirm security policy.
-- [ ] Confirm README links.
-- [ ] Confirm README banner and visual assets render on GitHub.
-- [ ] Run `pnpm check`.
-- [ ] Run `pnpm check:types`.
-- [ ] Run `pnpm test`.
-- [ ] Run `pnpm exec runwise doctor`.
-- [ ] Run `pnpm exec runwise trace validate examples/traces/valid-agent-run.json`.
-- [ ] Run `pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json`.
-- [ ] Run `pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json`.
-- [ ] Confirm `.runwise/` is ignored.
-- [ ] Push initial branch after the confirmed remote URL is added.
-- [ ] Confirm GitHub Actions start after the first push.
-- [ ] Confirm `action.yml` is visible at the repository root.
-- [ ] Confirm issue templates and PR template appear in GitHub.
-- [ ] Do not create the first tag until release review is complete.
-- [ ] Defer npm publishing until package metadata is reviewed.
+- [x] Create GitHub repository.
+- [x] Confirm repository name.
+- [x] Confirm remote repository URL.
+- [x] Confirm repository URL placeholders were replaced where appropriate.
+- [x] Confirm MIT license.
+- [x] Confirm security policy.
+- [x] Confirm README links.
+- [x] Confirm README banner and visual assets render on GitHub.
+- [x] Run `pnpm check`.
+- [x] Run `pnpm check:types`.
+- [x] Run `pnpm test`.
+- [x] Run `pnpm exec runwise doctor`.
+- [x] Run `pnpm exec runwise trace validate examples/traces/valid-agent-run.json`.
+- [x] Run `pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json`.
+- [x] Run `pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json`.
+- [x] Confirm `.runwise/` is ignored.
+- [x] Push initial branch after the confirmed remote URL is added.
+- [x] Confirm GitHub Actions start after the first push.
+- [x] Confirm GitHub Actions passes.
+- [x] Confirm `action.yml` is visible at the repository root.
+- [x] Confirm issue templates and PR template appear in GitHub.
+- [x] Confirm repository description is set.
+- [x] Confirm repository topics are set.
+- [x] Confirm `.runwise/` was not pushed.
+- [x] Do not create the first tag until release review is complete.
+- [x] Defer npm publishing until package metadata is reviewed.
+
+## Known Non-blocking Follow-up
+
+- GitHub Actions reports a Node.js 20 deprecation annotation from referenced actions, but CI passes. Review action runtime upgrades before the first release tag.
