@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/runwise-banner.svg" alt="Runwise - AI Agent 上线体检、运行审计、失败复盘与评测生成">
+  <img src="./assets/runwise-banner.svg" alt="Runwise - AI Agent 上线前检查">
 </p>
 
 # Runwise
@@ -13,20 +13,22 @@
 
 [English](./README.md) | [中文](./README.zh-CN.md)
 
-Runwise 是面向 AI Agent、MCP Server、RAG 与大语言模型应用的开源上线体检、运行审计、失败回放与评测生成工具。
+Runwise 帮你在 AI Agent 项目上线前做检查和复盘。
 
-它适合希望在 demo、CI 门禁和发布前获得本地、可审阅证据的团队。Runwise 不是 agent framework、聊天机器人平台、hosted SaaS、Dify/OpenWebUI 克隆、Langfuse/Promptfoo 替代品，也不是模型训练框架。
+它在本地运行，检查项目设置，生成报告，验证 trace，复盘运行过程，并把失败转成 eval case。
+
+当 demo 已经能跑，但你还想确认项目是否适合分享、审查或交付时，可以使用 Runwise。Runwise 不是 agent framework、聊天机器人产品、hosted SaaS、Dify/OpenWebUI 克隆、Langfuse/Promptfoo 替代品，也不是模型训练框架。
 
 ## 为什么需要 Runwise
 
-现代 AI 应用经常在 prompt、工具、MCP server、检索、审批和部署假设之间出问题。Runwise 帮你在不上传项目数据的前提下，把这些风险变成可见证据。
+AI Agent 项目在 demo 里看起来能跑，但风险可能藏在 prompt、工具、MCP server、检索、审批和部署假设之间。Runwise 帮你更早发现这些风险，而且不上传项目数据。
 
-- 使用结构化 Doctor rule 检查本地就绪度。
+- 使用结构化 Doctor rule 检查项目设置。
 - 生成 JSON、Markdown 和静态 HTML 报告。
 - 在回放或评测生成前验证 `runwise.agent_trace` 文件。
-- 为审查生成静态 trace replay 报告。
+- 用静态 trace replay 报告复盘一次运行。
 - 将失败和高风险运行转化为可复用评测用例文件。
-- 识别常见 AI 项目技术栈的本地生态信号。
+- 识别常见 AI 项目技术栈的本地信号。
 
 ## 快速开始
 
@@ -50,7 +52,7 @@ pnpm exec runwise view
 | Reports | 在 `.runwise/` 下生成 JSON、Markdown 和静态 HTML artifact。 |
 | Dashboard | 基于 `.runwise/runwise-report.json` 启动本地查看器。 |
 | Trace | 本地验证 `runwise.agent_trace` 文件和目录。 |
-| Replay | 为验证过的 trace 生成静态 Markdown 复盘报告。 |
+| Replay | 为验证过的 trace 生成静态 Markdown 报告，解释这次运行发生了什么。 |
 | Failure-to-Eval | 从验证过的 trace 确定性生成 JSON/YAML/Markdown 评测用例。 |
 | 生态检测 | 本地启发式识别 MCP、LangChain、OpenAI Agents、Dify、browser-use、Claude Code、Codex、Cursor、Windsurf、Ollama、OpenAI-compatible API 和国内大模型服务商。 |
 
@@ -59,11 +61,11 @@ pnpm exec runwise view
 ```text
 project source
   -> runwise doctor
-  -> local report artifacts
+  -> local reports
   -> trace validation
   -> static replay
-  -> Failure-to-Eval cases
-  -> CI / review evidence
+  -> eval case files
+  -> review / CI evidence
 ```
 
 Runwise 不会调用模型、执行工具、运行 agent、上传 trace、训练模型或要求登录。
@@ -92,7 +94,7 @@ pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 .runwise/runwise-report.html
 ```
 
-静态 HTML 报告 = doctor 生成的可分享审计交付物。
+静态 HTML 报告 = doctor 生成的可分享文件。
 
 本地 Dashboard 查看器 = 读取 report JSON 的交互式本地查看器。
 
@@ -205,6 +207,18 @@ docs/
 - Phase 10：开源发布前展示与仓库材料打磨。
 
 见 [ROADMAP.md](./ROADMAP.md)。
+
+## 下一轮迭代
+
+下一版 preview 会优先让 Runwise 更容易试用、更容易信任，而不是增加 hosted 产品能力。
+
+- 让首次运行流程更清楚。
+- 根据反馈检查 Doctor finding 是否误报或漏报。
+- 改进报告示例和 README 表达。
+- 持续收集公开预览帖子和 GitHub Issues 中的反馈。
+- 在未来是否发布 npm 前，先审查 package metadata。
+
+见 [下一轮迭代计划](./docs/NEXT_ITERATION_PLAN.zh-CN.md)。
 
 ## 欢迎反馈
 

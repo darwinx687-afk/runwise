@@ -2,7 +2,9 @@
 
 ## 它是什么
 
-Runwise 是一个开源、本地优先的就绪度、追踪回放和评测用例生成工具，面向 AI Agent、MCP server、RAG 系统和 LLM application。
+Runwise 帮你在 AI Agent 项目上线前做检查和复盘。
+
+它在本地运行，检查项目设置，生成报告，验证 trace，复盘运行过程，并把失败转成 eval case 文件。
 
 ## 当前版本
 
@@ -13,7 +15,7 @@ Runwise 是一个开源、本地优先的就绪度、追踪回放和评测用例
 
 ## 为什么需要它
 
-AI Agent 项目经常需要在 demo、CI 门禁或早期发布审查前提供证据。Runwise 聚焦生成本地、可审阅的产物，而不是依赖 hosted storage、隐藏模型调用或运行时接管。
+AI Agent 项目经常需要在 demo、CI 门禁或早期发布审查前再检查一遍。Runwise 聚焦生成本地、可审阅的文件，而不是依赖 hosted storage、隐藏模型调用或接管 agent runtime。
 
 ## 当前能做什么
 
@@ -39,7 +41,7 @@ AI Agent 项目经常需要在 demo、CI 门禁或早期发布审查前提供证
 - 构建本地 AI Agent 原型的开发者。
 - 交付 MCP server、RAG workflow 或 LLM application 的团队。
 - 希望在 CI 门禁或公开预览前获得就绪度证据的维护者。
-- 在采用 hosted infrastructure 前评估本地 AgentOps 工作流的团队。
+- 希望先用本地检查和报告判断是否需要更重工具链的团队。
 
 ## 希望获得的反馈
 

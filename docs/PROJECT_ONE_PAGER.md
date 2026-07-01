@@ -2,7 +2,9 @@
 
 ## What It Is
 
-Runwise is an open-source, local-first readiness, trace replay, and eval generation toolkit for AI agents, MCP servers, RAG systems, and LLM applications.
+Runwise helps you check AI agent projects before they go live.
+
+It runs locally, reviews project setup, generates reports, validates traces, replays runs, and turns failures into eval case files.
 
 ## Current Release
 
@@ -13,7 +15,7 @@ Runwise is an open-source, local-first readiness, trace replay, and eval generat
 
 ## Why It Exists
 
-AI agent projects often need evidence before demos, CI gates, or early release reviews. Runwise focuses on producing local, reviewable artifacts instead of relying on hosted storage, hidden model calls, or runtime ownership.
+AI agent projects often need a second look before demos, CI gates, or early release reviews. Runwise focuses on local, reviewable files instead of hosted storage, hidden model calls, or taking over the agent runtime.
 
 ## What It Does Today
 
@@ -39,7 +41,7 @@ AI agent projects often need evidence before demos, CI gates, or early release r
 - Developers building local AI agent prototypes.
 - Teams shipping MCP servers, RAG workflows, or LLM applications.
 - Maintainers who want readiness evidence before CI gates or public previews.
-- Teams comparing local AgentOps workflows before adopting hosted infrastructure.
+- Teams that want local checks and reports before deciding whether they need heavier tooling.
 
 ## Feedback Needed
 
