@@ -68,3 +68,37 @@ Image used: 无
 Text version used: Repository description 已更新为 "Check AI agents before you ship them — local reports, trace replay, and failure-to-eval for MCP/RAG/LLM apps."
 Initial reaction: GitHub CLI 更新成功；现有 topics 已保留。
 Follow-up needed: 如有需要，可在后续 launch review 中检查 GitHub 页面渲染。
+
+## Launch Monitoring Pass 1 - 2026-07-01
+
+Platform: GitHub
+Post link: https://github.com/darwinx687-afk/runwise
+Visible status: 仓库为 public；preview release 可见：https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0。
+Visible reactions: 0 stars，0 forks，0 open issues。最新 GitHub Actions run 已通过。
+Feedback themes: 暂无。
+Follow-up needed: 后续继续观察 stars、issues 和 Actions 状态。
+Issue candidates: 无。
+
+Platform: Juejin / 掘金
+Post link: https://juejin.cn/post/7657393797290278966
+Visible status: 公开文章可见。
+Visible reactions: 2 reads；0 comments；暂无可执行评论。公开页面快照中未显示点赞/收藏数量。
+Feedback themes: 暂无。
+Follow-up needed: 下次 monitoring pass 继续检查评论和反馈。
+Issue candidates: 无。
+
+Platform: Xiaohongshu / 小红书
+Post link: 暂未捕获公开链接。
+Visible status: Login required; user action needed.
+Visible reactions: 未检查。
+Feedback themes: 暂不可用。
+Follow-up needed: 后续由用户提供公开链接，或在登录状态下打开笔记管理/主页后再检查。
+Issue candidates: 无。
+
+Platform: LinkedIn
+Post link: 暂未捕获公开链接。
+Visible status: Login required; user action needed.
+Visible reactions: 未检查。
+Feedback themes: 暂不可用。
+Follow-up needed: 后续由用户提供公开链接，或在登录状态下打开 profile activity 后再检查。
+Issue candidates: 无。

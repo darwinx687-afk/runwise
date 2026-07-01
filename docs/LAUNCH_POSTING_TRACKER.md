@@ -67,3 +67,37 @@ Image used: None
 Text version used: Repository description updated to "Check AI agents before you ship them — local reports, trace replay, and failure-to-eval for MCP/RAG/LLM apps."
 Initial reaction: GitHub CLI update succeeded; existing topics were preserved.
 Follow-up needed: Verify rendering during post-push launch review if needed.
+
+## Launch Monitoring Pass 1 - 2026-07-01
+
+Platform: GitHub
+Post link: https://github.com/darwinx687-afk/runwise
+Visible status: Repository is public; preview release is visible at https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0.
+Visible reactions: 0 stars, 0 forks, 0 open issues. Latest GitHub Actions run passed.
+Feedback themes: None yet.
+Follow-up needed: Continue monitoring stars, issues, and Actions status after more external traffic.
+Issue candidates: None.
+
+Platform: Juejin / 掘金
+Post link: https://juejin.cn/post/7657393797290278966
+Visible status: Public article is visible.
+Visible reactions: 2 reads; 0 comments; no visible actionable comments. Like/bookmark counts were not visible in the public page snapshot.
+Feedback themes: None yet.
+Follow-up needed: Recheck comments and reactions in the next monitoring pass.
+Issue candidates: None.
+
+Platform: Xiaohongshu / 小红书
+Post link: Public URL not captured.
+Visible status: Login required; user action needed.
+Visible reactions: Not checked.
+Feedback themes: Not available.
+Follow-up needed: User can provide the public post URL or open the logged-in note management/profile page during a future monitoring pass.
+Issue candidates: None.
+
+Platform: LinkedIn
+Post link: Public URL not captured.
+Visible status: Login required; user action needed.
+Visible reactions: Not checked.
+Feedback themes: Not available.
+Follow-up needed: User can provide the public post URL or open the logged-in profile activity page during a future monitoring pass.
+Issue candidates: None.
