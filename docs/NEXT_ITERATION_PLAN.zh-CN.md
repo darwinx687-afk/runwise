@@ -112,7 +112,7 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ### 11J - Approve and Create v0.1.1-preview.0 Tag
 
-暂定下一轮。
+状态：本轮已完成。
 
 重点：
 
@@ -121,12 +121,47 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - 只有在批准后才创建并推送 `v0.1.1-preview.0`
 - 除非下一轮明确包含 GitHub Release 创建，否则不创建 GitHub Release
 
+### 11K - Create GitHub Prerelease v0.1.1-preview.0
+
+状态：本轮已完成。
+
+重点：
+
+- 基于已有 tag 创建 GitHub prerelease
+- 验证 prerelease、not draft 和 not latest 状态
+- 继续暂缓 npm 发布和 Marketplace 发布
+- 在文档中记录 release
+
+### 11L - Post-release Verification and v0.1.1 Sharing Pack
+
+状态：本轮已完成。
+
+重点：
+
+- 发布后验证已公开的 prerelease
+- 必要时更新 README release 链接
+- 准备中英文轻量分享文案
+- 准备反馈监控说明
+- 不对外发布内容
+- 将 v0.1.1 表达为首次开发者体验优化，而不是重大功能发布
+
+## 下一步选项
+
+选择一个：
+
+- Phase 11M - Monitor v0.1.1 Feedback and Small Follow-up Fixes
+- Phase 12A - Local JSON Rule Pack MVP
+- New Project Research - Next AI Open-source Direction
+
+plugin runtime 仍然是未来工作，只有在明确批准后才推进。
+
 ## 反馈来源
 
 - 用户打开的 GitHub Issues 和 Discussions。
 - 可见的公开发布帖子评论。
 - 真实源码试用者的手动反馈。
 - 用 Runwise 检查示例项目时发现的问题。
+- v0.1.1 分享和反馈监控文档。
 
 ## 非目标
 

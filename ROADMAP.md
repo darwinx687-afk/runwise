@@ -103,11 +103,14 @@
 - Phase 11G adds clean install, source-run, and finding-feedback guidance for first-time users.
 - Phase 11H verifies the clean-clone source-install path and records remaining release-candidate friction.
 - Phase 11I prepares `v0.1.1-preview.0` as the next planned prerelease candidate.
+- Phase 11J creates and pushes the approved `v0.1.1-preview.0` tag.
+- Phase 11K creates the GitHub prerelease for `v0.1.1-preview.0`.
+- Phase 11L verifies the published prerelease and prepares sharing and feedback-monitoring materials.
 - Avoid feature bloat while public preview feedback is still early.
 - Plugin support is future work and should not be listed as implemented.
 - `v0.1.1-preview.0` should focus on usability, trust, comparison clarity, install guidance, and feedback workflow.
 - npm publishing remains deferred until install behavior and package metadata are reviewed.
-- Next recommended loop: approve and create the `v0.1.1-preview.0` tag.
+- Next recommended options: monitor v0.1.1 feedback and small fixes, explore the local JSON rule pack MVP after approval, or pause Runwise for new AI open-source project research.
 
 ## Phase 12 Candidate: Local Rule Pack MVP
 

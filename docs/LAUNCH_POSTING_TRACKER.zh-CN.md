@@ -102,3 +102,40 @@ Visible reactions: 未检查。
 Feedback themes: 暂不可用。
 Follow-up needed: 后续由用户提供公开链接，或在登录状态下打开 profile activity 后再检查。
 Issue candidates: 无。
+
+## v0.1.1-preview.0 分享候选 - 2026-07-01
+
+Release URL: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.1-preview.0
+
+推荐平台：
+
+- Xiaohongshu / 小红书
+- Juejin / 掘金
+- LinkedIn
+- X / Twitter
+- V2EX，如果用户希望后续手动重试
+- GitHub Discussions，如果后续启用 discussions
+
+建议表达：
+
+- 小的 public preview 优化更新
+- 首次开发者体验改进
+- 源码安装路径更清楚
+- 示例展示和报告可读性更好
+- 仍然只支持源码安装，还没有 npm package
+- 插件架构只是未来探索，当前没有实现 plugin runtime
+
+状态：尚未发布。
+
+发布前是否需要用户批准：需要。
+
+已准备文案：
+
+- 英文和中文分享包：`docs/V0_1_1_SHARING_PACK.md`
+- 中文镜像：`docs/V0_1_1_SHARING_PACK.zh-CN.md`
+
+后续：
+
+- 不要自动发布。
+- 对任何外部平台发布前，都先询问用户。
+- 如后续发布成功，在本 tracker 记录公开 URL 和早期可见反馈。

@@ -77,7 +77,7 @@ For a quick before/after view, see [the visual overview](./assets/runwise-before
 - [Demo Output Samples](./docs/demo-output/README.md)
 - [Visual report sample](./docs/demo-output/visual-report-sample.md)
 - [English Docs](./docs/en/index.md) / [Chinese Docs](./docs/zh-CN/index.md)
-- [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)
+- [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.1-preview.0)
 
 ## What Runwise does today
 

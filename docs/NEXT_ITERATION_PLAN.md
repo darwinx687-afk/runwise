@@ -112,7 +112,7 @@ Focus:
 
 ### 11J - Approve and Create v0.1.1-preview.0 Tag
 
-Tentative next loop.
+Status: completed in this loop.
 
 Focus:
 
@@ -121,12 +121,47 @@ Focus:
 - create and push `v0.1.1-preview.0` only if approved
 - do not create a GitHub Release unless the next loop explicitly includes it
 
+### 11K - Create GitHub Prerelease v0.1.1-preview.0
+
+Status: completed in this loop.
+
+Focus:
+
+- create the GitHub prerelease from the existing tag
+- verify prerelease, not draft, and not latest status
+- keep npm publishing and Marketplace publishing deferred
+- record the release in docs
+
+### 11L - Post-release Verification and v0.1.1 Sharing Pack
+
+Status: completed in this loop.
+
+Focus:
+
+- verify the published prerelease after creation
+- update README release links where needed
+- prepare lightweight English and Chinese sharing copy
+- prepare feedback monitoring guidance
+- do not post externally
+- frame v0.1.1 as first-time developer experience polish, not a major feature launch
+
+## Next Options
+
+Choose one:
+
+- Phase 11M - Monitor v0.1.1 Feedback and Small Follow-up Fixes
+- Phase 12A - Local JSON Rule Pack MVP
+- New Project Research - Next AI Open-source Direction
+
+Plugin runtime remains future work and should only move forward after explicit approval.
+
 ## Feedback Inputs
 
 - GitHub Issues and Discussions if users open them.
 - Public launch post comments when visible.
 - Manual feedback from people trying source install.
 - Local findings from running Runwise against example projects.
+- v0.1.1 sharing and feedback monitoring docs.
 
 ## Non-Goals
 

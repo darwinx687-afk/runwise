@@ -101,3 +101,40 @@ Visible reactions: Not checked.
 Feedback themes: Not available.
 Follow-up needed: User can provide the public post URL or open the logged-in profile activity page during a future monitoring pass.
 Issue candidates: None.
+
+## v0.1.1-preview.0 Sharing Candidate - 2026-07-01
+
+Release URL: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.1-preview.0
+
+Recommended platforms:
+
+- Xiaohongshu / 小红书
+- Juejin / 掘金
+- LinkedIn
+- X / Twitter
+- V2EX, if the user wants to retry manually
+- GitHub Discussions, if discussions are enabled later
+
+Suggested framing:
+
+- Small public preview polish update
+- First-time developer experience improvement
+- Clearer source-install path
+- Better example gallery and report readability
+- Still source-install only, no npm package yet
+- Plugin architecture is documented as future exploration only
+
+Status: Not yet posted.
+
+User approval needed before posting: Yes.
+
+Prepared copy:
+
+- English and Chinese sharing pack: `docs/V0_1_1_SHARING_PACK.md`
+- Chinese mirror: `docs/V0_1_1_SHARING_PACK.zh-CN.md`
+
+Follow-up needed:
+
+- Do not publish automatically.
+- Ask the user before posting to any external platform.
+- After any post, record the public URL and visible early reaction in this tracker.

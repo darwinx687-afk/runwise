@@ -77,7 +77,7 @@ pnpm exec runwise view
 - [Demo Output 示例](./docs/demo-output/README.zh-CN.md)
 - [可视化报告示例](./docs/demo-output/visual-report-sample.zh-CN.md)
 - [英文文档](./docs/en/index.md) / [中文文档](./docs/zh-CN/index.md)
-- [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)
+- [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.1-preview.0)
 
 ## Runwise 当前能做什么
 
