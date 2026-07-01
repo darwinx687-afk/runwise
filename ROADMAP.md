@@ -95,6 +95,8 @@
 
 - Make the first-run path clear for source-install users.
 - Keep examples useful, lightweight, and easy to review.
+- Add Example Gallery polish and curated visual sample outputs as part of the developer experience phase.
 - Improve README, docs landing pages, walkthroughs, and report readability.
 - Avoid feature bloat while public preview feedback is still early.
-- Explore plugin architecture only after developer experience and report clarity improve.
+- Next loop: Visual Report Polish for Markdown reports, static HTML reports, local dashboard scanability, empty states, and score explanation.
+- Keep plugin architecture later, not immediate, until the current report experience is easier to understand.

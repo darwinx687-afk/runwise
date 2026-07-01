@@ -1,10 +1,14 @@
 # Runwise 示例
 
-这些示例是用于本地试用 Runwise 的轻量 fixture。它们不是生产 AI 应用，不包含真实依赖，也不应包含密钥。
+这些示例是用于本地试用 Runwise 的轻量兼容性 fixture。它们不是生产 AI 应用，不包含真实依赖，也不应包含密钥。
 
-建议先看 [示例 Gallery](../docs/EXAMPLE_GALLERY.zh-CN.md)，里面说明了每个示例的用途、运行命令和 review 重点。
+建议从这里开始：
 
-## 快速列表
+- [示例 Gallery](../docs/EXAMPLE_GALLERY.zh-CN.md)：每个示例代表什么、运行什么命令、重点看什么。
+- [首次运行 Walkthrough](../docs/FIRST_RUN_WALKTHROUGH.zh-CN.md)：完整源码试用流程。
+- [Demo Output 示例](../docs/demo-output/README.zh-CN.md)：整理过的报告、复盘、eval 和生态检测示例。
+
+## 示例目录
 
 - `mcp-demo`：MCP 配置和 tool approval 信号。
 - `rag-demo`：retrieval、trace 和 eval 占位。
@@ -16,4 +20,4 @@
 
 ## 安全边界
 
-这些示例只用于检测和文档说明。它们不会运行模型、执行工具、调用外部 API 或启动外部框架。
+这些示例只用于检测和文档说明。它们不会安装真实 framework 依赖，不会运行模型、执行工具、调用外部 API 或启动外部服务。

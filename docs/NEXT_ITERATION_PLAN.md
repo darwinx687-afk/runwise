@@ -27,14 +27,16 @@ Focus:
 - simple visual explanation
 - docs landing page cleanup
 
-### 11C - Example Gallery Polish
+### 11C - Example Gallery Polish and Visual Report Samples
+
+Status: completed in this loop.
 
 Focus:
 
-- improve example descriptions based on real first-run feedback
-- add small report screenshots or static sample snippets if useful
-- make command outcomes easier to compare
-- keep examples lightweight and local
+- add SVG example cards for MCP, RAG, replay, eval, and ecosystem detection
+- add curated demo-output samples for Doctor reports, trace replay, Failure-to-Eval, and ecosystem detection
+- improve example descriptions with commands, what to look for, and related sample outputs
+- keep examples lightweight, local, and separate from generated `.runwise/` artifacts
 
 ### 11D - Visual Report Polish
 
@@ -43,6 +45,9 @@ Focus:
 - improve Markdown and HTML report readability
 - make findings easier to scan
 - clarify score, severity, blocking, and ecosystem sections
+- add copy-to-issue snippets if they help manual feedback
+- improve report empty states
+- improve category score explanation
 - avoid adding hosted dashboard or complex product surface
 
 ### 11E - Plugin Architecture Exploration
@@ -52,7 +57,7 @@ Focus:
 - explore how future checks could be grouped or extended
 - keep the current rule engine stable
 - document extension boundaries before implementation
-- avoid plugin complexity until first-run clarity and report readability are better
+- keep plugin architecture later, after visual report polish has improved the current experience
 
 ## Feedback Inputs
 

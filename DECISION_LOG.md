@@ -83,3 +83,7 @@ Public launch execution remains manual, with feedback collected through GitHub I
 ## D022: Prioritize first-time developer experience before new product capabilities
 
 Phase 11 prioritizes first-time developer experience and understanding before adding new product capabilities.
+
+## D023: Use curated samples instead of generated artifacts for first-time understanding
+
+Runwise uses curated sample docs and SVG example cards for first-time understanding instead of committing generated `.runwise/` artifacts.

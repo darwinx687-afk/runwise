@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">RAG project check</title>
+  <desc id="desc">Runwise checks RAG signals, source references, eval coverage, and report output.</desc>
+  <defs>
+    <style>
+      .title { font: 700 34px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 20px Arial, Helvetica, sans-serif; fill: #475569; }
+      .label { font: 700 18px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .small { font: 500 17px Arial, Helvetica, sans-serif; fill: #334155; }
+      .cn { font: 500 18px Arial, Helvetica, sans-serif; fill: #0f766e; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .node { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.5; rx: 8; }
+    </style>
+  </defs>
+  <rect width="920" height="520" fill="#f8fafc"/>
+  <rect x="36" y="36" width="848" height="448" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="76" y="104" class="title">RAG project check</text>
+  <text x="76" y="140" class="subtitle">Look for evidence, retrieval, and grounding signals.</text>
+
+  <rect x="76" y="188" width="338" height="188" class="card"/>
+  <rect x="112" y="228" width="118" height="52" class="node"/>
+  <text x="171" y="260" text-anchor="middle" class="small">query</text>
+  <rect x="262" y="228" width="118" height="52" class="node"/>
+  <text x="321" y="260" text-anchor="middle" class="small">sources</text>
+  <rect x="187" y="306" width="118" height="52" class="node"/>
+  <text x="246" y="338" text-anchor="middle" class="small">answer</text>
+  <path d="M 230 254 L 262 254" stroke="#64748b" stroke-width="2"/>
+  <path d="M 321 280 L 274 306" stroke="#64748b" stroke-width="2"/>
+  <path d="M 171 280 L 218 306" stroke="#64748b" stroke-width="2"/>
+
+  <rect x="464" y="188" width="336" height="188" class="card"/>
+  <circle cx="510" cy="235" r="9" fill="#2563eb"/>
+  <text x="534" y="242" class="small">RAG signals</text>
+  <circle cx="510" cy="278" r="9" fill="#0f766e"/>
+  <text x="534" y="285" class="small">Source references</text>
+  <circle cx="510" cy="321" r="9" fill="#8b5cf6"/>
+  <text x="534" y="328" class="small">Eval coverage</text>
+  <circle cx="510" cy="364" r="9" fill="#f59e0b"/>
+  <text x="534" y="371" class="small">Report output</text>
+
+  <text x="76" y="436" class="cn">检查 RAG 证据、检索线索和评测覆盖</text>
+</svg>

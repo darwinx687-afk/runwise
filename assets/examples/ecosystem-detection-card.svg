@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">Ecosystem detection</title>
+  <desc id="desc">Runwise detects local signals for common AI project stacks.</desc>
+  <defs>
+    <style>
+      .title { font: 700 34px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 20px Arial, Helvetica, sans-serif; fill: #475569; }
+      .small { font: 500 17px Arial, Helvetica, sans-serif; fill: #334155; }
+      .chipText { font: 700 18px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .cn { font: 500 18px Arial, Helvetica, sans-serif; fill: #0f766e; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .chip { fill: #f0fdf4; stroke: #86efac; stroke-width: 1.4; rx: 20; }
+    </style>
+  </defs>
+  <rect width="920" height="520" fill="#f8fafc"/>
+  <rect x="36" y="36" width="848" height="448" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="76" y="104" class="title">Ecosystem detection</text>
+  <text x="76" y="140" class="subtitle">Detect local signals for common AI project stacks.</text>
+
+  <rect x="76" y="188" width="724" height="188" class="card"/>
+  <rect x="118" y="230" width="122" height="46" class="chip"/>
+  <text x="179" y="259" text-anchor="middle" class="chipText">MCP</text>
+  <rect x="268" y="230" width="152" height="46" class="chip"/>
+  <text x="344" y="259" text-anchor="middle" class="chipText">LangChain</text>
+  <rect x="448" y="230" width="126" height="46" class="chip"/>
+  <text x="511" y="259" text-anchor="middle" class="chipText">Codex</text>
+  <rect x="602" y="230" width="158" height="46" class="chip"/>
+  <text x="681" y="259" text-anchor="middle" class="chipText">China-ready</text>
+
+  <circle cx="132" cy="324" r="8" fill="#2563eb"/>
+  <text x="154" y="331" class="small">config files</text>
+  <circle cx="302" cy="324" r="8" fill="#0f766e"/>
+  <text x="324" y="331" class="small">package metadata</text>
+  <circle cx="532" cy="324" r="8" fill="#f59e0b"/>
+  <text x="554" y="331" class="small">env examples</text>
+
+  <text x="76" y="436" class="cn">识别常见 AI 项目生态线索</text>
+</svg>

@@ -27,14 +27,16 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - 简单视觉说明
 - 文档入口整理
 
-### 11C - Example Gallery Polish
+### 11C - Example Gallery Polish and Visual Report Samples
+
+状态：本轮已完成。
 
 重点：
 
-- 根据真实首次运行反馈改进示例说明
-- 如有帮助，添加小型报告截图或静态 sample snippet
-- 让命令结果更容易对比
-- 保持示例轻量、本地化
+- 为 MCP、RAG、replay、eval 和生态检测添加 SVG 示例卡片
+- 添加整理过的 Doctor 报告、Trace Replay、Failure-to-Eval 和生态检测 sample
+- 改进示例说明，补充运行命令、重点看什么和相关 sample output
+- 保持示例轻量、本地化，并与生成的 `.runwise/` artifact 分开
 
 ### 11D - Visual Report Polish
 
@@ -43,6 +45,9 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - 改进 Markdown 和 HTML 报告可读性
 - 让 finding 更容易扫描
 - 解释清楚 score、severity、blocking 和 ecosystem 区块
+- 如有帮助，添加便于手动反馈的 copy-to-issue snippet
+- 改进报告 empty state
+- 改进 category score 解释
 - 不添加 hosted dashboard 或复杂产品界面
 
 ### 11E - Plugin Architecture Exploration
@@ -52,7 +57,7 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - 探索未来 check 如何分组或扩展
 - 保持当前 rule engine 稳定
 - 先记录 extension boundary，再决定是否实现
-- 在首次运行清晰度和报告可读性改善前，不提前引入 plugin 复杂度
+- plugin architecture 放在后面，等 Visual Report Polish 改善当前体验后再推进
 
 ## 反馈来源
 

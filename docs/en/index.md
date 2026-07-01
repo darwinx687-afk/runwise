@@ -8,6 +8,7 @@ It runs locally, generates reports, validates traces, replays runs, and turns fa
 
 - [First Run Walkthrough](../FIRST_RUN_WALKTHROUGH.md)
 - [Example Gallery](../EXAMPLE_GALLERY.md)
+- [Demo Output Samples](../demo-output/README.md)
 - [Quick Start](./quick-start.md)
 - [Command Reference](./commands.md)
 - [GitHub Action](./github-action.md)
@@ -15,6 +16,13 @@ It runs locally, generates reports, validates traces, replays runs, and turns fa
 - [Failure-to-Eval](./failure-to-eval.md)
 - [Ecosystem Compatibility](./ecosystem-compatibility.md)
 - [Feedback Guide](../FEEDBACK_GUIDE.md)
+
+## See Output Samples
+
+- [Doctor report sample](../demo-output/doctor-report-sample.md)
+- [Trace replay sample](../demo-output/trace-replay-sample.md)
+- [Failure-to-Eval sample](../demo-output/failure-to-eval-sample.md)
+- [Ecosystem detection sample](../demo-output/ecosystem-detection-sample.md)
 
 ## Good First Flow
 

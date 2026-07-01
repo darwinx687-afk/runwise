@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="280" viewBox="0 0 1120 280" role="img" aria-labelledby="title desc">
+  <title id="title">Runwise example gallery overview</title>
+  <desc id="desc">MCP to RAG to Trace to Replay to Eval to Ecosystem</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .label { font: 700 20px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .small { font: 400 15px Arial, Helvetica, sans-serif; fill: #64748b; }
+      .node { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .line { stroke: #334155; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1120" height="280" fill="#f8fafc"/>
+  <text x="560" y="48" text-anchor="middle" class="title">Example gallery path</text>
+  <text x="560" y="76" text-anchor="middle" class="small">See what Runwise detects before you run it locally</text>
+  <g transform="translate(56 126)">
+    <rect class="node" width="130" height="70"/>
+    <text x="65" y="42" text-anchor="middle" class="label">MCP</text>
+  </g>
+  <line class="line" x1="198" y1="161" x2="250" y2="161"/>
+  <g transform="translate(262 126)">
+    <rect class="node" width="130" height="70"/>
+    <text x="65" y="42" text-anchor="middle" class="label">RAG</text>
+  </g>
+  <line class="line" x1="404" y1="161" x2="456" y2="161"/>
+  <g transform="translate(468 126)">
+    <rect class="node" width="130" height="70"/>
+    <text x="65" y="42" text-anchor="middle" class="label">Trace</text>
+  </g>
+  <line class="line" x1="610" y1="161" x2="662" y2="161"/>
+  <g transform="translate(674 126)">
+    <rect class="node" width="130" height="70"/>
+    <text x="65" y="42" text-anchor="middle" class="label">Replay</text>
+  </g>
+  <line class="line" x1="816" y1="161" x2="868" y2="161"/>
+  <g transform="translate(880 126)">
+    <rect class="node" width="154" height="70"/>
+    <text x="77" y="42" text-anchor="middle" class="label">Eval</text>
+  </g>
+  <text x="560" y="238" text-anchor="middle" class="small">Ecosystem signals help explain which local AI stack patterns are visible.</text>
+</svg>

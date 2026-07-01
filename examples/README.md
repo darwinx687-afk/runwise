@@ -1,10 +1,14 @@
 # Runwise Examples
 
-These examples are lightweight fixtures for trying Runwise locally. They are not production AI apps, do not include real dependencies, and should not contain secrets.
+These examples are lightweight compatibility fixtures for trying Runwise locally. They are not production AI apps, do not include real dependencies, and should not contain secrets.
 
-Start with the [Example Gallery](../docs/EXAMPLE_GALLERY.md) for the purpose, command, and review notes for each example.
+Start here:
 
-## Quick list
+- [Example Gallery](../docs/EXAMPLE_GALLERY.md): what each example represents, what to run, and what to look for.
+- [First Run Walkthrough](../docs/FIRST_RUN_WALKTHROUGH.md): the full source-install path.
+- [Demo Output Samples](../docs/demo-output/README.md): curated report, replay, eval, and ecosystem examples.
+
+## Example folders
 
 - `mcp-demo`: MCP config and tool approval signals.
 - `rag-demo`: retrieval, trace, and eval placeholders.
@@ -16,4 +20,4 @@ Start with the [Example Gallery](../docs/EXAMPLE_GALLERY.md) for the purpose, co
 
 ## Safety
 
-The examples are for detection and documentation only. They do not run models, execute tools, call external APIs, or start external frameworks.
+The examples are for detection and documentation only. They do not install real framework dependencies, run models, execute tools, call external APIs, or start external services.

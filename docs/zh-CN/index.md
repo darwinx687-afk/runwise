@@ -8,6 +8,7 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 - [首次运行 Walkthrough](../FIRST_RUN_WALKTHROUGH.zh-CN.md)
 - [示例 Gallery](../EXAMPLE_GALLERY.zh-CN.md)
+- [Demo Output 示例](../demo-output/README.zh-CN.md)
 - [快速开始](./quick-start.md)
 - [命令参考](./commands.md)
 - [GitHub Action](./github-action.md)
@@ -15,6 +16,13 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - [Failure-to-Eval / 失败转评测](./failure-to-eval.md)
 - [生态兼容性](./ecosystem-compatibility.md)
 - [反馈指南](../FEEDBACK_GUIDE.zh-CN.md)
+
+## 先看输出示例
+
+- [Doctor 报告示例](../demo-output/doctor-report-sample.zh-CN.md)
+- [Trace Replay 示例](../demo-output/trace-replay-sample.zh-CN.md)
+- [Failure-to-Eval 示例](../demo-output/failure-to-eval-sample.zh-CN.md)
+- [生态检测示例](../demo-output/ecosystem-detection-sample.zh-CN.md)
 
 ## 推荐第一次怎么跑
 

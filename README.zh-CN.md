@@ -66,10 +66,20 @@ pnpm exec runwise view
 
 想快速理解使用前后差异，可以看 [这张 before/after 图](./assets/runwise-before-after.svg)。
 
+## 先看看示例
+
+如果你想先了解 Runwise 会输出什么，可以看这些示例：
+
+- [示例展示](./docs/EXAMPLE_GALLERY.zh-CN.md)
+- [Doctor 报告示例](./docs/demo-output/doctor-report-sample.zh-CN.md)
+- [Trace Replay 示例](./docs/demo-output/trace-replay-sample.zh-CN.md)
+- [Failure-to-Eval 示例](./docs/demo-output/failure-to-eval-sample.zh-CN.md)
+
 ## 从这里开始
 
 - [首次运行 walkthrough](./docs/FIRST_RUN_WALKTHROUGH.zh-CN.md)
 - [示例 Gallery](./docs/EXAMPLE_GALLERY.zh-CN.md)
+- [Demo Output 示例](./docs/demo-output/README.zh-CN.md)
 - [英文文档](./docs/en/index.md)
 - [中文文档](./docs/zh-CN/index.md)
 - [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)

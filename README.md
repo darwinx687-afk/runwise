@@ -66,10 +66,20 @@ After running `runwise doctor`, you get:
 
 For a quick before/after view, see [the visual overview](./assets/runwise-before-after.svg).
 
+## See examples before you run it
+
+Want to understand what Runwise outputs before cloning?
+
+- [Example Gallery](./docs/EXAMPLE_GALLERY.md)
+- [Doctor report sample](./docs/demo-output/doctor-report-sample.md)
+- [Trace replay sample](./docs/demo-output/trace-replay-sample.md)
+- [Failure-to-Eval sample](./docs/demo-output/failure-to-eval-sample.md)
+
 ## Start here
 
 - [First Run Walkthrough](./docs/FIRST_RUN_WALKTHROUGH.md)
 - [Example Gallery](./docs/EXAMPLE_GALLERY.md)
+- [Demo Output Samples](./docs/demo-output/README.md)
 - [English Docs](./docs/en/index.md)
 - [Chinese Docs](./docs/zh-CN/index.md)
 - [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)
