@@ -71,3 +71,7 @@ First release candidate preparation uses `v0.1.0-preview.0`, with npm publishing
 ## D018: Keep post-release launch assets as draft materials
 
 Post-release launch assets are prepared as draft sharing materials only; external posting remains a manual step.
+
+## D019: Use GitHub Issues and bilingual docs for public launch feedback
+
+Public launch feedback intake uses GitHub Issues, repository labels, and bilingual docs before adding any hosted feedback system.

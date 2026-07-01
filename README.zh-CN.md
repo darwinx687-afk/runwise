@@ -206,6 +206,19 @@ docs/
 
 见 [ROADMAP.md](./ROADMAP.md)。
 
+## 欢迎反馈
+
+Runwise 目前处于公开预览阶段。我们尤其希望收到这些反馈：
+
+- Doctor 规则是否误报或漏报
+- AI 生态检测线索是否准确
+- trace schema 是否好用
+- replay 复盘报告是否清楚
+- Failure-to-Eval 是否有实际价值
+- 国内大模型服务商检测是否完整
+
+请不要在公开 issue 中包含密钥、客户隐私数据或专有 trace。
+
 ## 贡献
 
 提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。

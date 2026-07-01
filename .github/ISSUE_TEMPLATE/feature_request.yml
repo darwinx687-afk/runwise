@@ -2,7 +2,7 @@ name: Feature request
 description: Suggest a Runwise improvement. / 建议 Runwise 改进。
 title: "[Feature]: "
 labels:
-  - enhancement
+  - "type: feature"
 body:
   - type: textarea
     id: problem
@@ -12,10 +12,25 @@ body:
     validations:
       required: true
   - type: textarea
+    id: desired-workflow
+    attributes:
+      label: Desired workflow / 期望流程
+      description: What should the user be able to do with Runwise?
+      placeholder: "Example: review noisy Doctor findings before CI, compare trace replay reports, or generate eval case drafts from risky runs."
+    validations:
+      required: true
+  - type: textarea
     id: solution
     attributes:
       label: Proposed solution / 方案
       description: Describe the smallest useful version.
+    validations:
+      required: true
+  - type: textarea
+    id: why-runwise
+    attributes:
+      label: Why this matters for Runwise / 为什么这对 Runwise 重要
+      description: Connect the request to AI Agent readiness, trace validation, replay, Failure-to-Eval, reports, GitHub Action, docs, or ecosystem detection.
     validations:
       required: true
   - type: input
@@ -26,4 +41,5 @@ body:
   - type: textarea
     id: bilingual
     attributes:
-      label: English / Chinese description optional / 可选中英文说明
+      label: English or Chinese description / 英文或中文说明
+      description: Either language is welcome.

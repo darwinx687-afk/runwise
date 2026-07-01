@@ -206,6 +206,19 @@ docs/
 
 See [ROADMAP.md](./ROADMAP.md).
 
+## Feedback Wanted
+
+Runwise is in public preview. We are especially looking for feedback on:
+
+- noisy or missing Doctor findings
+- AI ecosystem detection signals
+- trace schema usability
+- replay report clarity
+- Failure-to-Eval usefulness
+- China-ready LLM provider detection
+
+Please do not include secrets, private customer data, or proprietary traces in public issues.
+
 ## Contributing
 
 Read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.

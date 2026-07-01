@@ -2,27 +2,27 @@
 
 ## Current Phase
 
-Phase 10I
+Phase 10J
 
 ## Current Loop
 
-Loop 10I - Post-Release Verification and Launch Sharing Assets
+Loop 10J - Public Launch Sharing and Feedback Intake Setup
 
 ## Completed
 
-- GitHub prerelease verified
-- Release body corrected from draft-era wording
-- Final English and Chinese release notes added
-- Existing GitHub prerelease updated with finalized release notes
-- Launch sharing pack added
-- Project one-pager added
-- Launch notes updated for post-release status
-- Post-release checks passed
+- Feedback guide added
+- Early user testing guide added
+- Public launch checklist added
+- Final launch copy pack added
+- README feedback section added
+- Issue templates reviewed and refined
+- Repository feedback labels created or updated
+- Post-release public preview sharing materials prepared
 - Generated .runwise artifacts confirmed ignored and untracked
 
 ## Next Required Step
 
-Phase 10J - Public Launch Sharing and Feedback Intake Setup
+Phase 10K - Manual Launch Posting and Feedback Monitoring
 
 ## Remote
 
