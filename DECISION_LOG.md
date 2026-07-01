@@ -103,3 +103,7 @@ Runwise will explore local JSON rule packs before executable plugins, keeping pl
 ## D027: Prioritize source-install clarity before npm publishing
 
 v0.1.1 usability work prioritizes source-install clarity, user feedback quality, and first-run confidence before npm publishing.
+
+## D028: Require clean-clone install review before the next preview tag
+
+v0.1.1 release preparation requires a clean-clone install review before tagging a new preview release.

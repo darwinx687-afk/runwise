@@ -9,14 +9,14 @@ The current public preview runs from source. There is no npm package yet.
 Start here if you want to see expected behavior first.
 
 ```bash
-npx -y pnpm@9.15.4 exec runwise doctor --cwd examples/mcp-demo --output .runwise/examples/mcp-demo
+npx -y pnpm@9.15.4 exec runwise doctor --cwd examples/mcp-demo --output .runwise
 ```
 
 Then open the generated report:
 
 ```text
-.runwise/examples/mcp-demo/runwise-report.md
-.runwise/examples/mcp-demo/runwise-report.html
+examples/mcp-demo/.runwise/runwise-report.md
+examples/mcp-demo/.runwise/runwise-report.html
 ```
 
 ## Option B: Run Against Your Own Project
@@ -34,6 +34,8 @@ This writes reports inside your project:
 /path/to/your-ai-project/.runwise/runwise-report.md
 /path/to/your-ai-project/.runwise/runwise-report.html
 ```
+
+`--output` is resolved relative to the scanned `--cwd` project when you pass a relative path.
 
 If your shell path has spaces, quote it:
 

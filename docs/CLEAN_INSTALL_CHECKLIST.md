@@ -19,7 +19,7 @@ corepack enable
 corepack prepare pnpm@9.15.4 --activate
 ```
 
-Alternative if you do not want to change your global pnpm:
+Alternative if `corepack` is not available or you do not want to change your global pnpm:
 
 ```bash
 npx -y pnpm@9.15.4 install --frozen-lockfile
@@ -63,6 +63,14 @@ Use the repo-declared version directly:
 
 ```bash
 npx -y pnpm@9.15.4 check
+```
+
+### `corepack` is not available
+
+Skip the Corepack setup and use the repo-declared pnpm version through `npx`:
+
+```bash
+npx -y pnpm@9.15.4 install --frozen-lockfile
 ```
 
 ### Newer pnpm asks about build approvals

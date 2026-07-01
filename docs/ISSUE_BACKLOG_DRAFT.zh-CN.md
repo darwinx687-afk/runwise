@@ -31,7 +31,7 @@
 - Type label: `type:docs`
 - Area label: `area:quick-start`
 - Priority: high
-- 状态：Phase 11G 已在 `docs/CLEAN_INSTALL_CHECKLIST.zh-CN.md` 中本地补充。
+- 状态：Phase 11G 已在 `docs/CLEAN_INSTALL_CHECKLIST.zh-CN.md` 中本地补充；Phase 11H 已通过 clean clone 验证。
 - 为什么重要：当前只支持源码安装，这是最大的试用摩擦。
 - Acceptance criteria:
   - 覆盖 Node.js 和 pnpm/Corepack。
@@ -43,7 +43,7 @@
 - Type label: `type:docs`
 - Area label: `area:doctor`
 - Priority: medium
-- 状态：Phase 11G 已在 `docs/TEST_ON_YOUR_PROJECT.zh-CN.md` 中本地补充。
+- 状态：Phase 11G 已在 `docs/TEST_ON_YOUR_PROJECT.zh-CN.md` 中本地补充；Phase 11H 在 `--cwd` 输出路径复核后做了修正。
 - 为什么重要：用户需要知道 Runwise 能不能用在自己的 repo 上。
 - Acceptance criteria:
   - 展示带 `--cwd` 的安全命令。
@@ -57,7 +57,7 @@
 - Type label: `type:dx`
 - Area label: `area:install`
 - Priority: high
-- 状态：Phase 11G 已通过干净安装清单和源码运行说明推进。
+- 状态：Phase 11G 已推进，Phase 11H 已验证；clean shell 中 `corepack` 不可用，所以 `npx -y pnpm@9.15.4` fallback 很重要。
 - 为什么重要：目前还没有 npm package。
 - Acceptance criteria:
   - 文档中的源码安装能在干净环境跑通。
@@ -69,7 +69,7 @@
 - Type label: `type:dx`
 - Area label: `area:package-manager`
 - Priority: medium
-- 状态：Phase 11G 已补充 Corepack 和 `npx -y pnpm@9.15.4` 指引。
+- 状态：Phase 11G 已补充，Phase 11H 确认 `corepack` 可能不可用后进一步修正。
 - 为什么重要：全局 pnpm 版本差异可能让用户困惑。
 - Acceptance criteria:
   - README 或 Quick Start 指向声明的 package manager 版本。
@@ -92,6 +92,7 @@
 - Type label: `type:dx`
 - Area label: `area:doctor`
 - Priority: medium
+- 状态：仍然 open；clean clone 中 Doctor 输出可用，但后续可以继续让下一步动作更清楚。
 - 为什么重要：终端输出通常是用户看到的第一个结果。
 - Acceptance criteria:
   - score 和 report path 清楚。
@@ -217,6 +218,17 @@
   - 找到触发 annotation 的 action。
   - 只有安全时才修复。
   - 保持现有 readiness 行为不变。
+
+### 解释自定义输出目录行为
+
+- Type label: `type:docs`
+- Area label: `area:doctor`
+- Priority: low
+- 为什么重要：`.runwise-mcp-demo/` 这类自定义输出目录默认不会被忽略。
+- Acceptance criteria:
+  - 文档优先推荐首次运行使用 `.runwise`。
+  - 自定义输出示例说明 git ignore 行为。
+  - 不提交新的生成输出目录。
 
 ### 后续准备 npm publish review
 

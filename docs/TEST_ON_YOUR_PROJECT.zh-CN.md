@@ -9,14 +9,14 @@ Runwise 在本地运行，不会上传你的项目数据。
 如果你想先看看预期行为，可以从示例开始。
 
 ```bash
-npx -y pnpm@9.15.4 exec runwise doctor --cwd examples/mcp-demo --output .runwise/examples/mcp-demo
+npx -y pnpm@9.15.4 exec runwise doctor --cwd examples/mcp-demo --output .runwise
 ```
 
 然后打开生成的报告：
 
 ```text
-.runwise/examples/mcp-demo/runwise-report.md
-.runwise/examples/mcp-demo/runwise-report.html
+examples/mcp-demo/.runwise/runwise-report.md
+examples/mcp-demo/.runwise/runwise-report.html
 ```
 
 ## 方式 B：检查你自己的项目
@@ -34,6 +34,8 @@ npx -y pnpm@9.15.4 exec runwise doctor --cwd /path/to/your-ai-project --output .
 /path/to/your-ai-project/.runwise/runwise-report.md
 /path/to/your-ai-project/.runwise/runwise-report.html
 ```
+
+当你传入相对路径时，`--output` 会相对于被扫描的 `--cwd` 项目解析。
 
 如果路径里有空格，请加引号：
 

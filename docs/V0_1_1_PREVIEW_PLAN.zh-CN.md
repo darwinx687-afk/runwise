@@ -53,6 +53,25 @@ v0.1.1-preview.0 = usability and trust polish。
 
 这不表示 `v0.1.1-preview.0` 已发布，只是推进计划中的 usability 工作。
 
+## Phase 11H 进展
+
+已在本地完成：
+
+- 从 `/tmp/runwise-clean-install-review/runwise` 执行 clean clone install review。
+- 验证仓库声明的 `pnpm@9.15.4` 安装路径。
+- 在 clean clone 中验证 `check`、`check:types` 和 `test`。
+- 在 clean clone 中验证 `runwise doctor`，并生成文档中的报告文件。
+- 在端口 `43118` smoke-test 本地 viewer。
+- 在 clean clone 中验证 trace validate、replay 和 eval generation。
+- 验证 `--cwd` 行为；相对 `--output` 路径会在被扫描项目内解析。
+- 添加干净环境安装复核记录。
+
+进入 release candidate 前仍需跟进：
+
+- 继续保留 GitHub Actions Node.js 20 annotation review。
+- 考虑是否需要给自定义输出目录增加更清楚的提醒或 ignore 指引。
+- 在 review docs 合入后确认 GitHub Actions 为绿色。
+
 ## 打 Tag 前需要 Review
 
 未来创建 `v0.1.1-preview.0` tag 前：

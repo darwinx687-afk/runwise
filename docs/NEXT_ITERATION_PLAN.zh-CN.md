@@ -90,7 +90,7 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ### 11H - Clean-machine Install Review
 
-暂定下一轮。
+状态：本轮已完成。
 
 重点：
 
@@ -101,7 +101,7 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ### 11I - v0.1.1 Release Candidate
 
-暂定后续。
+暂定下一轮。
 
 重点：
 

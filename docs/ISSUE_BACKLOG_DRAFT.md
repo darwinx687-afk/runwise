@@ -31,7 +31,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:docs`
 - Area label: `area:quick-start`
 - Priority: high
-- Status: addressed locally in Phase 11G by `docs/CLEAN_INSTALL_CHECKLIST.md`.
+- Status: addressed locally in Phase 11G by `docs/CLEAN_INSTALL_CHECKLIST.md`; verified from a clean clone in Phase 11H.
 - Why it matters: source-install only is the biggest current adoption friction.
 - Acceptance criteria:
   - covers Node.js and pnpm/Corepack.
@@ -43,7 +43,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:docs`
 - Area label: `area:doctor`
 - Priority: medium
-- Status: addressed locally in Phase 11G by `docs/TEST_ON_YOUR_PROJECT.md`.
+- Status: addressed locally in Phase 11G by `docs/TEST_ON_YOUR_PROJECT.md`; corrected in Phase 11H after `--cwd` output-path review.
 - Why it matters: users need to know whether Runwise applies to their own repo.
 - Acceptance criteria:
   - shows safe commands with `--cwd`.
@@ -57,7 +57,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:dx`
 - Area label: `area:install`
 - Priority: high
-- Status: moved forward in Phase 11G with clean install and source-run guidance.
+- Status: moved forward in Phase 11G and verified in Phase 11H; `corepack` was unavailable in the clean shell, so the `npx -y pnpm@9.15.4` fallback remains important.
 - Why it matters: no npm package exists yet.
 - Acceptance criteria:
   - documented source install works from a clean environment.
@@ -69,7 +69,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:dx`
 - Area label: `area:package-manager`
 - Priority: medium
-- Status: moved forward in Phase 11G by documenting Corepack and `npx -y pnpm@9.15.4`.
+- Status: moved forward in Phase 11G and refined in Phase 11H after confirming `corepack` may be unavailable.
 - Why it matters: global pnpm version differences can confuse users.
 - Acceptance criteria:
   - README or Quick Start points to the declared package manager version.
@@ -92,6 +92,7 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
 - Type label: `type:dx`
 - Area label: `area:doctor`
 - Priority: medium
+- Status: still open; clean clone Doctor output was usable, but future polish can make next actions clearer.
 - Why it matters: terminal output is the first result many users see.
 - Acceptance criteria:
   - score and report paths are clear.
@@ -217,6 +218,17 @@ This is a local planning draft. Do not create GitHub Issues automatically from t
   - identify which actions trigger the annotation.
   - fix only if safe.
   - keep existing readiness behavior unchanged.
+
+### Clarify custom output directory behavior
+
+- Type label: `type:docs`
+- Area label: `area:doctor`
+- Priority: low
+- Why it matters: custom output directories such as `.runwise-mcp-demo/` are not ignored by default.
+- Acceptance criteria:
+  - docs recommend `.runwise` for first-time runs.
+  - custom output examples mention git ignore behavior.
+  - no new generated output directories are committed.
 
 ### Prepare npm publish review later
 

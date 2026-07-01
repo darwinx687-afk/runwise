@@ -90,7 +90,7 @@ Focus:
 
 ### 11H - Clean-machine Install Review
 
-Tentative next loop.
+Status: completed in this loop.
 
 Focus:
 
@@ -101,7 +101,7 @@ Focus:
 
 ### 11I - v0.1.1 Release Candidate
 
-Tentative follow-up.
+Tentative next loop.
 
 Focus:
 

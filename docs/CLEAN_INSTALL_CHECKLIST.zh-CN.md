@@ -19,7 +19,7 @@ corepack enable
 corepack prepare pnpm@9.15.4 --activate
 ```
 
-如果你不想改全局 pnpm，也可以直接使用：
+如果 `corepack` 不可用，或者你不想改全局 pnpm，也可以直接使用：
 
 ```bash
 npx -y pnpm@9.15.4 install --frozen-lockfile
@@ -63,6 +63,14 @@ git ls-files .runwise
 
 ```bash
 npx -y pnpm@9.15.4 check
+```
+
+### `corepack` 不可用
+
+跳过 Corepack 设置，直接通过 `npx` 使用仓库声明的 pnpm 版本：
+
+```bash
+npx -y pnpm@9.15.4 install --frozen-lockfile
 ```
 
 ### 较新的 pnpm 提示 build approval

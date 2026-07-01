@@ -53,6 +53,25 @@ Completed locally:
 
 This does not make `v0.1.1-preview.0` released. It only moves the planned usability work forward.
 
+## Phase 11H Progress
+
+Completed locally:
+
+- Clean clone install review performed from `/tmp/runwise-clean-install-review/runwise`.
+- Repo-declared `pnpm@9.15.4` install path verified.
+- `check`, `check:types`, and `test` verified from the clean clone.
+- `runwise doctor` verified from the clean clone and generated the documented report files.
+- Local viewer smoke-tested on port `43118`.
+- Trace validate, replay, and eval generation verified from the clean clone.
+- `--cwd` behavior verified; relative `--output` paths are resolved inside the scanned project.
+- Clean-machine install review notes added.
+
+Remaining follow-ups before a release candidate:
+
+- Keep the GitHub Actions Node.js 20 annotation review open.
+- Consider whether custom output directories need clearer warnings or ignore guidance.
+- Confirm GitHub Actions is green after the review docs land.
+
 ## Review Before Any Tag
 
 Before creating a future `v0.1.1-preview.0` tag:
