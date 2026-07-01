@@ -1,13 +1,14 @@
 # v0.1.1 Release Candidate 检查清单
 
-这份清单用于准备 `v0.1.1-preview.0` 的审批。它不会创建 tag，不会发布 npm，也不会创建 GitHub Release。
+这份清单记录 `v0.1.1-preview.0` prerelease 的审批状态。它不会发布 npm，也不会创建 GitHub Marketplace listing。
 
 ## Release 目标
 
 - 目标版本：`v0.1.1-preview.0`
 - Release 类型：GitHub prerelease
-- 后续要创建的 tag：`v0.1.1-preview.0`
-- 当前 release：`v0.1.0-preview.0`
+- Tag：`v0.1.1-preview.0`
+- 当前 release：`v0.1.1-preview.0`
+- 上一个 release：`v0.1.0-preview.0`
 - 分发方式：仅源码安装
 - npm 发布：不包含
 - GitHub Marketplace 发布：不包含
@@ -19,12 +20,14 @@
 |---|---:|---|
 | Source install | Ready | 已通过 clean clone 验证 |
 | npm package | Not included | 暂缓 |
+| npm publish | Not included | 暂缓 |
+| Marketplace publish | Not included | 暂缓 |
 | Plugin runtime | Not included | 只有文档探索 |
 | GitHub Action | Ready | 现有 workflow 通过 |
 | Clean-machine review | Ready | 已通过 |
 | Release notes | Ready | 已起草 |
 | Tag | Created and pushed | `v0.1.1-preview.0` |
-| GitHub prerelease | Pending | 在 Phase 11K 创建 |
+| GitHub prerelease | Created | https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.1-preview.0 |
 
 ## 本地验证
 
@@ -59,18 +62,20 @@ release-candidate 准备时没有发现阻塞项。
 - GitHub Actions 仍会因为引用的 upstream actions 报告 Node.js 20 deprecation annotation。
 - `.runwise/` 之外的自定义输出目录，后续可能需要更明确的 ignore 指引。
 
-## Tag 后状态
+## Release 后状态
 
 - Tag: Created and pushed
-- GitHub prerelease: Pending
+- GitHub prerelease: Created
+- npm publish: Not included
+- Marketplace publish: Not included
 
 ## 审批门槛
 
-下一轮创建 GitHub prerelease 前：
+下一轮 post-release loop 前：
 
 - 需要用户明确批准
 - `main` 应保持干净
 - 本地检查应通过
 - GitHub Actions 应通过
 - `.runwise/` 应继续被忽略且未被跟踪
-- release 命令只能在批准后的 prerelease loop 中运行
+- npm publish、GitHub Marketplace publish 和额外 release 命令除非明确批准，否则仍然不在范围内

@@ -4,9 +4,9 @@ All notable changes to Runwise will be documented here.
 
 ## Unreleased
 
-No unreleased changes are currently listed after the v0.1.1 release-candidate preparation.
+No unreleased product changes are currently listed after the v0.1.1 prerelease.
 
-## v0.1.1-preview.0 - Release candidate
+## v0.1.1-preview.0 - Preview prerelease
 
 ### Added
 

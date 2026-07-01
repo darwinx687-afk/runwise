@@ -1,13 +1,14 @@
 # v0.1.1 Release Candidate Checklist
 
-This checklist prepares `v0.1.1-preview.0` for approval. It does not create a tag, publish npm, or create a GitHub Release.
+This checklist records the `v0.1.1-preview.0` prerelease approval state. It does not publish npm or create a GitHub Marketplace listing.
 
 ## Release Target
 
 - Target version: `v0.1.1-preview.0`
 - Release type: GitHub prerelease
-- Tag to create later: `v0.1.1-preview.0`
-- Current release: `v0.1.0-preview.0`
+- Tag: `v0.1.1-preview.0`
+- Current release: `v0.1.1-preview.0`
+- Previous release: `v0.1.0-preview.0`
 - Distribution path: source install only
 - npm publish: not included
 - GitHub Marketplace publish: not included
@@ -19,12 +20,14 @@ This checklist prepares `v0.1.1-preview.0` for approval. It does not create a ta
 |---|---:|---|
 | Source install | Ready | Verified from clean clone |
 | npm package | Not included | Deferred |
+| npm publish | Not included | Deferred |
+| Marketplace publish | Not included | Deferred |
 | Plugin runtime | Not included | Docs only |
 | GitHub Action | Ready | Existing workflow passes |
 | Clean-machine review | Ready | Passed |
 | Release notes | Ready | Drafted |
 | Tag | Created and pushed | `v0.1.1-preview.0` |
-| GitHub prerelease | Pending | Create in Phase 11K |
+| GitHub prerelease | Created | https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.1-preview.0 |
 
 ## Local Verification
 
@@ -59,18 +62,20 @@ Known non-blocking follow-ups:
 - GitHub Actions still reports a Node.js 20 deprecation annotation from referenced upstream actions.
 - Custom output directories outside `.runwise/` may need explicit ignore guidance in future docs.
 
-## Post-tag Status
+## Post-release Status
 
 - Tag: Created and pushed
-- GitHub prerelease: Pending
+- GitHub prerelease: Created
+- npm publish: Not included
+- Marketplace publish: Not included
 
 ## Approval Gate
 
-Before the next loop creates the GitHub prerelease:
+Before the next post-release loop:
 
 - user approval is required
 - `main` should be clean
 - local checks should pass
 - GitHub Actions should pass
 - `.runwise/` should remain ignored and untracked
-- release commands should be run only in the approved prerelease loop
+- npm publish, GitHub Marketplace publish, and additional release commands remain out of scope unless explicitly approved
