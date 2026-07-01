@@ -219,6 +219,8 @@ Runwise 目前处于公开预览阶段。我们尤其希望收到这些反馈：
 
 请不要在公开 issue 中包含密钥、客户隐私数据或专有 trace。
 
+参见 [反馈指南](./docs/FEEDBACK_GUIDE.zh-CN.md)、[早期用户测试指南](./docs/EARLY_USER_TESTING_GUIDE.zh-CN.md) 和 [最终发布文案包](./docs/FINAL_LAUNCH_COPY_PACK.zh-CN.md)。
+
 ## 贡献
 
 提交变更前，请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)、[PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md) 和 [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md)。

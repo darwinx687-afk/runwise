@@ -2,6 +2,10 @@
 
 These drafts are copy/paste ready, but they must be posted manually. Do not post automatically from this repository or workflow.
 
+Repository: https://github.com/darwinx687-afk/runwise
+
+Release: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
+
 ## One-line Pitch
 
 Runwise is a local-first readiness, trace replay, and Failure-to-Eval toolkit for AI agents, MCP servers, RAG systems, and LLM applications.

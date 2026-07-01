@@ -75,3 +75,7 @@ Post-release launch assets are prepared as draft sharing materials only; externa
 ## D019: Use GitHub Issues and bilingual docs for public launch feedback
 
 Public launch feedback intake uses GitHub Issues, repository labels, and bilingual docs before adding any hosted feedback system.
+
+## D020: Keep public launch execution manual
+
+Public launch execution remains manual, with feedback collected through GitHub Issues and maintained through docs-based trackers before adding any analytics or hosted feedback system.

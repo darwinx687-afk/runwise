@@ -219,6 +219,8 @@ Runwise is in public preview. We are especially looking for feedback on:
 
 Please do not include secrets, private customer data, or proprietary traces in public issues.
 
+See [Feedback Guide](./docs/FEEDBACK_GUIDE.md), [Early User Testing Guide](./docs/EARLY_USER_TESTING_GUIDE.md), and [Final Launch Copy Pack](./docs/FINAL_LAUNCH_COPY_PACK.md).
+
 ## Contributing
 
 Read [CONTRIBUTING.md](./CONTRIBUTING.md), [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md), and [CODEX_LOOP_PROTOCOL.md](./CODEX_LOOP_PROTOCOL.md) before proposing changes.

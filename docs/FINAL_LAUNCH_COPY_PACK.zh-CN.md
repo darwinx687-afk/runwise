@@ -2,6 +2,10 @@
 
 以下文案可以复制粘贴使用，但必须手动发布。不要从本仓库或 workflow 自动发布。
 
+Repository: https://github.com/darwinx687-afk/runwise
+
+Release: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
+
 ## 一句话介绍
 
 Runwise 是一个本地优先的 AI Agent 就绪度、trace replay 和 Failure-to-Eval 工具，面向 AI Agent、MCP server、RAG 系统和 LLM application。
