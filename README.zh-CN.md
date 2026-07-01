@@ -13,26 +13,22 @@
 
 [English](./README.md) | [中文](./README.zh-CN.md)
 
-Runwise 帮你在 AI Agent 项目上线前做检查和复盘。
+Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
-它在本地运行，检查项目设置，生成报告，验证 trace，复盘运行过程，并把失败转成 eval case。
+它会在本地检查项目结构、生成报告、验证 trace、静态复盘运行过程，并把失败记录转成 eval 用例。
 
-当 demo 已经能跑，但你还想确认项目是否适合分享、审查或交付时，可以使用 Runwise。Runwise 不是 agent framework、聊天机器人产品、hosted SaaS、Dify/OpenWebUI 克隆、Langfuse/Promptfoo 替代品，也不是模型训练框架。
+我做这个工具的原因很简单：很多 AI demo 能跑，但真正要交付、上线、给团队或客户看时，还需要回答一些更实际的问题：
 
-## 为什么需要 Runwise
+- 这个项目现在适不适合 review？
+- MCP / tool 调用里有没有明显风险？
+- 有没有 trace 记录？
+- 失败以后能不能复盘？
+- 失败能不能沉淀成 eval case？
+- 能不能生成一份团队或客户看得懂的报告？
 
-AI Agent 项目在 demo 里看起来能跑，但风险可能藏在 prompt、工具、MCP server、检索、审批和部署假设之间。Runwise 帮你更早发现这些风险，而且不上传项目数据。
+**公开预览：** Runwise 目前只支持源码方式试用，还没有 npm package，没有 GitHub Marketplace release，也不声明任何官方生态集成或合作。它是本地优先工具，不上传项目数据，不调用模型，也不要求登录。
 
-- 使用结构化 Doctor rule 检查项目设置。
-- 生成 JSON、Markdown 和静态 HTML 报告。
-- 在回放或评测生成前验证 `runwise.agent_trace` 文件。
-- 用静态 trace replay 报告复盘一次运行。
-- 将失败和高风险运行转化为可复用评测用例文件。
-- 识别常见 AI 项目技术栈的本地信号。
-
-## 快速开始
-
-Runwise 当前从源码运行。
+## 5 分钟试一下
 
 ```bash
 git clone https://github.com/darwinx687-afk/runwise.git
@@ -44,31 +40,51 @@ pnpm exec runwise doctor
 pnpm exec runwise view
 ```
 
+生成的报告：
+
+```text
+.runwise/runwise-report.json
+.runwise/runwise-report.md
+.runwise/runwise-report.html
+```
+
+如果你的全局 pnpm 行为不一致，建议使用 `package.json` 中声明的 pnpm 版本，或启用 Corepack。
+
+## 你会看到什么
+
+运行 `runwise doctor` 后，你会得到：
+
+- 一个 readiness 分数
+- 一组项目检查结果
+- 检测到的 AI 项目生态线索
+- JSON / Markdown / HTML 报告
+- 一个本地 dashboard 查看页面
+
+<p align="center">
+  <img src="./assets/runwise-5-minute-flow.svg" alt="Runwise 5 分钟流程">
+</p>
+
+想快速理解使用前后差异，可以看 [这张 before/after 图](./assets/runwise-before-after.svg)。
+
+## 从这里开始
+
+- [首次运行 walkthrough](./docs/FIRST_RUN_WALKTHROUGH.zh-CN.md)
+- [示例 Gallery](./docs/EXAMPLE_GALLERY.zh-CN.md)
+- [英文文档](./docs/en/index.md)
+- [中文文档](./docs/zh-CN/index.md)
+- [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)
+
 ## Runwise 当前能做什么
 
 | 领域 | 当前能力 |
 | --- | --- |
-| Doctor | 本地就绪度检查：workspace 结构、包管理器状态、TypeScript 配置、治理文件、AI 迹象、MCP 迹象、评测覆盖、trace 覆盖和生态信号。 |
-| Reports | 在 `.runwise/` 下生成 JSON、Markdown 和静态 HTML artifact。 |
-| Dashboard | 基于 `.runwise/runwise-report.json` 启动本地查看器。 |
-| Trace | 本地验证 `runwise.agent_trace` 文件和目录。 |
-| Replay | 为验证过的 trace 生成静态 Markdown 报告，解释这次运行发生了什么。 |
-| Failure-to-Eval | 从验证过的 trace 确定性生成 JSON/YAML/Markdown 评测用例。 |
-| 生态检测 | 本地启发式识别 MCP、LangChain、OpenAI Agents、Dify、browser-use、Claude Code、Codex、Cursor、Windsurf、Ollama、OpenAI-compatible API 和国内大模型服务商。 |
-
-## 核心流程
-
-```text
-project source
-  -> runwise doctor
-  -> local reports
-  -> trace validation
-  -> static replay
-  -> eval case files
-  -> review / CI evidence
-```
-
-Runwise 不会调用模型、执行工具、运行 agent、上传 trace、训练模型或要求登录。
+| Doctor | 检查 workspace 结构、包管理器状态、TypeScript 配置、治理文件、AI 线索、MCP 线索、trace 覆盖、eval 覆盖和生态信号。 |
+| Reports | 在 `.runwise/` 下写入 JSON、Markdown 和静态 HTML artifact。 |
+| View | 从 `.runwise/runwise-report.json` 打开本地 dashboard 查看页面。 |
+| Trace validation | 验证本地 `runwise.agent_trace` 文件和目录。 |
+| Trace replay | 为验证过的 trace 生成一份静态 Markdown 复盘报告。 |
+| Failure-to-Eval | 从验证过的 trace 确定性生成 JSON/YAML/Markdown eval case 草稿。 |
+| 生态检测 | 识别 MCP、RAG、browser agent、Dify-style workflow、Codex-style project、OpenAI-compatible API 和国内大模型服务商的本地线索。 |
 
 ## 命令
 
@@ -82,93 +98,11 @@ pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json
 pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 ```
 
-如果目录中包含无效 fixture，目录 trace 验证可能以退出码 `1` 结束。
-
-## 报告
-
-`runwise doctor` 会写入：
-
-```text
-.runwise/runwise-report.json
-.runwise/runwise-report.md
-.runwise/runwise-report.html
-```
-
-静态 HTML 报告 = doctor 生成的可分享文件。
-
-本地 Dashboard 查看器 = 读取 report JSON 的交互式本地查看器。
-
-生成的 `.runwise/` 文件应保持被忽略状态，并作为可复现的本地输出。
-
-## 本地 Dashboard 查看器
-
-```bash
-pnpm exec runwise view
-```
-
-查看器只读取本地 `.runwise/runwise-report.json`，不会上传项目数据。
-
-## GitHub Action
-
-当前本地用法：
-
-```yaml
-- uses: ./
-  with:
-    min-score: "70"
-    fail-on-blocking: "true"
-    fail-on-severity: "critical"
-```
-
-公开仓库和 release tag 创建后的未来用法：
-
-```yaml
-- uses: <owner>/<repo>@v0
-```
-
-当前 preview 不声明 GitHub Marketplace 可用性。
-
-## Trace Schema
-
-Runwise 定义了一套轻量本地 trace 格式，用于 AI Agent、MCP、RAG 和大语言模型应用运行。它记录运行元数据、model/environment 提示，以及 LLM call、tool call、MCP tool call、RAG retrieval、审批、错误和最终输出等有序 step。
-
-```bash
-pnpm exec runwise trace validate examples/traces/valid-agent-run.json
-```
-
-## Trace Replay / 运行轨迹复盘
-
-Replay 读取验证过的 trace，解释运行时间线、风险点、审批流程和错误，不会重新运行 Agent，也不会调用模型。
-
-```bash
-pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json
-```
-
-## Failure-to-Eval / 失败转评测
-
-Runwise 可以把验证过的 trace 转化为可复用评测用例文件，帮助团队将真实失败、高风险工具调用、缺失审批和 RAG 证据问题沉淀为回归测试资产。
-
-```bash
-pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
-```
-
-Runwise 只生成评测用例文件，不执行评测，也不会调用任何模型。
-
-## 生态兼容性
-
-Runwise 会基于本地文件和配置线索识别常见 AI 项目生态，例如 MCP、LangChain、OpenAI Agents、Dify、browser-use、Claude Code、Codex、Cursor、Windsurf、Ollama、OpenAI-compatible API 以及国内大模型服务商。
-
-检测过程是本地启发式识别。Runwise 不会执行这些框架，不会上传项目数据，也不声明与任何生态厂商存在官方合作关系。
-
-## 国内可用 / 全球可用部署提示
-
-Runwise 可以识别 `OPENAI_BASE_URL`、OpenAI-compatible API、Ollama、DashScope/Qwen、DeepSeek、Moonshot/Kimi、Zhipu/GLM、Minimax、Baichuan 和 SiliconFlow 等占位信号。
-
-你可以用这些 finding 来补充部署前文档：provider base URL、模型名称、数据边界、速率限制和降级策略。
+如果目录里包含无效 fixture，目录 trace 验证可能以退出码 `1` 结束。
 
 ## 示例项目
 
-见 [examples/README.zh-CN.md](./examples/README.zh-CN.md)。
+如果想知道每个示例在展示什么，先看 [示例 Gallery](./docs/EXAMPLE_GALLERY.zh-CN.md)。
 
 - `examples/mcp-demo`
 - `examples/rag-demo`
@@ -178,13 +112,13 @@ Runwise 可以识别 `OPENAI_BASE_URL`、OpenAI-compatible API、Ollama、DashSc
 - `examples/codex-project-demo`
 - `examples/traces`
 
-这些示例是轻量兼容性示例和 fixture，不是生产 AI 应用。
+这些示例都是轻量 fixture。它们不会安装真实 AI framework，不会调用外部 API，不会运行模型，也不会执行工具。
 
-## 架构
+## 架构概览
 
 ```text
 apps/
-  dashboard/                 本地 report-file Dashboard Viewer。
+  dashboard/                 本地 report-file dashboard viewer。
   docs/                      文档应用外壳。
 packages/
   cli/                       Runwise 命令行界面。
@@ -198,42 +132,33 @@ docs/
   zh-CN/                     简体中文 Markdown 文档。
 ```
 
+Runwise 不会运行你的 agent、执行工具、上传 trace、训练模型，也不会把项目数据存到 hosted service。
+
 ## 路线图
 
 - Phase 0-2：项目基础、Doctor CLI、规则引擎和评分。
-- Phase 3-5：报告、本地 Dashboard 查看器和 GitHub Action 就绪度检查。
-- Phase 6-8：Trace 验证、静态回放和 Failure-to-Eval 生成。
+- Phase 3-5：报告、本地 dashboard viewer 和 GitHub Action 就绪度检查。
+- Phase 6-8：Trace 验证、静态复盘和 Failure-to-Eval 生成。
 - Phase 9：生态兼容性检测和示例。
-- Phase 10：开源发布前展示与仓库材料打磨。
+- Phase 10：开源发布展示打磨。
+- Phase 11：首次开发者体验、示例和报告可读性。
 
-见 [ROADMAP.md](./ROADMAP.md)。
-
-## 下一轮迭代
-
-下一版 preview 会优先让 Runwise 更容易试用、更容易信任，而不是增加 hosted 产品能力。
-
-- 让首次运行流程更清楚。
-- 根据反馈检查 Doctor finding 是否误报或漏报。
-- 改进报告示例和 README 表达。
-- 持续收集公开预览帖子和 GitHub Issues 中的反馈。
-- 在未来是否发布 npm 前，先审查 package metadata。
-
-见 [下一轮迭代计划](./docs/NEXT_ITERATION_PLAN.zh-CN.md)。
+见 [ROADMAP.md](./ROADMAP.md) 和 [下一轮迭代计划](./docs/NEXT_ITERATION_PLAN.zh-CN.md)。
 
 ## 欢迎反馈
 
-Runwise 目前处于公开预览阶段。我们尤其希望收到这些反馈：
+Runwise 目前处于 public preview。最有帮助的反馈包括：
 
-- Doctor 规则是否误报或漏报
-- AI 生态检测线索是否准确
+- Doctor finding 是否误报或漏报
+- AI 生态检测线索是否缺失
 - trace schema 是否好用
-- replay 复盘报告是否清楚
+- replay 报告是否清楚
 - Failure-to-Eval 是否有实际价值
-- 国内大模型服务商检测是否完整
+- 国内大模型服务商检测还缺什么
 
 请不要在公开 issue 中包含密钥、客户隐私数据或专有 trace。
 
-参见 [反馈指南](./docs/FEEDBACK_GUIDE.zh-CN.md)、[早期用户测试指南](./docs/EARLY_USER_TESTING_GUIDE.zh-CN.md) 和 [最终发布文案包](./docs/FINAL_LAUNCH_COPY_PACK.zh-CN.md)。
+参见 [反馈指南](./docs/FEEDBACK_GUIDE.zh-CN.md)、[早期用户测试指南](./docs/EARLY_USER_TESTING_GUIDE.zh-CN.md) 和 [反馈到路线图 Review](./docs/FEEDBACK_TO_ROADMAP_REVIEW.zh-CN.md)。
 
 ## 贡献
 

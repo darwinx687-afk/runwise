@@ -1,59 +1,78 @@
 # 下一轮迭代计划
 
-本文档用于规划 `v0.1.0-preview.0` 之后的下一轮 Runwise preview。
-
-它只是计划说明，不是发布公告。不要仅凭本文档发布 npm package、创建 tag、创建 release，或修改 `ROADMAP.md`。
-
 ## 定位
 
-Runwise 帮你在 AI Agent 项目上线前做检查和复盘。
+Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
-它应该像一个本地开发工具：运行检查、阅读报告、查看 trace、复盘发生了什么，并把失败沉淀成 eval case 文件。
+它会在本地检查项目结构、生成报告、验证 trace、静态复盘运行过程，并把失败记录转成 eval 用例。
 
 ## 下一版 Preview 的目标
 
-让 Runwise 在前五分钟里更容易试用、更容易解释，也更容易建立信任。
+在增加更大产品能力之前，先让 Runwise 更容易理解、更容易从源码试用、更容易 review。
 
-## 计划工作
+下一轮仍然保持本地优先、源码安装友好，并诚实说明 public preview 状态。
 
-- 改进 README 和文档里的首次运行说明。
-- 让 Doctor finding 更容易看懂。
-- 根据早期反馈检查误报、漏报和评分问题。
-- 增加更清楚的报告示例，但不引入 hosted service。
-- 保持 trace replay 和 Failure-to-Eval 示例小而实用。
-- 在未来是否发布 npm 前，先审查 package metadata。
+## Phase 11 结构
+
+### 11B - First 5-Minute Experience
+
+状态：本轮已完成。
+
+重点：
+
+- README 第一印象更清楚
+- 5 分钟源码试用流程
+- 首次运行 walkthrough
+- 示例 Gallery
+- 简单视觉说明
+- 文档入口整理
+
+### 11C - Example Gallery Polish
+
+重点：
+
+- 根据真实首次运行反馈改进示例说明
+- 如有帮助，添加小型报告截图或静态 sample snippet
+- 让命令结果更容易对比
+- 保持示例轻量、本地化
+
+### 11D - Visual Report Polish
+
+重点：
+
+- 改进 Markdown 和 HTML 报告可读性
+- 让 finding 更容易扫描
+- 解释清楚 score、severity、blocking 和 ecosystem 区块
+- 不添加 hosted dashboard 或复杂产品界面
+
+### 11E - Plugin Architecture Exploration
+
+重点：
+
+- 探索未来 check 如何分组或扩展
+- 保持当前 rule engine 稳定
+- 先记录 extension boundary，再决定是否实现
+- 在首次运行清晰度和报告可读性改善前，不提前引入 plugin 复杂度
 
 ## 反馈来源
 
-- GitHub Issues。
-- 可访问的公开发布评论。
-- `docs/LAUNCH_POSTING_TRACKER.zh-CN.md`。
-- `docs/FEEDBACK_TO_ROADMAP_REVIEW.zh-CN.md`。
-- 早期用户提供的安全、已脱敏示例。
-
-## 候选 Loop
-
-| Loop | 重点 | 输出 |
-| --- | --- | --- |
-| Phase 11B | 首次运行更清楚 | README/docs 清理、命令 walkthrough、更清楚的源码安装说明 |
-| Phase 11C | Doctor 实用性复盘 | 误报、漏报和评分调整草案 |
-| Phase 11D | 报告和 replay 示例 | 更清楚的示例输出，必要时补充截图或静态产物 |
-| Phase 11E | Package metadata 审查 | 仅 npm-readiness checklist，不发布 |
+- 用户打开的 GitHub Issues 和 Discussions。
+- 可见的公开发布帖子评论。
+- 真实源码试用者的手动反馈。
+- 用 Runwise 检查示例项目时发现的问题。
 
 ## 非目标
 
-- 本计划不发布 npm。
-- 不创建新 release 或 tag。
-- 不添加 hosted dashboard、cloud sync、登录、计费或数据库。
-- 不添加 telemetry 或 analytics。
-- 不做 agent runtime orchestration。
-- 不添加隐藏模型调用、模型评审或 eval 执行。
-- 不声明官方集成或官方合作。
+- 发布 npm。
+- 发布 GitHub Marketplace。
+- hosted service、登录、计费、数据库或 cloud sync。
+- agent runtime orchestration。
+- 模型调用、模型评审或 eval 执行。
+- 声明官方生态合作。
 
 ## 成功标准
 
-- 新访客能在一两分钟内理解 Runwise。
-- 开发者能按源码安装路径运行，不需要猜下一条命令。
-- Doctor、trace replay 和 Failure-to-Eval 都有清楚的白话说明。
-- 反馈能被归类为文档修复、Doctor 规则修复、integration signal 或暂缓的非目标。
-- 任何未来 package 或 release 步骤发生前，都先有 checklist。
+- 新访客能在 README 第一屏理解 Runwise 做什么。
+- 开发者能在大约 5 分钟内跑完源码试用流程并看到报告。
+- 示例说明不只是文件列表，而是告诉用户应该看什么。
+- 报告和 replay 反馈可以转成小而明确的后续任务。

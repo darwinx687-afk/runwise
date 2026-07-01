@@ -79,3 +79,7 @@ Public launch feedback intake uses GitHub Issues, repository labels, and bilingu
 ## D020: Keep public launch execution manual
 
 Public launch execution remains manual, with feedback collected through GitHub Issues and maintained through docs-based trackers before adding any analytics or hosted feedback system.
+
+## D022: Prioritize first-time developer experience before new product capabilities
+
+Phase 11 prioritizes first-time developer experience and understanding before adding new product capabilities.

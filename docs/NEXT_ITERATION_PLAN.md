@@ -1,59 +1,78 @@
 # Next Iteration Plan
 
-This plan prepares the next Runwise preview iteration after `v0.1.0-preview.0`.
-
-It is a planning note, not a release announcement. Do not publish npm packages, create tags, create releases, or change `ROADMAP.md` from this file alone.
-
 ## Positioning
 
 Runwise helps you check AI agent projects before they go live.
 
-It should feel like a local developer tool: run a check, read the report, review a trace, replay what happened, and turn failures into eval case files.
+It runs locally, reviews project setup, generates reports, validates traces, replays runs, and turns failures into eval cases.
 
 ## Goal For The Next Preview
 
-Make Runwise easier to try, easier to explain, and easier to trust from the first five minutes.
+Make Runwise easier to understand, try, and review from source before adding larger product capabilities.
 
-## Planned Work
+The next iteration should keep the product local-first, source-install friendly, and honest about public preview status.
 
-- Improve first-run guidance in README and docs.
-- Make Doctor findings easier to understand.
-- Review early feedback for noisy or missing checks.
-- Add clearer report examples without adding hosted services.
-- Keep trace replay and Failure-to-Eval examples practical and small.
-- Review package metadata before any future npm publishing decision.
+## Phase 11 Structure
+
+### 11B - First 5-Minute Experience
+
+Status: completed in this loop.
+
+Focus:
+
+- clearer README first impression
+- 5-minute source-install flow
+- first-run walkthrough
+- example gallery
+- simple visual explanation
+- docs landing page cleanup
+
+### 11C - Example Gallery Polish
+
+Focus:
+
+- improve example descriptions based on real first-run feedback
+- add small report screenshots or static sample snippets if useful
+- make command outcomes easier to compare
+- keep examples lightweight and local
+
+### 11D - Visual Report Polish
+
+Focus:
+
+- improve Markdown and HTML report readability
+- make findings easier to scan
+- clarify score, severity, blocking, and ecosystem sections
+- avoid adding hosted dashboard or complex product surface
+
+### 11E - Plugin Architecture Exploration
+
+Focus:
+
+- explore how future checks could be grouped or extended
+- keep the current rule engine stable
+- document extension boundaries before implementation
+- avoid plugin complexity until first-run clarity and report readability are better
 
 ## Feedback Inputs
 
-- GitHub Issues.
-- Public launch post comments where available.
-- `docs/LAUNCH_POSTING_TRACKER.md`.
-- `docs/FEEDBACK_TO_ROADMAP_REVIEW.md`.
-- Safe, redacted examples from early users.
-
-## Candidate Loops
-
-| Loop | Focus | Output |
-| --- | --- | --- |
-| Phase 11B | First-run clarity | README/docs cleanup, command walkthrough, clearer source-install notes |
-| Phase 11C | Doctor usefulness review | Draft list of noisy findings, missing checks, and scoring tweaks |
-| Phase 11D | Report and replay examples | Better example outputs and screenshots or static artifacts where useful |
-| Phase 11E | Package metadata review | npm-readiness checklist only, no publishing |
+- GitHub Issues and Discussions if users open them.
+- Public launch post comments when visible.
+- Manual feedback from people trying source install.
+- Local findings from running Runwise against example projects.
 
 ## Non-Goals
 
-- No npm publishing in this plan.
-- No new release or tag.
-- No hosted dashboard, cloud sync, login, billing, or database.
-- No telemetry or analytics.
-- No agent runtime orchestration.
-- No hidden model calls, model judging, or eval execution.
-- No official integration or partnership claims.
+- npm publishing.
+- GitHub Marketplace publishing.
+- hosted services, login, billing, database, or cloud sync.
+- agent runtime orchestration.
+- model calls, model judging, or eval execution.
+- official ecosystem partnership claims.
 
 ## Success Criteria
 
-- A new visitor can understand Runwise in one or two minutes.
-- A developer can run the local source install path without guessing the next command.
-- Doctor, trace replay, and Failure-to-Eval each have a plain-language explanation.
-- Feedback can be sorted into docs fixes, Doctor rule fixes, integration signals, or deferred non-goals.
-- Any future package or release step has a checklist before it happens.
+- A new visitor can understand what Runwise does in the first screen of the README.
+- A developer can run the source-install flow and see a report in about 5 minutes.
+- Examples explain what to look for, not just where files live.
+- Report and replay feedback can be turned into small, concrete follow-up tasks.

@@ -17,22 +17,18 @@ Runwise helps you check AI agent projects before they go live.
 
 It runs locally, reviews your project setup, generates reports, validates traces, replays runs, and turns failures into eval cases.
 
-Use it when a demo works, but you still need to understand whether the project is ready to share, review, or ship. Runwise is not an agent framework, chatbot product, hosted SaaS, Dify/OpenWebUI clone, Langfuse/Promptfoo replacement, or model training framework.
+Use it when your AI demo already runs, but you still need to answer:
 
-## Why Runwise
+- Is this project ready to review?
+- Are risky tools or MCP servers visible?
+- Do we have trace records?
+- Can we replay a failed run?
+- Can we turn that failure into an eval case?
+- Can we share a clear report with a team or client?
 
-AI agent projects can look fine in a demo and still hide risk in prompts, tools, MCP servers, retrieval, approvals, or deployment assumptions. Runwise helps you find those risks earlier without uploading project data.
+**Public preview:** Runwise is source-install only. There is no npm package yet, no GitHub Marketplace release, and no official ecosystem integration or partnership claim. It is local-first, does not upload project data, does not call models, and does not require login.
 
-- Check project setup with structured Doctor rules.
-- Generate JSON, Markdown, and static HTML reports.
-- Validate `runwise.agent_trace` files before replay or eval generation.
-- Review a run with a static trace replay report.
-- Turn failures and risky runs into reusable eval case files.
-- Detect local signals for common AI project stacks.
-
-## Quick Start
-
-Runwise currently runs from source.
+## Try it in 5 minutes
 
 ```bash
 git clone https://github.com/darwinx687-afk/runwise.git
@@ -44,31 +40,51 @@ pnpm exec runwise doctor
 pnpm exec runwise view
 ```
 
-## What Runwise Does
+Generated reports:
+
+```text
+.runwise/runwise-report.json
+.runwise/runwise-report.md
+.runwise/runwise-report.html
+```
+
+If your global pnpm behaves differently, use the package manager version declared in `package.json` or enable Corepack.
+
+## What you will see
+
+After running `runwise doctor`, you get:
+
+- a readiness score
+- a list of findings
+- detected AI project ecosystems
+- JSON / Markdown / HTML reports
+- a local dashboard view
+
+<p align="center">
+  <img src="./assets/runwise-5-minute-flow.svg" alt="Runwise 5-minute flow">
+</p>
+
+For a quick before/after view, see [the visual overview](./assets/runwise-before-after.svg).
+
+## Start here
+
+- [First Run Walkthrough](./docs/FIRST_RUN_WALKTHROUGH.md)
+- [Example Gallery](./docs/EXAMPLE_GALLERY.md)
+- [English Docs](./docs/en/index.md)
+- [Chinese Docs](./docs/zh-CN/index.md)
+- [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)
+
+## What Runwise does today
 
 | Area | Current capability |
 | --- | --- |
-| Doctor | Local readiness checks for workspace shape, package manager state, TypeScript config, governance files, AI indicators, MCP indicators, eval coverage, trace coverage, and ecosystem signals. |
-| Reports | JSON, Markdown, and static HTML artifacts under `.runwise/`. |
-| Dashboard | Local viewer served from `.runwise/runwise-report.json`. |
-| Trace | Local `runwise.agent_trace` validation for files and directories. |
-| Replay | Static Markdown reports that explain what happened in a validated trace. |
-| Failure-to-Eval | Deterministic JSON/YAML/Markdown eval case generation from validated traces. |
-| Ecosystem detection | Local heuristic profiles for MCP, LangChain, OpenAI Agents, Dify, browser-use, Claude Code, Codex, Cursor, Windsurf, Ollama, OpenAI-compatible APIs, and China-ready LLM providers. |
-
-## Core Workflow
-
-```text
-project source
-  -> runwise doctor
-  -> local reports
-  -> trace validation
-  -> static replay
-  -> eval case files
-  -> review / CI evidence
-```
-
-Runwise does not call models, execute tools, run agents, upload traces, train models, or require login.
+| Doctor | Checks workspace shape, package manager state, TypeScript config, governance files, AI indicators, MCP indicators, trace coverage, eval coverage, and ecosystem signals. |
+| Reports | Writes JSON, Markdown, and static HTML artifacts under `.runwise/`. |
+| View | Opens a local dashboard viewer from `.runwise/runwise-report.json`. |
+| Trace validation | Validates local `runwise.agent_trace` files and directories. |
+| Trace replay | Builds a static Markdown review of a validated trace. |
+| Failure-to-Eval | Generates deterministic JSON/YAML/Markdown eval case drafts from validated traces. |
+| Ecosystem detection | Looks for local signals from MCP, RAG, browser agents, Dify-style workflows, Codex-style projects, OpenAI-compatible APIs, and China-ready LLM providers. |
 
 ## Commands
 
@@ -84,91 +100,9 @@ pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
 
 Directory trace validation may exit with code `1` if invalid fixtures are included.
 
-## Reports
+## Example projects
 
-`runwise doctor` writes:
-
-```text
-.runwise/runwise-report.json
-.runwise/runwise-report.md
-.runwise/runwise-report.html
-```
-
-Static HTML report = shareable file generated by doctor.
-
-Local Dashboard Viewer = interactive local viewer served from report JSON.
-
-Generated `.runwise/` files are ignored and should remain reproducible local outputs.
-
-## Local Dashboard Viewer
-
-```bash
-pnpm exec runwise view
-```
-
-The viewer reads `.runwise/runwise-report.json` locally and does not upload project data.
-
-## GitHub Action
-
-Current local usage:
-
-```yaml
-- uses: ./
-  with:
-    min-score: "70"
-    fail-on-blocking: "true"
-    fail-on-severity: "critical"
-```
-
-Future public usage after the public repository and release tag are created:
-
-```yaml
-- uses: <owner>/<repo>@v0
-```
-
-Runwise is not claiming GitHub Marketplace availability in this preview.
-
-## Trace Schema
-
-Runwise defines a lightweight local trace format for AI Agent, MCP, RAG and LLM application runs. It records run metadata, model/environment hints, and ordered steps such as LLM calls, tool calls, MCP tool calls, RAG retrieval, approvals, errors, and final output.
-
-```bash
-pnpm exec runwise trace validate examples/traces/valid-agent-run.json
-```
-
-## Trace Replay
-
-Replay reads a validated trace and explains the timeline, risk points, approval flow, and errors without re-running the agent or calling any model.
-
-```bash
-pnpm exec runwise trace replay examples/traces/mcp-risk-agent-run.json
-```
-
-## Failure-to-Eval
-
-Runwise can turn a validated trace into reusable eval case files. This helps teams convert real failures, high-risk tool runs, missing approvals, and RAG grounding issues into regression-test assets.
-
-```bash
-pnpm exec runwise eval generate examples/traces/mcp-risk-agent-run.json
-```
-
-Runwise only generates eval case files. It does not execute evals or call any model.
-
-## Ecosystem Compatibility
-
-Runwise detects local signals for common AI project ecosystems such as MCP, LangChain, OpenAI Agents, Dify, browser-use, Claude Code, Codex, Cursor, Windsurf, Ollama, OpenAI-compatible APIs, and China-ready LLM providers.
-
-Detection is local and heuristic. Runwise does not execute these frameworks or send data anywhere, and it does not claim official partnerships with ecosystem vendors.
-
-## China-Ready / Global-Ready Notes
-
-Runwise can detect placeholder signals such as `OPENAI_BASE_URL`, OpenAI-compatible API usage, Ollama, DashScope/Qwen, DeepSeek, Moonshot/Kimi, Zhipu/GLM, Minimax, Baichuan, and SiliconFlow.
-
-Use these findings to document provider base URLs, model names, data boundaries, rate limits, and fallback behavior before deployment.
-
-## Example Projects
-
-See [examples/README.md](./examples/README.md).
+Start with [the Example Gallery](./docs/EXAMPLE_GALLERY.md) if you want to see what each example is meant to show.
 
 - `examples/mcp-demo`
 - `examples/rag-demo`
@@ -178,13 +112,13 @@ See [examples/README.md](./examples/README.md).
 - `examples/codex-project-demo`
 - `examples/traces`
 
-These examples are lightweight compatibility examples and fixtures, not production AI apps.
+The examples are lightweight fixtures. They do not install real AI frameworks, call external APIs, run models, or execute tools.
 
-## Architecture
+## Architecture overview
 
 ```text
 apps/
-  dashboard/                 Local report-file Dashboard Viewer.
+  dashboard/                 Local report-file dashboard viewer.
   docs/                      Documentation app shell.
 packages/
   cli/                       Runwise command-line interface.
@@ -198,42 +132,33 @@ docs/
   zh-CN/                     Simplified Chinese Markdown docs.
 ```
 
+Runwise does not run your agent, execute tools, upload traces, train models, or store project data in a hosted service.
+
 ## Roadmap
 
 - Phase 0-2: Foundation, Doctor CLI, rule engine, and scoring.
 - Phase 3-5: Reports, local dashboard viewer, and GitHub Action readiness check.
 - Phase 6-8: Trace validation, static replay, and Failure-to-Eval generation.
 - Phase 9: Ecosystem compatibility detection and examples.
-- Phase 10: Open-source launch polish and repository presentation.
+- Phase 10: Open-source launch polish.
+- Phase 11: First-time developer experience, examples, and report readability.
 
-See [ROADMAP.md](./ROADMAP.md).
+See [ROADMAP.md](./ROADMAP.md) and [Next Iteration Plan](./docs/NEXT_ITERATION_PLAN.md).
 
-## Next Iteration
+## Feedback wanted
 
-The next preview work is focused on making Runwise easier to try and easier to trust, not on adding hosted product surface.
-
-- Make the first-run experience clearer.
-- Review Doctor findings for noisy or missing checks.
-- Improve report examples and README wording.
-- Collect feedback from public preview posts and GitHub Issues.
-- Review package metadata before any future npm publishing decision.
-
-See [Next Iteration Plan](./docs/NEXT_ITERATION_PLAN.md).
-
-## Feedback Wanted
-
-Runwise is in public preview. We are especially looking for feedback on:
+Runwise is in public preview. Useful feedback includes:
 
 - noisy or missing Doctor findings
-- AI ecosystem detection signals
+- missing AI ecosystem detection signals
 - trace schema usability
 - replay report clarity
 - Failure-to-Eval usefulness
-- China-ready LLM provider detection
+- China-ready LLM provider detection gaps
 
 Please do not include secrets, private customer data, or proprietary traces in public issues.
 
-See [Feedback Guide](./docs/FEEDBACK_GUIDE.md), [Early User Testing Guide](./docs/EARLY_USER_TESTING_GUIDE.md), and [Final Launch Copy Pack](./docs/FINAL_LAUNCH_COPY_PACK.md).
+See [Feedback Guide](./docs/FEEDBACK_GUIDE.md), [Early User Testing Guide](./docs/EARLY_USER_TESTING_GUIDE.md), and [Feedback-to-Roadmap Review](./docs/FEEDBACK_TO_ROADMAP_REVIEW.md).
 
 ## Contributing
 

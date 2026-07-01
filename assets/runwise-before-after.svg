@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
+  <title id="title">Runwise before and after</title>
+  <desc id="desc">Before Runwise the demo runs but review artifacts are missing. After Runwise there are reports, trace validation, replay, eval cases, and a local dashboard.</desc>
+  <defs>
+    <style>
+      .title { font: 700 28px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .heading { font: 700 24px Arial, Helvetica, sans-serif; fill: #0f172a; }
+      .item { font: 500 20px Arial, Helvetica, sans-serif; fill: #334155; }
+      .small { font: 400 16px Arial, Helvetica, sans-serif; fill: #64748b; }
+      .cn { font: 500 18px Arial, Helvetica, sans-serif; fill: #0f766e; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1120" height="520" fill="#ffffff"/>
+  <text x="560" y="52" text-anchor="middle" class="title">Before and after Runwise</text>
+  <text x="560" y="82" text-anchor="middle" class="small">From a working demo to reviewable local evidence</text>
+
+  <rect x="70" y="124" width="440" height="300" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="110" y="174" class="heading">Before</text>
+  <circle cx="116" cy="220" r="5" fill="#94a3b8"/>
+  <text x="138" y="226" class="item">AI demo runs</text>
+  <circle cx="116" cy="262" r="5" fill="#94a3b8"/>
+  <text x="138" y="268" class="item">But hard to review</text>
+  <circle cx="116" cy="304" r="5" fill="#94a3b8"/>
+  <text x="138" y="310" class="item">No clear report</text>
+  <circle cx="116" cy="346" r="5" fill="#94a3b8"/>
+  <text x="138" y="352" class="item">No replay</text>
+  <circle cx="116" cy="388" r="5" fill="#94a3b8"/>
+  <text x="138" y="394" class="item">No eval case</text>
+
+  <rect x="610" y="124" width="440" height="300" rx="8" fill="#ecfeff" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="650" y="174" class="heading">After Runwise</text>
+  <circle cx="656" cy="220" r="5" fill="#0f766e"/>
+  <text x="678" y="226" class="item">Readiness report</text>
+  <circle cx="656" cy="262" r="5" fill="#0f766e"/>
+  <text x="678" y="268" class="item">Trace validation</text>
+  <circle cx="656" cy="304" r="5" fill="#0f766e"/>
+  <text x="678" y="310" class="item">Static replay</text>
+  <circle cx="656" cy="346" r="5" fill="#0f766e"/>
+  <text x="678" y="352" class="item">Failure-to-Eval</text>
+  <circle cx="656" cy="388" r="5" fill="#0f766e"/>
+  <text x="678" y="394" class="item">Local dashboard</text>
+
+  <path d="M 528 274 L 588 274" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <text x="560" y="472" text-anchor="middle" class="cn">从“能跑”到“能检查、能复盘、能分享”</text>
+</svg>

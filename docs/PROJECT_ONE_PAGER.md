@@ -6,6 +6,12 @@ Runwise helps you check AI agent projects before they go live.
 
 It runs locally, reviews project setup, generates reports, validates traces, replays runs, and turns failures into eval case files.
 
+## First 30 Seconds
+
+Runwise is for the moment after your AI agent demo starts working, but before you are comfortable shipping it.
+
+It helps you check the project, generate a report, validate traces, replay what happened, and turn failures into eval cases.
+
 ## Current Release
 
 - Release: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0

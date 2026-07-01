@@ -90,3 +90,11 @@
 - Replace placeholder repository URL text.
 - Run launch readiness checks one final time.
 - Push the initial branch and defer npm publishing until package metadata is reviewed.
+
+## Phase 11: Developer Experience and First Impression
+
+- Make the first-run path clear for source-install users.
+- Keep examples useful, lightweight, and easy to review.
+- Improve README, docs landing pages, walkthroughs, and report readability.
+- Avoid feature bloat while public preview feedback is still early.
+- Explore plugin architecture only after developer experience and report clarity improve.

@@ -6,6 +6,12 @@ Runwise 帮你在 AI Agent 项目上线前做检查和复盘。
 
 它在本地运行，检查项目设置，生成报告，验证 trace，复盘运行过程，并把失败转成 eval case 文件。
 
+## 前 30 秒怎么理解它
+
+Runwise 适合用在一个 AI Agent demo 已经能跑，但你还不确定它能不能交付或上线的时候。
+
+它帮你检查项目、生成报告、验证 trace、复盘运行过程，并把失败记录转成 eval 用例。
+
 ## 当前版本
 
 - Release: https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0
