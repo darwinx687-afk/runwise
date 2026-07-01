@@ -7,9 +7,11 @@ They are not generated `.runwise/` artifacts and should stay small enough to rea
 ## Samples
 
 - [Doctor report sample](./doctor-report-sample.md)
+- [Visual report sample](./visual-report-sample.md)
 - [Trace replay sample](./trace-replay-sample.md)
 - [Failure-to-Eval sample](./failure-to-eval-sample.md)
 - [Ecosystem detection sample](./ecosystem-detection-sample.md)
+- [Report preview SVG](../../assets/report-preview.svg)
 
 ## What These Samples Are For
 
@@ -18,3 +20,5 @@ They are not generated `.runwise/` artifacts and should stay small enough to rea
 - Keep demo evidence readable without committing generated local reports.
 
 For the real first run, see the [First Run Walkthrough](../FIRST_RUN_WALKTHROUGH.md).
+
+For help reading a generated report, see the [Report Reading Guide](../REPORT_READING_GUIDE.md).

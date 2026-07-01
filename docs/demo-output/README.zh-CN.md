@@ -7,9 +7,11 @@
 ## 示例
 
 - [Doctor 报告示例](./doctor-report-sample.zh-CN.md)
+- [可视化报告示例](./visual-report-sample.zh-CN.md)
 - [Trace Replay 示例](./trace-replay-sample.zh-CN.md)
 - [Failure-to-Eval 示例](./failure-to-eval-sample.zh-CN.md)
 - [生态检测示例](./ecosystem-detection-sample.zh-CN.md)
+- [报告预览图](../../assets/report-preview.svg)
 
 ## 这些示例用来做什么
 
@@ -18,3 +20,5 @@
 - 保持示例证据可读，同时不提交生成的本地报告。
 
 如果想真实跑一遍，请看 [首次运行 Walkthrough](../FIRST_RUN_WALKTHROUGH.zh-CN.md)。
+
+如果想知道怎样阅读生成后的报告，请看 [报告阅读指南](../REPORT_READING_GUIDE.zh-CN.md)。

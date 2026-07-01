@@ -46,6 +46,7 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
       --medium: #a16207;
       --low: #2563eb;
       --info: #4b5563;
+      --success: #15803d;
       --shadow: 0 14px 42px rgba(21, 24, 22, 0.08);
     }
 
@@ -165,12 +166,26 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
       background: var(--panel-soft);
       min-height: 88px;
     }
+    .card-score { border-color: color-mix(in srgb, var(--accent), var(--border) 58%); }
+    .card-success { border-color: color-mix(in srgb, var(--success), var(--border) 60%); }
+    .card-critical { border-color: color-mix(in srgb, var(--critical), var(--border) 62%); }
+    .card-high { border-color: color-mix(in srgb, var(--high), var(--border) 62%); }
+    .card-medium { border-color: color-mix(in srgb, var(--medium), var(--border) 64%); }
+    .card-low { border-color: color-mix(in srgb, var(--low), var(--border) 64%); }
+    .card-info { border-color: color-mix(in srgb, var(--info), var(--border) 70%); }
     .card-value {
       margin-top: 4px;
       font-size: 1.65rem;
       font-weight: 780;
       overflow-wrap: anywhere;
     }
+    .card-score .card-value { color: var(--accent); }
+    .card-success .card-value { color: var(--success); }
+    .card-critical .card-value { color: var(--critical); }
+    .card-high .card-value { color: var(--high); }
+    .card-medium .card-value { color: var(--medium); }
+    .card-low .card-value { color: var(--low); }
+    .card-info .card-value { color: var(--info); }
     .bar-list {
       display: grid;
       gap: 12px;
@@ -290,9 +305,10 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
     <header>
       <div>
         <h1>Runwise</h1>
-        <p class="tagline">Local-first AI readiness, tracing, replay and eval toolkit.</p>
-        <p class="tagline">面向 AI 项目的本地优先上线体检、运行审计、失败回放与评测生成工具。</p>
+        <p class="tagline">Runwise helps you check AI agent projects before they go live.</p>
+        <p class="tagline">Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。</p>
         <div class="meta">
+          ${renderMetaRow("Mode", "Public preview · local-first / 公开预览 · 本地优先")}
           ${renderMetaRow("Generated", report.generatedAt)}
           ${renderMetaRow("Scanned path", report.scannedPath)}
         </div>
@@ -307,15 +323,15 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
     </header>
 
     <section class="section" aria-labelledby="score-cards-title">
-      <h2 id="score-cards-title">Score Cards / 评分卡</h2>
+      <h2 id="score-cards-title">Score overview / 评分概览</h2>
       <div class="grid">
-        ${renderMetricCard("Overall score", `${report.summary.overallScore}/100`)}
-        ${renderMetricCard("Critical", report.summary.critical)}
-        ${renderMetricCard("High", report.summary.high)}
-        ${renderMetricCard("Medium", report.summary.medium)}
-        ${renderMetricCard("Low", report.summary.low)}
-        ${renderMetricCard("Info", report.summary.info)}
-        ${renderMetricCard("Blocking findings", report.rules.blocking)}
+        ${renderMetricCard("Overall score", `${report.summary.overallScore}/100`, "card-score")}
+        ${renderMetricCard("Critical", report.summary.critical, "card-critical")}
+        ${renderMetricCard("High", report.summary.high, "card-high")}
+        ${renderMetricCard("Medium", report.summary.medium, "card-medium")}
+        ${renderMetricCard("Low", report.summary.low, "card-low")}
+        ${renderMetricCard("Info", report.summary.info, "card-info")}
+        ${renderMetricCard("Blocking findings", report.rules.blocking, "card-critical")}
       </div>
     </section>
 
@@ -323,10 +339,10 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
       <h2 id="rules-title">Rule Summary / 规则摘要</h2>
       <div class="grid">
         ${renderMetricCard("Total rules", report.rules.total)}
-        ${renderMetricCard("Passed", report.rules.passed)}
-        ${renderMetricCard("Failed", report.rules.failed)}
+        ${renderMetricCard("Passed", report.rules.passed, "card-success")}
+        ${renderMetricCard("Failed", report.rules.failed, "card-high")}
         ${renderMetricCard("Not applicable", report.rules.notApplicable)}
-        ${renderMetricCard("Blocking", report.rules.blocking)}
+        ${renderMetricCard("Blocking", report.rules.blocking, "card-critical")}
       </div>
     </section>
 
@@ -341,7 +357,7 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
     </section>
 
     <section class="section" aria-labelledby="fix-title">
-      <h2 id="fix-title">What to Fix First / 优先修复项</h2>
+      <h2 id="fix-title">What to fix first / 优先修复项</h2>
       ${renderPriorityFindings(priorityFindings)}
     </section>
 
@@ -354,14 +370,14 @@ export function renderDashboardHtml(report: RunwiseDoctorReport): string {
 
     <section class="section" aria-labelledby="report-links-title">
       <h2 id="report-links-title">Report Links / 报告路径</h2>
-      <p class="detail">These files are generated locally under the project <code>.runwise</code> directory.</p>
-      <p class="detail">这些文件位于项目本地的 <code>.runwise</code> 目录中。</p>
+      <p class="detail">These files are generated locally and ignored by git by default.</p>
+      <p class="detail">这些文件在本地生成，默认不会被 git 跟踪。</p>
       ${renderReportFiles(report)}
     </section>
 
     <footer>
-      <p>Runwise is local-first. This viewer reads your generated report file and does not send data anywhere.</p>
-      <p>Runwise 采用本地优先设计。此查看器只读取本地生成的报告文件，不会上传数据。</p>
+      <p>Generated by Runwise. Local-first. No project data is uploaded.</p>
+      <p>由 Runwise 生成。本地优先，不上传项目数据。</p>
     </footer>
   </main>
   <script>
@@ -399,8 +415,9 @@ function renderMetaRow(label: string, value: string): string {
   return `<div class="meta-row"><div class="label">${escapeHtml(label)}</div><div class="value">${escapeHtml(value)}</div></div>`;
 }
 
-function renderMetricCard(label: string, value: string | number): string {
-  return `<div class="card"><div class="label">${escapeHtml(label)}</div><div class="card-value">${escapeHtml(String(value))}</div></div>`;
+function renderMetricCard(label: string, value: string | number, className = ""): string {
+  const classes = className ? `card ${className}` : "card";
+  return `<div class="${classes}"><div class="label">${escapeHtml(label)}</div><div class="card-value">${escapeHtml(String(value))}</div></div>`;
 }
 
 function renderCategoryScores(categoryScores: RunwiseDoctorReport["summary"]["categoryScores"]): string {
@@ -422,7 +439,7 @@ function renderCategoryScores(categoryScores: RunwiseDoctorReport["summary"]["ca
 
 function renderPriorityFindings(findings: RunwiseFinding[]): string {
   if (findings.length === 0) {
-    return `<div class="empty-state">No priority findings. Keep the current readiness baseline healthy.<br>暂无优先修复项，请保持当前就绪度基线。</div>`;
+    return `<div class="empty-state">No blocking, critical, or high-priority findings were found. Review medium and low findings when you have time.<br>没有发现 blocking、critical 或 high 级别问题。你可以在有时间时继续查看 medium 和 low 级别建议。</div>`;
   }
 
   return `<div class="finding-list">${findings.map(renderFindingCard).join("\n")}</div>`;

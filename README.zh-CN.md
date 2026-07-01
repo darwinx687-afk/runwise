@@ -75,11 +75,17 @@ pnpm exec runwise view
 - [Trace Replay 示例](./docs/demo-output/trace-replay-sample.zh-CN.md)
 - [Failure-to-Eval 示例](./docs/demo-output/failure-to-eval-sample.zh-CN.md)
 
+想先看看报告长什么样？
+
+- [可视化报告示例](./docs/demo-output/visual-report-sample.zh-CN.md)
+- [报告预览图](./assets/report-preview.svg)
+
 ## 从这里开始
 
 - [首次运行 walkthrough](./docs/FIRST_RUN_WALKTHROUGH.zh-CN.md)
 - [示例 Gallery](./docs/EXAMPLE_GALLERY.zh-CN.md)
 - [Demo Output 示例](./docs/demo-output/README.zh-CN.md)
+- [报告阅读指南](./docs/REPORT_READING_GUIDE.zh-CN.md)
 - [英文文档](./docs/en/index.md)
 - [中文文档](./docs/zh-CN/index.md)
 - [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)

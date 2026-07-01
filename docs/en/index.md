@@ -9,6 +9,7 @@ It runs locally, generates reports, validates traces, replays runs, and turns fa
 - [First Run Walkthrough](../FIRST_RUN_WALKTHROUGH.md)
 - [Example Gallery](../EXAMPLE_GALLERY.md)
 - [Demo Output Samples](../demo-output/README.md)
+- [Report Reading Guide](../REPORT_READING_GUIDE.md)
 - [Quick Start](./quick-start.md)
 - [Command Reference](./commands.md)
 - [GitHub Action](./github-action.md)
@@ -19,6 +20,8 @@ It runs locally, generates reports, validates traces, replays runs, and turns fa
 
 ## See Output Samples
 
+- [Visual report sample](../demo-output/visual-report-sample.md)
+- [Report preview SVG](../../assets/report-preview.svg)
 - [Doctor report sample](../demo-output/doctor-report-sample.md)
 - [Trace replay sample](../demo-output/trace-replay-sample.md)
 - [Failure-to-Eval sample](../demo-output/failure-to-eval-sample.md)

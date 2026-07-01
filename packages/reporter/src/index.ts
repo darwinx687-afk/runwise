@@ -132,11 +132,16 @@ export function renderMarkdownReport(
   const lines = [
     "# Runwise Doctor Report",
     "",
-    `Generated: ${report.generatedAt}`,
+    "Runwise helps you check AI agent projects before they go live.",
     "",
-    `Scanned path: ${report.scannedPath}`,
+    "Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。",
     "",
-    `Overall score: ${report.summary.overallScore}/100`,
+    "| Field | Value |",
+    "| --- | --- |",
+    `| Generated | ${escapeMarkdown(report.generatedAt)} |`,
+    `| Scanned path | ${escapeMarkdown(report.scannedPath)} |`,
+    "| Mode | Public preview · local-first / 公开预览 · 本地优先 |",
+    `| Overall score | ${report.summary.overallScore}/100 |`,
     "",
     "## Rule Summary",
     "",
@@ -159,11 +164,15 @@ export function renderMarkdownReport(
     `| Info | ${report.summary.info} |`,
     `| Blocking findings | ${report.rules.blocking} |`,
     "",
+    "## Category Scores",
+    "",
+    ...formatCategoryScoresMarkdown(report.summary.categoryScores),
+    "",
     "## Detected Ecosystems / 检测到的生态",
     "",
     ...formatIntegrationsMarkdown(report),
     "",
-    "## What to Fix First",
+    "## What to fix first / 优先修复项",
     "",
     ...formatFixFirstMarkdown(report.findings),
     "",
@@ -193,7 +202,11 @@ export function renderMarkdownReport(
     "",
     `- JSON: \`${formatReportPath(options.cwd, options.jsonPath, report.reportFiles?.json ?? ".runwise/runwise-report.json")}\``,
     `- Markdown: \`${formatReportPath(options.cwd, options.markdownPath, report.reportFiles?.markdown ?? ".runwise/runwise-report.md")}\``,
-    `- HTML: \`${formatReportPath(options.cwd, options.htmlPath, report.reportFiles?.html ?? ".runwise/runwise-report.html")}\``
+    `- HTML: \`${formatReportPath(options.cwd, options.htmlPath, report.reportFiles?.html ?? ".runwise/runwise-report.html")}\``,
+    "",
+    "These files are generated locally and ignored by git by default.",
+    "",
+    "这些文件在本地生成，默认不会被 git 跟踪。"
   );
 
   return lines.join("\n");
@@ -258,28 +271,29 @@ export function renderHtmlReport(
   const headerMetrics = [
     renderMetric("Generated", report.generatedAt),
     renderMetric("Scanned path", report.scannedPath),
-    renderMetric("Overall score", scoreBadge, false)
+    renderMetric("Mode", "Public preview · local-first / 公开预览 · 本地优先"),
+    renderMetric("Overall score", scoreBadge, false, "metric-score")
   ].join("\n");
   const scoreMetrics = [
-    renderMetric("Overall", `${report.summary.overallScore}/100`),
-    renderMetric("Critical", String(report.summary.critical)),
-    renderMetric("High", String(report.summary.high)),
-    renderMetric("Medium", String(report.summary.medium)),
-    renderMetric("Low", String(report.summary.low)),
-    renderMetric("Info", String(report.summary.info)),
-    renderMetric("Blocking", String(report.rules.blocking))
+    renderMetric("Overall", `${report.summary.overallScore}/100`, true, "metric-score"),
+    renderMetric("Critical", String(report.summary.critical), true, "metric-critical"),
+    renderMetric("High", String(report.summary.high), true, "metric-high"),
+    renderMetric("Medium", String(report.summary.medium), true, "metric-medium"),
+    renderMetric("Low", String(report.summary.low), true, "metric-low"),
+    renderMetric("Info", String(report.summary.info), true, "metric-info"),
+    renderMetric("Blocking", String(report.rules.blocking), true, "metric-critical")
   ].join("\n");
   const ruleMetrics = [
     renderMetric("Total rules", String(report.rules.total)),
-    renderMetric("Passed", String(report.rules.passed)),
-    renderMetric("Failed", String(report.rules.failed)),
+    renderMetric("Passed", String(report.rules.passed), true, "metric-success"),
+    renderMetric("Failed", String(report.rules.failed), true, "metric-high"),
     renderMetric("Not applicable", String(report.rules.notApplicable)),
-    renderMetric("Blocking", String(report.rules.blocking))
+    renderMetric("Blocking", String(report.rules.blocking), true, "metric-critical")
   ].join("\n");
   const fixFirstHtml =
     fixFirst.length > 0
       ? `<div class="finding-list">${fixFirst.map(renderFindingCard).join("\n")}</div>`
-      : `<div class="empty-state">No priority findings. / 暂无优先修复项。</div>`;
+      : `<div class="empty-state">No blocking, critical, or high-priority findings were found. Review medium and low findings when you have time.<br>没有发现 blocking、critical 或 high 级别问题。你可以在有时间时继续查看 medium 和 low 级别建议。</div>`;
   const findingsHtml = renderFindingsBySeverity(report.findings);
   const integrationsHtml = renderIntegrations(report);
   const jsonReportPath = formatReportPath(
@@ -319,6 +333,7 @@ export function renderHtmlReport(
       --medium: #b7791f;
       --low: #2563eb;
       --info: #4b5563;
+      --success: #15803d;
       --shadow: 0 18px 50px rgba(20, 24, 18, 0.08);
     }
 
@@ -372,6 +387,20 @@ export function renderHtmlReport(
       background: var(--panel);
       padding: 16px;
     }
+    .metric-score { border-color: color-mix(in srgb, var(--accent), var(--border) 58%); }
+    .metric-success { border-color: color-mix(in srgb, var(--success), var(--border) 60%); }
+    .metric-critical { border-color: color-mix(in srgb, var(--critical), var(--border) 62%); }
+    .metric-high { border-color: color-mix(in srgb, var(--high), var(--border) 62%); }
+    .metric-medium { border-color: color-mix(in srgb, var(--medium), var(--border) 64%); }
+    .metric-low { border-color: color-mix(in srgb, var(--low), var(--border) 64%); }
+    .metric-info { border-color: color-mix(in srgb, var(--info), var(--border) 70%); }
+    .metric-score .metric-value { color: var(--accent); }
+    .metric-success .metric-value { color: var(--success); }
+    .metric-critical .metric-value { color: var(--critical); }
+    .metric-high .metric-value { color: var(--high); }
+    .metric-medium .metric-value { color: var(--medium); }
+    .metric-low .metric-value { color: var(--low); }
+    .metric-info .metric-value { color: var(--info); }
     .metric-label { color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
     .metric-value { margin-top: 4px; font-size: 1.45rem; font-weight: 750; overflow-wrap: anywhere; }
     .score {
@@ -443,15 +472,15 @@ export function renderHtmlReport(
   <main>
     <header>
       <h1>Runwise</h1>
-      <p class="tagline">Local-first AI readiness, tracing, replay and eval toolkit.</p>
-      <p class="tagline">面向 AI 项目的本地优先上线体检、运行审计、失败回放与评测生成工具。</p>
+      <p class="tagline">Runwise helps you check AI agent projects before they go live.</p>
+      <p class="tagline">Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。</p>
       <div class="meta-grid">
         ${headerMetrics}
       </div>
     </header>
 
     <section class="section" aria-labelledby="score-title">
-      <h2 id="score-title">Score and Severity Summary / 评分和严重级别摘要</h2>
+      <h2 id="score-title">Score overview / 评分概览</h2>
       <div class="metric-grid">
         ${scoreMetrics}
       </div>
@@ -475,7 +504,7 @@ export function renderHtmlReport(
     </section>
 
     <section class="section" aria-labelledby="fix-first-title">
-      <h2 id="fix-first-title">What to Fix First / 优先修复项</h2>
+      <h2 id="fix-first-title">What to fix first / 优先修复项</h2>
       ${fixFirstHtml}
     </section>
 
@@ -486,14 +515,16 @@ export function renderHtmlReport(
 
     <section class="section" aria-labelledby="files-title">
       <h2 id="files-title">Report Files / 报告文件</h2>
+      <p class="detail">These files are generated locally and ignored by git by default.</p>
+      <p class="detail">这些文件在本地生成，默认不会被 git 跟踪。</p>
       <p><code>${escapeHtml(jsonReportPath)}</code></p>
       <p><code>${escapeHtml(markdownReportPath)}</code></p>
       <p><code>${escapeHtml(htmlReportPath)}</code></p>
     </section>
 
     <footer>
-      <p>Generated by Runwise.<br>Local-first AI readiness, tracing, replay and eval toolkit.</p>
-      <p>由 Runwise 生成。<br>面向 AI 项目的本地优先上线体检、运行审计、失败回放与评测生成工具。</p>
+      <p>Generated by Runwise. Local-first. No project data is uploaded.</p>
+      <p>由 Runwise 生成。本地优先，不上传项目数据。</p>
     </footer>
   </main>
 </body>
@@ -826,21 +857,52 @@ function renderCategoryScores(
     .join("\n")}</div>`;
 }
 
-function renderMetric(label: string, value: string, escapeValue = true): string {
-  return `<div class="metric"><div class="metric-label">${escapeHtml(label)}</div><div class="metric-value">${escapeValue ? escapeHtml(value) : value}</div></div>`;
+function renderMetric(label: string, value: string, escapeValue = true, className = ""): string {
+  const classes = className ? `metric ${className}` : "metric";
+  return `<div class="${classes}"><div class="metric-label">${escapeHtml(label)}</div><div class="metric-value">${escapeValue ? escapeHtml(value) : value}</div></div>`;
 }
 
 function formatFixFirstMarkdown(findings: RunwiseFinding[]): string[] {
   const priorityFindings = getPriorityFindings(findings).slice(0, 5);
 
   if (priorityFindings.length === 0) {
-    return ["No priority findings. Keep the current readiness baseline healthy."];
+    return [
+      "No blocking, critical, or high-priority findings were found. Review medium and low findings when you have time.",
+      "",
+      "没有发现 blocking、critical 或 high 级别问题。你可以在有时间时继续查看 medium 和 low 级别建议。"
+    ];
   }
 
-  return priorityFindings.map((finding) => {
-    const prefix = finding.blocking === true ? "Blocking" : capitalize(finding.severity);
-    return `- ${prefix}: ${escapeMarkdown(finding.title)} / ${escapeMarkdown(finding.titleZh)} (\`${finding.id}\`)`;
-  });
+  return [
+    "| Priority | Severity | Category | Finding | Recommendation |",
+    "| ---: | --- | --- | --- | --- |",
+    ...priorityFindings.map((finding, index) => {
+      const severity = finding.blocking === true
+        ? `blocking · ${finding.severity}`
+        : finding.severity;
+      return `| ${index + 1} | ${severity} | ${escapeMarkdown(finding.category)} | ${escapeMarkdown(finding.title)}<br>${escapeMarkdown(finding.titleZh)} | ${escapeMarkdown(finding.recommendation)}<br>${escapeMarkdown(finding.recommendationZh)} |`;
+    })
+  ];
+}
+
+function formatCategoryScoresMarkdown(
+  categoryScores: RunwiseDoctorReport["summary"]["categoryScores"]
+): string[] {
+  if (!categoryScores || Object.keys(categoryScores).length === 0) {
+    return [
+      "Category scoring is not available in this report.",
+      "",
+      "此报告暂未提供分类评分。"
+    ];
+  }
+
+  return [
+    "| Category | Score |",
+    "| --- | ---: |",
+    ...Object.entries(categoryScores).map(
+      ([category, score]) => `| ${escapeMarkdown(formatCategory(category as RunwiseCategory))} | ${score}/100 |`
+    )
+  ];
 }
 
 function getPriorityFindings(findings: RunwiseFinding[]): RunwiseFinding[] {

@@ -75,11 +75,17 @@ Want to understand what Runwise outputs before cloning?
 - [Trace replay sample](./docs/demo-output/trace-replay-sample.md)
 - [Failure-to-Eval sample](./docs/demo-output/failure-to-eval-sample.md)
 
+Want to see what the report looks like first?
+
+- [Visual report sample](./docs/demo-output/visual-report-sample.md)
+- [Report preview](./assets/report-preview.svg)
+
 ## Start here
 
 - [First Run Walkthrough](./docs/FIRST_RUN_WALKTHROUGH.md)
 - [Example Gallery](./docs/EXAMPLE_GALLERY.md)
 - [Demo Output Samples](./docs/demo-output/README.md)
+- [Report Reading Guide](./docs/REPORT_READING_GUIDE.md)
 - [English Docs](./docs/en/index.md)
 - [Chinese Docs](./docs/zh-CN/index.md)
 - [Preview Release](https://github.com/darwinx687-afk/runwise/releases/tag/v0.1.0-preview.0)

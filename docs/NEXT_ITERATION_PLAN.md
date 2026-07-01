@@ -40,12 +40,14 @@ Focus:
 
 ### 11D - Visual Report Polish
 
+Status: completed in this loop.
+
 Focus:
 
 - improve Markdown and HTML report readability
 - make findings easier to scan
 - clarify score, severity, blocking, and ecosystem sections
-- add copy-to-issue snippets if they help manual feedback
+- add a report preview SVG and report reading guide
 - improve report empty states
 - improve category score explanation
 - avoid adding hosted dashboard or complex product surface
@@ -54,10 +56,12 @@ Focus:
 
 Focus:
 
-- explore how future checks could be grouped or extended
+- study plugin design before implementation
+- decide whether rules should become externally loadable in a later phase
+- define a draft plugin manifest boundary if useful
 - keep the current rule engine stable
 - document extension boundaries before implementation
-- keep plugin architecture later, after visual report polish has improved the current experience
+- do not add runtime plugin execution unless explicitly approved
 
 ## Feedback Inputs
 

@@ -40,12 +40,14 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ### 11D - Visual Report Polish
 
+状态：本轮已完成。
+
 重点：
 
 - 改进 Markdown 和 HTML 报告可读性
 - 让 finding 更容易扫描
 - 解释清楚 score、severity、blocking 和 ecosystem 区块
-- 如有帮助，添加便于手动反馈的 copy-to-issue snippet
+- 添加 report preview SVG 和报告阅读指南
 - 改进报告 empty state
 - 改进 category score 解释
 - 不添加 hosted dashboard 或复杂产品界面
@@ -54,10 +56,12 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 重点：
 
-- 探索未来 check 如何分组或扩展
+- 先研究 plugin design，不直接实现
+- 判断未来规则是否需要 external loadable
+- 如有帮助，定义 draft plugin manifest boundary
 - 保持当前 rule engine 稳定
 - 先记录 extension boundary，再决定是否实现
-- plugin architecture 放在后面，等 Visual Report Polish 改善当前体验后再推进
+- 未明确批准前，不加入 runtime plugin execution
 
 ## 反馈来源
 

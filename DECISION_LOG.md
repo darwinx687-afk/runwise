@@ -87,3 +87,7 @@ Phase 11 prioritizes first-time developer experience and understanding before ad
 ## D023: Use curated samples instead of generated artifacts for first-time understanding
 
 Runwise uses curated sample docs and SVG example cards for first-time understanding instead of committing generated `.runwise/` artifacts.
+
+## D024: Polish local report readability before adding runtime capabilities
+
+Runwise report polish focuses on self-contained local HTML and lightweight dashboard readability before adding new runtime capabilities.

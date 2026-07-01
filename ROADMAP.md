@@ -97,6 +97,7 @@
 - Keep examples useful, lightweight, and easy to review.
 - Add Example Gallery polish and curated visual sample outputs as part of the developer experience phase.
 - Improve README, docs landing pages, walkthroughs, and report readability.
+- Phase 11D polishes Markdown reports, static HTML reports, local dashboard scanability, empty states, and score explanation.
 - Avoid feature bloat while public preview feedback is still early.
-- Next loop: Visual Report Polish for Markdown reports, static HTML reports, local dashboard scanability, empty states, and score explanation.
-- Keep plugin architecture later, not immediate, until the current report experience is easier to understand.
+- Next loop: Plugin Architecture Exploration as design study only.
+- Keep plugin runtime implementation later, not immediate, until extension boundaries are explicit.
