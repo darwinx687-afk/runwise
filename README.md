@@ -150,6 +150,12 @@ docs/
 
 Runwise does not run your agent, execute tools, upload traces, train models, or store project data in a hosted service.
 
+## Future: local rule packs
+
+Runwise does not support plugins yet. We are exploring a simple local rule-pack design so teams can add their own checks without changing Runwise core.
+
+See: [Plugin Architecture Exploration](./docs/PLUGIN_ARCHITECTURE_EXPLORATION.md)
+
 ## Roadmap
 
 - Phase 0-2: Foundation, Doctor CLI, rule engine, and scoring.
@@ -157,7 +163,7 @@ Runwise does not run your agent, execute tools, upload traces, train models, or 
 - Phase 6-8: Trace validation, static replay, and Failure-to-Eval generation.
 - Phase 9: Ecosystem compatibility detection and examples.
 - Phase 10: Open-source launch polish.
-- Phase 11: First-time developer experience, examples, and report readability.
+- Phase 11: First-time developer experience, examples, report readability, and future plugin architecture exploration.
 
 See [ROADMAP.md](./ROADMAP.md) and [Next Iteration Plan](./docs/NEXT_ITERATION_PLAN.md).
 

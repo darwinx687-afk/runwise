@@ -1,0 +1,51 @@
+{
+  "schema": "runwise.rule_pack",
+  "schemaVersion": "0.1-draft",
+  "rules": [
+    {
+      "id": "mcp_safety.require_approval_for_shell_like_tools",
+      "category": "mcp",
+      "severity": "high",
+      "title": "Shell-like MCP tools should require approval",
+      "titleZh": "类似 shell 的 MCP 工具应要求审批",
+      "description": "Detects MCP tool names that look like shell or command execution operations.",
+      "descriptionZh": "检测看起来像 shell 或命令执行操作的 MCP 工具名称。",
+      "recommendation": "Add an approval policy before allowing shell-like MCP tools to run.",
+      "recommendationZh": "在允许类似 shell 的 MCP 工具执行前增加审批策略。",
+      "match": {
+        "filePatterns": ["mcp.json", ".mcp.json", "mcp.config.json"],
+        "textIncludesAny": ["shell", "exec", "command", "terminal"]
+      }
+    },
+    {
+      "id": "mcp_safety.review_filesystem_write_tools",
+      "category": "mcp",
+      "severity": "medium",
+      "title": "Filesystem write MCP tools should be reviewed",
+      "titleZh": "文件写入类 MCP 工具需要 review",
+      "description": "Looks for MCP tool names that suggest filesystem writes or deletion.",
+      "descriptionZh": "查找暗示文件写入或删除的 MCP 工具名称。",
+      "recommendation": "Document allowed paths, approval expectations, and rollback behavior.",
+      "recommendationZh": "记录允许访问的路径、审批要求和回滚行为。",
+      "match": {
+        "filePatterns": ["mcp.json", ".mcp.json", "mcp.config.json"],
+        "textIncludesAny": ["write", "delete", "remove", "unlink", "rename"]
+      }
+    },
+    {
+      "id": "mcp_safety.review_send_payment_delete_names",
+      "category": "mcp",
+      "severity": "medium",
+      "title": "Action-like MCP tool names should be reviewed",
+      "titleZh": "动作类 MCP 工具名称需要 review",
+      "description": "Looks for tool names that may imply external side effects.",
+      "descriptionZh": "查找可能意味着外部副作用的工具名称。",
+      "recommendation": "Add trace examples and approval notes for side-effecting tools.",
+      "recommendationZh": "为有副作用的工具补充 trace 示例和审批说明。",
+      "match": {
+        "filePatterns": ["mcp.json", ".mcp.json", "mcp.config.json"],
+        "textIncludesAny": ["send", "payment", "charge", "refund", "delete"]
+      }
+    }
+  ]
+}

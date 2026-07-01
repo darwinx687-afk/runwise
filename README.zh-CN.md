@@ -150,6 +150,12 @@ docs/
 
 Runwise 不会运行你的 agent、执行工具、上传 trace、训练模型，也不会把项目数据存到 hosted service。
 
+## 未来方向：本地规则包
+
+Runwise 目前还不支持插件。我们正在探索一种简单的本地规则包设计，让团队可以在不修改 Runwise core 的情况下添加自己的检查规则。
+
+见：[插件架构探索](./docs/PLUGIN_ARCHITECTURE_EXPLORATION.zh-CN.md)
+
 ## 路线图
 
 - Phase 0-2：项目基础、Doctor CLI、规则引擎和评分。
@@ -157,7 +163,7 @@ Runwise 不会运行你的 agent、执行工具、上传 trace、训练模型，
 - Phase 6-8：Trace 验证、静态复盘和 Failure-to-Eval 生成。
 - Phase 9：生态兼容性检测和示例。
 - Phase 10：开源发布展示打磨。
-- Phase 11：首次开发者体验、示例和报告可读性。
+- Phase 11：首次开发者体验、示例、报告可读性和未来插件架构探索。
 
 见 [ROADMAP.md](./ROADMAP.md) 和 [下一轮迭代计划](./docs/NEXT_ITERATION_PLAN.zh-CN.md)。
 

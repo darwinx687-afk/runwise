@@ -54,14 +54,27 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 
 ### 11E - Plugin Architecture Exploration
 
+状态：本轮已完成。
+
 重点：
 
-- 先研究 plugin design，不直接实现
-- 判断未来规则是否需要 external loadable
-- 如有帮助，定义 draft plugin manifest boundary
-- 保持当前 rule engine 稳定
-- 先记录 extension boundary，再决定是否实现
-- 未明确批准前，不加入 runtime plugin execution
+- 梳理插件目标和非目标
+- 起草 plugin manifest
+- 起草 JSON rule pack 格式
+- 添加 documentation-only 插件示例
+- 决定是否在 Phase 12 实现
+- 不加入 runtime plugin execution
+
+### 11F - Self-review and v0.1.1-preview.0 Planning
+
+建议作为下一轮。
+
+重点：
+
+- 从整体上 review Phase 11 文档和示例
+- 判断插件实现应该继续等待，还是进入 Phase 12
+- 如有必要，准备一个小的 v0.1.1-preview.0 计划
+- 除非明确批准，继续暂缓 npm 发布、tag 和新 release
 
 ## 反馈来源
 

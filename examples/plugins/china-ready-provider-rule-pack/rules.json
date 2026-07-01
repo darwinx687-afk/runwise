@@ -1,0 +1,66 @@
+{
+  "schema": "runwise.rule_pack",
+  "schemaVersion": "0.1-draft",
+  "rules": [
+    {
+      "id": "china_ready_provider.document_dashscope_qwen_base_url",
+      "category": "integrations",
+      "severity": "info",
+      "title": "DashScope/Qwen provider assumptions should be documented",
+      "titleZh": "应记录 DashScope/Qwen provider 假设",
+      "description": "Looks for DashScope or Qwen environment names in local examples.",
+      "descriptionZh": "在本地示例中查找 DashScope 或 Qwen 环境变量名称。",
+      "recommendation": "Document provider base URL, model name, rate-limit assumptions, and fallback behavior.",
+      "recommendationZh": "记录 provider base URL、模型名称、限流假设和降级策略。",
+      "match": {
+        "filePatterns": [".env.example", "README.md", "README.zh-CN.md"],
+        "textIncludesAny": ["DASHSCOPE_API_KEY", "QWEN", "dashscope"]
+      }
+    },
+    {
+      "id": "china_ready_provider.document_deepseek_base_url",
+      "category": "integrations",
+      "severity": "info",
+      "title": "DeepSeek provider assumptions should be documented",
+      "titleZh": "应记录 DeepSeek provider 假设",
+      "description": "Looks for DeepSeek environment names in local examples.",
+      "descriptionZh": "在本地示例中查找 DeepSeek 环境变量名称。",
+      "recommendation": "Document base URL, model name, data boundary, and fallback behavior.",
+      "recommendationZh": "记录 base URL、模型名称、数据边界和降级策略。",
+      "match": {
+        "filePatterns": [".env.example", "README.md", "README.zh-CN.md"],
+        "textIncludesAny": ["DEEPSEEK_API_KEY", "deepseek"]
+      }
+    },
+    {
+      "id": "china_ready_provider.document_glm_kimi_minimax",
+      "category": "integrations",
+      "severity": "info",
+      "title": "China-ready provider notes should cover configured vendors",
+      "titleZh": "国内大模型 provider 说明应覆盖已配置服务商",
+      "description": "Looks for GLM/Zhipu, Moonshot/Kimi, or MiniMax provider hints.",
+      "descriptionZh": "查找 GLM/智谱、Moonshot/Kimi 或 MiniMax provider 线索。",
+      "recommendation": "Add deployment notes for each provider used by the project.",
+      "recommendationZh": "为项目使用的每个 provider 补充部署说明。",
+      "match": {
+        "filePatterns": [".env.example", "README.md", "README.zh-CN.md"],
+        "textIncludesAny": ["ZHIPU", "GLM", "MOONSHOT_API_KEY", "KIMI", "MINIMAX"]
+      }
+    },
+    {
+      "id": "china_ready_provider.review_openai_compatible_base_url",
+      "category": "integrations",
+      "severity": "low",
+      "title": "OpenAI-compatible base URLs should identify the provider",
+      "titleZh": "OpenAI-compatible base URL 应说明服务商",
+      "description": "Looks for OpenAI-compatible base URL configuration.",
+      "descriptionZh": "查找 OpenAI-compatible base URL 配置。",
+      "recommendation": "Name the provider behind each OpenAI-compatible base URL and document data handling assumptions.",
+      "recommendationZh": "说明每个 OpenAI-compatible base URL 背后的服务商，并记录数据处理假设。",
+      "match": {
+        "filePatterns": [".env.example", "README.md", "README.zh-CN.md"],
+        "textIncludesAny": ["OPENAI_BASE_URL", "OPENAI_API_BASE", "openai-compatible"]
+      }
+    }
+  ]
+}

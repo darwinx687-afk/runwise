@@ -27,6 +27,14 @@ Runwise 帮你在 AI Agent 项目上线前先做一次本地检查。
 - [Failure-to-Eval 示例](../demo-output/failure-to-eval-sample.zh-CN.md)
 - [生态检测示例](../demo-output/ecosystem-detection-sample.zh-CN.md)
 
+## 未来插件架构
+
+插件能力目前还没有实现，但我们正在探索 Runwise 未来如何支持本地规则包，例如 MCP、RAG、生态检测和团队自定义策略。
+
+- [插件架构探索](../PLUGIN_ARCHITECTURE_EXPLORATION.zh-CN.md)
+- [插件 Manifest 草案](../PLUGIN_MANIFEST_DRAFT.zh-CN.md)
+- [插件规则包草案](../PLUGIN_RULE_PACK_DRAFT.zh-CN.md)
+
 ## 推荐第一次怎么跑
 
 1. 运行 `pnpm exec runwise doctor`。

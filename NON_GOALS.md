@@ -12,3 +12,6 @@ The following remain out of scope unless a future phase explicitly changes the b
 - Model calls hidden inside readiness checks.
 - Hidden network calls.
 - Vendor-specific lock-in.
+- Remote plugin execution.
+- Automatic plugin installation from unknown URLs.
+- Running third-party plugin code as part of the current public preview.

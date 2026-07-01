@@ -27,6 +27,14 @@ It runs locally, generates reports, validates traces, replays runs, and turns fa
 - [Failure-to-Eval sample](../demo-output/failure-to-eval-sample.md)
 - [Ecosystem detection sample](../demo-output/ecosystem-detection-sample.md)
 
+## Future Plugin Architecture
+
+Plugin support is not implemented yet, but we are exploring how Runwise could support local rule packs for MCP, RAG, ecosystem detection, and team-specific policies.
+
+- [Plugin Architecture Exploration](../PLUGIN_ARCHITECTURE_EXPLORATION.md)
+- [Plugin Manifest Draft](../PLUGIN_MANIFEST_DRAFT.md)
+- [Plugin Rule Pack Draft](../PLUGIN_RULE_PACK_DRAFT.md)
+
 ## Good First Flow
 
 1. Run `pnpm exec runwise doctor`.

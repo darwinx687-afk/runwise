@@ -72,6 +72,16 @@ Detection uses only local file names, directory names, package metadata, environ
 
 Doctor reports include a compact detected-ecosystem summary in JSON, Markdown, static HTML, and the local Dashboard Viewer. Compatibility examples under `examples/` are inert documentation and detection fixtures, not runnable AI apps.
 
+## Future Plugin Direction
+
+Plugin support is not implemented in the current public preview.
+
+Today, Doctor rules are built into `@runwise/core`, and ecosystem profiles are built into `@runwise/integrations`. A possible future direction is to add local JSON rule packs first, so teams can add reviewable checks without changing Runwise core.
+
+The first plugin MVP, if approved later, should avoid executable plugins. It should not run arbitrary JavaScript, call models, access the network, write files, auto-install packages, or replace the core Doctor engine.
+
+Documentation-only plugin examples may live under `examples/plugins/`, but current Runwise does not load them.
+
 ## GitHub Action Readiness Check
 
 The first GitHub Action is a root composite action. It uses the same local Doctor report artifacts as the CLI instead of a hosted service, GitHub App, cloud sync layer, database, or external API call.

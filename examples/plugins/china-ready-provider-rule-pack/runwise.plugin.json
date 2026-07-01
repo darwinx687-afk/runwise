@@ -1,0 +1,24 @@
+{
+  "schema": "runwise.plugin",
+  "schemaVersion": "0.1-draft",
+  "id": "runwise-plugin-china-ready-providers",
+  "name": "China-ready Provider Rules",
+  "nameZh": "国内大模型 Provider 规则",
+  "version": "0.1.0",
+  "description": "Documentation-only draft rules for China-ready LLM provider assumptions.",
+  "descriptionZh": "面向国内大模型 provider 配置假设的文档示例规则。",
+  "type": "readiness-rule-pack",
+  "entry": "./rules.json",
+  "capabilities": [
+    "read-project-files",
+    "add-findings"
+  ],
+  "permissions": {
+    "network": false,
+    "filesystemWrite": false,
+    "modelCalls": false
+  },
+  "runwise": {
+    "minVersion": "0.1.0-preview.0"
+  }
+}

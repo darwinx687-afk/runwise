@@ -91,3 +91,7 @@ Runwise uses curated sample docs and SVG example cards for first-time understand
 ## D024: Polish local report readability before adding runtime capabilities
 
 Runwise report polish focuses on self-contained local HTML and lightweight dashboard readability before adding new runtime capabilities.
+
+## D025: Explore JSON rule packs before executable plugins
+
+Runwise will explore local JSON rule packs before executable plugins, keeping plugin support local-first, reviewable, and safe.

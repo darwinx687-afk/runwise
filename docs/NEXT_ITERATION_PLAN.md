@@ -54,14 +54,27 @@ Focus:
 
 ### 11E - Plugin Architecture Exploration
 
+Status: completed in this loop.
+
 Focus:
 
-- study plugin design before implementation
-- decide whether rules should become externally loadable in a later phase
-- define a draft plugin manifest boundary if useful
-- keep the current rule engine stable
-- document extension boundaries before implementation
-- do not add runtime plugin execution unless explicitly approved
+- draft plugin goals and non-goals
+- draft a plugin manifest
+- draft a JSON rule pack format
+- add documentation-only plugin examples
+- decide whether implementation should happen in Phase 12
+- do not add runtime plugin execution
+
+### 11F - Self-review and v0.1.1-preview.0 Planning
+
+Recommended next loop.
+
+Focus:
+
+- review Phase 11 docs and examples as a whole
+- check whether plugin implementation should wait or move into Phase 12
+- prepare a small v0.1.1-preview.0 plan if useful
+- keep npm publishing, tags, and new releases deferred unless explicitly approved
 
 ## Feedback Inputs
 

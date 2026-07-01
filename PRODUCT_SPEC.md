@@ -31,3 +31,10 @@ Runwise is an open-source readiness, tracing, replay, and eval toolkit for AI ag
 - Eval adapters and reporting.
 - CI and GitHub Action integration.
 - Optional local dashboard.
+- Future local plugin architecture exploration for reviewable JSON rule packs.
+
+## Future Plugin Direction
+
+Plugin support is not a current feature.
+
+Runwise may later support local rule packs so teams can add project-specific checks without changing core. The preferred first direction is JSON rule packs that are deterministic, reviewable, local-first, and free of model calls or network access.

@@ -98,6 +98,14 @@
 - Add Example Gallery polish and curated visual sample outputs as part of the developer experience phase.
 - Improve README, docs landing pages, walkthroughs, and report readability.
 - Phase 11D polishes Markdown reports, static HTML reports, local dashboard scanability, empty states, and score explanation.
+- Phase 11E explores future plugin architecture with docs, draft manifests, draft JSON rule packs, and documentation-only examples.
 - Avoid feature bloat while public preview feedback is still early.
-- Next loop: Plugin Architecture Exploration as design study only.
-- Keep plugin runtime implementation later, not immediate, until extension boundaries are explicit.
+- Plugin support is future work and should not be listed as implemented.
+- Next recommended loop: Self-review and v0.1.1-preview.0 planning.
+
+## Phase 12 Candidate: Local Rule Pack MVP
+
+- Phase 12 should require approval after review.
+- Candidate scope: schema validation and explicit local JSON rule packs.
+- Do not add executable plugins as the first plugin MVP.
+- Do not add remote plugin execution, hosted marketplace behavior, cloud sync, or model calls.
